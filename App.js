@@ -1,30 +1,69 @@
-import * as React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import WelcomeScreen from './screens/WelcomeScreen';
-import TragoDetail from './screens/TragoDetail';
-import Navigation from './components/Navigation';
-import { NativeWindStyleSheet } from 'nativewind';
+import { NavigationContainer } from "@react-navigation/native"
+import { createStackNavigator } from "@react-navigation/stack"
+import { StatusBar } from "expo-status-bar"
+import { SafeAreaProvider } from "react-native-safe-area-context"
+import { View, ActivityIndicator } from "react-native"
 
-NativeWindStyleSheet.setOutput({
-  default: 'native',
-});
+import { FavoritesProvider } from "./context/favoritesContext"
+import { OnboardingProvider, useOnboarding } from "./context/OnboardingContext"
+import TabNavigator from "./navigation/TabNavigator"
+import CocktailDetailScreen from "./screens/CocktailDetailScreen"
+import WelcomeScreen from "./screens/WelcomeScreen"
+import NameInputScreen from "./screens/NameInputScreen"
+import TastePreferencesScreen from "./screens/TastePreferenceScreen"
+import FavoriteBaseScreen from "./screens/FavoriteBaseScreen"
+import OccasionPreferencesScreen from "./screens/OcassionPreferencesScreen"
 
-const Stack = createStackNavigator();
+const Stack = createStackNavigator()
 
-function App() {
+// Navigation container with onboarding check
+function AppNavigator() {
+  const { onboardingCompleted, isLoading } = useOnboarding()
+
+  if (isLoading) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: "#FFF5F5" }}>
+        <ActivityIndicator size="large" color="#FF6B6B" />
+      </View>
+    )
+  }
+
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name="Welcome" component={WelcomeScreen} options={{ headerShown: false }} />
-          <Stack.Screen name="Main" component={Navigation} options={{ headerShown: false }} />
-          <Stack.Screen name="TragoDetail" component={TragoDetail} options={{ headerShown: false }} />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </GestureHandlerRootView>
-  );
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      {!onboardingCompleted ? (
+        // Onboarding flow
+        <>
+          <Stack.Screen name="Welcome" component={WelcomeScreen} />
+          <Stack.Screen name="NameInput" component={NameInputScreen} />
+          <Stack.Screen name="TastePreferences" component={TastePreferencesScreen} />
+          <Stack.Screen name="FavoriteBase" component={FavoriteBaseScreen} />
+          <Stack.Screen name="OccasionPreferences" component={OccasionPreferencesScreen} />
+        </>
+      ) : null}
+      <Stack.Screen name="MainTabs" component={TabNavigator} />
+      <Stack.Screen
+        name="CocktailDetail"
+        component={CocktailDetailScreen}
+        options={{
+          cardStyle: { backgroundColor: "transparent" },
+          presentation: "modal",
+        }}
+      />
+    </Stack.Navigator>
+  )
 }
 
-export default App;
+export default function App() {
+  return (
+    <SafeAreaProvider>
+      <FavoritesProvider>
+        <OnboardingProvider>
+          <NavigationContainer>
+            <StatusBar style="auto" />
+            <AppNavigator />
+          </NavigationContainer>
+        </OnboardingProvider>
+      </FavoritesProvider>
+    </SafeAreaProvider>
+  )
+}

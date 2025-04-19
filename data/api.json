@@ -1,2060 +1,1185 @@
 [
-  {
-    "id": 1,
-    "nombre": "Alexander",
-    "formula": "Cóctel Alexander",
-    "categoria": "crema",
-    "temporada": "",
-    "fondo": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714323132/Alexander_sckdpk.jpg",
-    "sabor": "dulce",
-    "cristaleria": "copa cocktail",
-    "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714712594/Alexander_vpzjrv.png",
-    "metodo": "batido",
-    "liked": false,
-    "ingredientes": [
-      {"nombre": "Ginebra", "cantidad": 3},
-      {"nombre": "Crema de Cacao incolora", "cantidad": 3},
-      {"nombre": "Nata liquida", "cantidad": 3}
-    ],
-    "aderezos": "Se espolvorea con chocolate en polvo.",
-    "observaciones": "Se elabora en coctelera. Se sirve en copa de cocktail. Receta de Alejandro Troya, creado en 1915, en New York."
-  },
-
     {
-      "id": 2,
-      "liked": false,
-      "nombre": "Alexandra",
-      "formula": "Cóctel Alexandra",
-      "categoria": "crema",
-      "temporada": "",
-      "sabor": "dulce",
-      "fondo": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714443108/alexandra-xl-668x400x80xX_d7tkag.jpg",
-      "cristaleria": "copa cocktail",
-      "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714076071/Alexandra_ir5yvx.png",
-      "metodo": "batido",
-      "ingredientes": [
-        {"nombre": "Brandy", "cantidad": 3},
-        {"nombre": "Crema de cacao oscura", "cantidad": 3},
-        {"nombre": "Nata liquida", "cantidad": 3}
-      ],
-      "aderezos": "Espolvorear con canela en polvo.",
-      "observaciones": "Se elabora en coctelera. Se sirve en copa de cocktail. Creado por Harry Mcelhone, en el Ciro’s Club de LONDRES, el 28 de febrero de 1922."
-    },
-
-    {
-      "id": 4,
-      "nombre": "Americano",
-      "liked": false,
-      "formula": "Cóctel Americano",
-      "categoria": "aperitivo",
-      "temporada": "",
-      "sabor": "amargo",
-      "cristaleria": "old fashioned",
-      "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714076532/Americano_eaeeet.png",
-      "fondo": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714444437/3Ygphcmh3_1200x0__1_rocgl3.jpg",
-      "metodo": "directo",
-      "ingredientes": [
-        {"nombre": "Campari", "cantidad": 3},
-        {"nombre": "Vermouth o vermú Cinzano Rosso", "cantidad": 3}
-      ],
-      "decoracion": "Rodaja de naranja.",
-      "aderezos": "Soda al gusto.",
-      "observaciones": "Se prepara directamente en vaso de old fashioned con hielo. Receta IBA."
-    },
-    {
-      "id": 5,
-      "nombre": "Angel",
-      "liked": false,
-      "formula": "Cóctel Angel",
-      "categoria": "vodka",
-      "temporada": "",
-      "sabor": "frutal",
-      "cristaleria": "vazo Long drink",
-      "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714076532/Angel_sjkwhv.png",
-      "metodo": "batido",
-      "ingredientes": [
-        {"nombre": "Vodka Sobieski Cranberry", "cantidad": 4},
-        {"nombre": "Cointreau", "cantidad": 1},
-        {"nombre": "Licor de fresa", "cantidad": 2},
-        {"nombre": "Monin Mango", "cantidad": 1},
-        {"nombre": "Rives Sandia Sin Alcohol", "cantidad": 5},
-        {"nombre": "jugo de melocotón", "cantidad": 9}
-      ],
-      "decoracion": "Fruta en stick.",
-      "aderezos": "Perfumar con twist de naranja.",
-      "observaciones": "Se prepara en coctelera. Se sirve en vaso de Long drink. Receta de creación."
-    },
-    {
-      "id": 6,
-      "nombre": "Angel Face",
-      "formula": "Cóctel Angel Face",
-      "liked": false,
-      "categoria": "crema",
-      "temporada": "",
-      "sabor": "dulce",
-      "cristaleria": "copa cocktail",
-      "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714712688/angel-face_mmyvnn.png",
-      "fondo": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714443328/angels-face-720x720-primary-974a2f0bde394508b149e95fe272122f_oxp5wx.jpg",
-      "metodo": "batido",
-      "ingredientes": [
-        {"nombre": "Ginebra", "cantidad": 3},
-        {"nombre": "Apricot Brandy", "cantidad": 3},
-        {"nombre": "Calvados", "cantidad": 3}
-      ],
-      "decoracion": "Guinda Roja.",
-      "observaciones": "Servir en copa de cocktail. Se prepara en coctelera."
-    },
-    {
-      "id": 7,
-      "nombre": "Apple de Liria",
-      "formula": "Cóctel Apple de Liria",
-      "liked": false,
-      "categoria": "ron",
-      "temporada": "",
-      "sabor": "frutal",
-      "cristaleria": "vaso especial",
-      "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714713420/apple_liria_mkjyhf.png",
-      "metodo": "batido",
-      "ingredientes": [
-        {"nombre": "Ron", "cantidad": 4},
-        {"nombre": "Licor de manzana verde", "cantidad": 2},
-        {"nombre": "Lima roses", "cantidad": 4},
-        {"nombre": "Manzana verde sin alcohol", "cantidad": 5},
-        {"nombre": "jugo de Lima natural", "cantidad": 1}
-      ],
-      "decoracion": "Espiral de manzana verde y naranja china.",
-      "aderezos": "Preparación: fruta natural en vaso mezclador macerada con lima roses.",
-      "observaciones": "Se prepara en coctelera. Se sirve en vaso especial y se le añade la fruta y la lima del vaso mezclador y se mezcla con la cuchara imperial."
-    },
-    {
-      "id": 8,
-      "nombre": "Apple Martini",
-      "formula": "Cóctel Apple Martini",
-      "liked": false,
-      "categoria": "vodka",
-      "temporada": "",
-      "sabor": "dulce",
-      "cristaleria": "copa cocktail",
-      "fondo": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714443394/Apple-Martini_s1zwkl.jpg",
-      "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714080742/Apple_Martini_rjgxlq.png",
-      "metodo": "mezclado",
-      "ingredientes": [
-        {"nombre": "Vodka Grey Goose", "cantidad": 4},
-        {"nombre": "Licor de Manzana Marie Brizard", "cantidad": 1.5},
-        {"nombre": "Cointreau", "cantidad": 1.5}
-      ],
-      "decoracion": "Rodaja de manzana.",
-      "observaciones": "Poner todos los ingredientes en un vaso mezclador con hielo, agitar bien y servir en copa de cocktail con una rodaja de manzana."
-    },
-    {
-      "id": 9,
-      "nombre": "Arrival",
-      "formula": "Cóctel Arrival (Espíritu Isleño)",
-      "liked": false,
-      "categoria": "ron",
-      "temporada": "",
-      "sabor": "frutal",
-      "cristaleria": "vazo Long drink",
-      "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714080759/arrival_ncfprg.png",
-      "metodo": "batido",
-      "ingredientes": [
-        {"nombre": "Pisang Ambong", "cantidad": 3},
-        {"nombre": "Sobieski Mandarina", "cantidad": 2},
-        {"nombre": "Curaçao Blue", "cantidad": 2},
-        {"nombre": "jugo Mango-Maracuyá", "cantidad": 9},
-        {"nombre": "Sirope de Fruta de la Pasión", "cantidad": 5},
-        {"nombre": "Batida de Coco", "cantidad": 1}
-      ],
-      "decoracion": "Laminas de mango natural.",
-      "aderezos": "Perfumado con naranja.",
-      "observaciones": "Se elabora en coctelera. Se sirve en copa de Long drink. Receta de creación."
-    },
-    {
-      "id": 10,
-      "nombre": "Aviation",
-      "formula": "Cóctel Aviation",
-      "liked": false,
-      "categoria": "ginebra",
-      "temporada": "",
-      "sabor": "cítrico",
-      "fondo": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714447318/6ceb8db5fdf51426ced810398a2c2ff2_reuvyv.jpg",
-      "cristaleria": "copa cocktail",
-      "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714080760/Aviation_zrzrr3.png",
-      "metodo": "batido",
-      "ingredientes": [
-        {"nombre": "Ginebra", "cantidad": 4.5},
-        {"nombre": "Marraschino", "cantidad": 1.5},
-        {"nombre": "jugo de limón", "cantidad": 1.5}
-      ],
-      "decoracion": "Guinda Roja.",
-      "observaciones": "Se elabora en coctelera. Se sirve en copa de cocktail. Receta IBA."
-    },
-    
-    {
-        "id": 12,
-        "nombre": "Bacardi",
-        "formula": "Cóctel Bacardi",
-        "liked": false,
-        "categoria": "ron",
-        "temporada": "",
-        "sabor": "cítrico",
-        "cristaleria": "copa cocktail",
-        "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714080763/Bacardi_tazple.png",
-        "metodo": "batido",
-        "ingredientes": [
-        {"nombre": "ron Carta Blanca", "cantidad": 4.5},
-        {"nombre": "jugo de limón", "cantidad": 2},
-        {"nombre": "Granadina", "cantidad": 0.5}
-        ],
-        "decoracion": "Guinda roja.",
-        "observaciones": "Se prepara en coctelera. Se sirve en copa de cocktail. Receta IBA."
-    },
-    {
-        "id": 13,
-        "nombre": "Banana Frozen Daiquiri",
-        "formula": "Cóctel Banana Frozen Daiquiri",
-        "liked": false,
-        "categoria": "ron",
-        "temporada": "",
-        "sabor": "frutal",
-        "cristaleria": "copa goblet",
-        "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714080764/banana_frozen_daiquiri_bgcijl.png",
-        "metodo": "batido",
-        "ingredientes": [
-        {"nombre": "Ron Carta Blanca", "cantidad": 4.5},
-        {"nombre": "jugo de limón", "cantidad": 2},
-        {"nombre": "Azúcar Líquido", "cantidad": 0.5},
-        {"nombre": "Plátano Natural", "cantidad": 0.5}
-        ],
-        "decoracion": "Banana natural.",
-        "aderezos": "La copa debe estar bien fría.",
-        "observaciones": "Se prepara en batidora eléctrica con hielo picado. Se sirve en copa goblet (balón). Receta IBA."
-    },
-    {
-        "id": 14,
-        "nombre": "Barracuda",
-        "formula": "Cóctel Barracuda",
-        "liked": false,
-        "categoria": "ron",
-        "temporada": "",
-        "sabor": "frutal",
-        "cristaleria": "copa sparkling",
-        "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714080767/Barracuda_vk99bn.png",
-        "metodo": "directo",
-        "ingredientes": [
-        {"nombre": "Ron dorado", "cantidad": 4.5},
-        {"nombre": "Galiano", "cantidad": 1.5},
-        {"nombre": "jugo de piña", "cantidad": 6},
-        {"nombre": "Prosecco", "cantidad": "Llenar"}
-        ],
-        "decoracion": "Guinda roja.",
-        "aderezos": "Enfriar los ingredientes y terminar de llenar con el vino de prosecco bien frío.",
-        "observaciones": "Directamente en copa de Sparkling. Receta IBA."
-    },
-    {
-        "id": 15,
-        "nombre": "Basilico",
-        "formula": "Cóctel Basilico",
-        "liked": false,
-        "categoria": "ginebra",
-        "temporada": "",
-        "sabor": "cítrico",
-        "cristaleria": "vazo tumbler mediano",
-        "fondo": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714447310/DRp2-ugX0AARdVa_wbecz1.jpg",
-        "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714080768/Basilico_u4et5l.png",
-        "metodo": "batido",
-        "ingredientes": [
-        {"nombre": "Jarabe de azúcar natural", "cantidad": 2},
-        {"nombre": "Pepino y lima en trozos", "cantidad": 10},
-        {"nombre": "Ginebra", "cantidad": 5},
-        {"nombre": "Licor de melón", "cantidad": 2},
-        {"nombre": "jugo de manzana", "cantidad": 3}
-        ],
-        "decoracion": "Piel de pepino y albahaca.",
-        "aderezos": "Se maceran el pepino y la lima en el vaso mezclador con el Jarabe de azúcar, se coloca en un tumbler mediano con hielo. Se termina de llenar con los demás ingredientes pasados por la coctelera.",
-        "observaciones": "Se elabora en coctelera. Se sirve en vaso tumbler mediano. Receta de creación."
-    },
-    {
-        "id": 16,
-        "nombre": "Bellini Long Drink",
-        "formula": "Cóctel Bellini Long Drink",
-        "liked": false,
-        "categoria": "vino",
-        "temporada": "",
-        "sabor": "frutal",
-        "cristaleria": "copa flauta",
-        "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714080771/Bellini_hxohtp.png",
-        "metodo": "directo",
-        "ingredientes": [
-        {"nombre": "Vino Blanco de prosecco", "cantidad": 10},
-        {"nombre": "Pure de melocotón", "cantidad": 5}
-        ],
-        "decoracion": "Piel o trocito de melocotón.",
-        "aderezos": "Poner el puré en la copa y terminar de llenar con el prosecco y remover.",
-        "observaciones": "Se prepara directamente en copa de flauta. Receta IBA."
-    },
-
-    {
-        "id": 18,
-        "nombre": "Black Russian",
-        "formula": "Cóctel Black Russian",
-        "liked": false,
-        "categoria": "vodka",
-        "temporada": "",
-        "sabor": "café",
-        "cristaleria": "old fashioned",
-        "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714080774/black_russian_xkuj5h.png",
-        "metodo": "mezclado",
-        "ingredientes": [
-        {"nombre": "Vodka", "cantidad": 5},
-        {"nombre": "Licor de café", "cantidad": 2}
-        ],
-        "observaciones": "Poner todos los ingredientes en un vaso old fashioned con hielo y remover suavemente. Para el white russian, añadir nata liquida por encima y remover suavemente. Recetas IBA."
-    },
-    {
-        "id": 19,
-        "nombre": "Bloody Mary",
-        "formula": "Cóctel Bloody Mary",
-        "liked": false,
-        "categoria": "vodka",
-        "temporada": "",
-        "sabor": "salado",
-        "cristaleria": "vazo hig-ball",
-        "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714080775/bloody_mary_voaeng.png",
-        "metodo": "mezclado",
-        "ingredientes": [
-        {"nombre": "Vodka", "cantidad": 4.5},
-        {"nombre": "jugo de tomate", "cantidad": 9},
-        {"nombre": "jugo de limón", "cantidad": 1.5},
-        {"nombre": "Salsa Perrins (Worchestershire)", "cantidad": 2},
-        {"nombre": "Tabasco", "cantidad": 1}
-        ],
-        "decoracion": "Apio fresco y rodaja de limón.",
-        "aderezos": "Aderezar con sal de apio, sal y pimienta.",
-        "observaciones": "Se elabora en vaso mezclador o directamente en vaso hig-ball. Receta IBA."
-    },
-    {
-        "id": 20,
-        "nombre": "Bramble",
-        "formula": "Cóctel Bramble",
-        "liked": false,
-        "categoria": "ginebra",
-        "temporada": "",
-        "sabor": "frutal",
-        "cristaleria": "old fashioned",
-        "fondo": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714447283/Bramble_ulcja5.jpg",
-        "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714082198/Bramble_q8k00a.png",
-        "metodo": "directo",
-        "ingredientes": [
-        {"nombre": "Ginebra", "cantidad": 4},
-        {"nombre": "jugo de limón", "cantidad": 1.5},
-        {"nombre": "Licor de moras", "cantidad": 1.5},
-        {"nombre": "Sirope de azucar", "cantidad": 1}
-        ],
-        "decoracion": "Con rodaja de limón y moras.",
-        "aderezos": "En un vaso de old fashioned con hielo troceado, colocar el licor de moras, a continuación añadir el resto de ingredientes colocándolos circularmente por las paredes del vaso sin mezclar.",
-        "observaciones": "Se elabora en vaso de old fashioned. Receta IBA."
-    },
-
-      {
-        "id": 22,
-        "nombre": "Brezza",
-        "formula": "Cóctel Brezza",
-        "liked": false,
-        "categoria": "vodka",
-        "temporada": "",
-        "sabor": "frutal",
-        "cristaleria": "tumbler",
-        "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714082198/brezza_mwlb5g.png",
-        "metodo": "batido",
-        "ingredientes": [
-          {"nombre": "jugo de naranja", "cantidad": 5},
-          {"nombre": "jugo Mango-Maracuyá", "cantidad": 5},
-          {"nombre": "Vodka Rabsberry", "cantidad": 5},
-          {"nombre": "Lima", "cantidad": 2.5},
-          {"nombre": "Angostura Orange", "cantidad": 5}
-        ],
-        "decoracion": "Frutas variadas.",
-        "observaciones": "Se prepara en coctelera. Se sirve en vaso de higball con hielo. Receta IBA."
-      },
-      {
-        "id": 23,
-        "nombre": "Bronx",
-        "formula": "Cóctel Bronx",
-        "liked": false,
-        "categoria": "ginebra",
-        "temporada": "",
-        "sabor": "cítrico",
-        "cristaleria": "copa cocktail",
-        "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714082199/Bronx_apzh7f.png",
-        "fondo": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714447568/5ce534d00251e_dnqntu.jpg",
-        "metodo": "batido",
-        "ingredientes": [
-          {"nombre": "Ginebra", "cantidad": 3},
-          {"nombre": "Vermouth o vermú Cinzano Rosso", "cantidad": 1.5},
-          {"nombre": "Vermouth o vermú blanco Seco", "cantidad": 1},
-          {"nombre": "jugo de naranja", "cantidad": 1.5}
-        ],
-        "decoracion": "Guinda roja.",
-        "observaciones": "Se elabora en coctelera. Se sirve en copa de cocktail. Receta IBA."
-      },
-      {
-        "id": 24,
-        "nombre": "Bull Shot",
-        "formula": "Cóctel Bull Shot",
-        "liked": false,
-        "categoria": "vodka",
-        "temporada": "",
-        "sabor": "salado",
-        "cristaleria": "vazo alto",
-        "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714082202/bull_shot_ykdmd4.png",
-        "metodo": "mezclado",
-        "ingredientes": [
-          {"nombre": "Vodka Grey Goose", "cantidad": 3},
-          {"nombre": "Consomé de Carne", "cantidad": 6},
-          {"nombre": "jugo de lima-limón Pago", "cantidad": 1}
-        ],
-        "decoracion": "Adornar con apio.",
-        "observaciones": "Poner todos los ingredientes en un highball, añadiendo unos golpes de salsa Worchestershire, Tabasco, Sal y Pimienta. Mezclar los ingredientes. Debe ser servido caliente en épocas de frío."
-      },
-      {
-        "id": 25,
-        "nombre": "Caipirinha o Caipiroska",
-        "formula": "Cóctel Caipirinha",
-        "liked": false,
-        "categoria": "cachaza",
-        "temporada": "",
-        "sabor": "cítrico",
-        "cristaleria": "old fashioned",
-        "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714082203/caipirinha_qe29wp.png",
-        "metodo": "batido",
-        "ingredientes": [
-          {"nombre": "Cachaza o vodka", "cantidad": 5},
-          {"nombre": "Lima cortada en cuartos", "cantidad": 0.5},
-          {"nombre": "Azúcar", "cantidad": "2 cucharillas"}
-        ],
-        "decoracion": "Al gusto.",
-        "aderezos": "Colocar el azúcar y la lima en un vaso de coctelera Boston y machacar ligeramente, cerrar la coctelera y agitar, servir en vaso de old fashioned.",
-        "observaciones": "Se elabora en coctelera Boston, también se puede elaborar directamente en el vaso. Receta IBA."
-      },
-
-      {
-        "id": 27,
-        "nombre": "Cantabria Infinita",
-        "formula": "Cóctel Cantabria Infinita",
-        "liked": false,
-        "categoria": "ron",
-        "temporada": "",
-        "sabor": "frutal",
-        "cristaleria": "copa cocktail",
-        "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714082205/cantabria_baesng.png",
-        "metodo": "batido",
-        "ingredientes": [
-          {"nombre": "Ron Blanco", "cantidad": 5},
-          {"nombre": "Vermouth o vermú blanco", "cantidad": 2},
-          {"nombre": "Jarabe de Melón", "cantidad": 3},
-          {"nombre": "jugo de Piña", "cantidad": 10},
-          {"nombre": "Lima", "cantidad": 2}
-        ],
-        "decoracion": "Melón piña y guinda roja.",
-        "observaciones": "Se prepara en coctelera. Se sirve en copa de cocktail. Receta de creación."
-      },
-      {
-        "id": 28,
-        "nombre": "Casino",
-        "formula": "Cóctel Casino",
-        "liked": false,
-        "categoria": "gin",
-        "temporada": "",
-        "sabor": "cítrico",
-        "cristaleria": "copa cocktail",
-        "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714082206/casino_bjqvaj.png",
-        "fondo": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714447561/zzv5kuhx3jsvm4bfslmu.jpg",
-        "metodo": "batido",
-        "ingredientes": [
-          {"nombre": "Old Tom Gin", "cantidad": 4},
-          {"nombre": "Marraschino", "cantidad": 1},
-          {"nombre": "Orange Bitter", "cantidad": 1},
-          {"nombre": "jugo de limón", "cantidad": 1}
-        ],
-        "decoracion": "Piel de limón",
-        "aderezos": "Guinda al Marraschino.",
-        "observaciones": "Se elabora en coctelera. Se sirve en copa de cocktail. Receta IBA."
-      },
-      {
-        "id": 29,
-        "nombre": "Champagne Cocktail",
-        "formula": "Champagne Cocktail",
-        "liked": false,
-        "categoria": "champagne",
-        "temporada": "",
-        "sabor": "dulce",
-        "cristaleria": "cava flauta",
-        "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714082208/Champagne_Cocktail_vtjh9l.png",
-        "fondo": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714443536/Champagne-cocktail-72fbccc_swh0xd.jpg",
-        "metodo": "directo",
-        "ingredientes": [
-          {"nombre": "Champagne o Cava", "cantidad": 9},
-          {"nombre": "Brandy", "cantidad": 1},
-          {"nombre": "Angostura", "cantidad": "2 Dashes"},
-          {"nombre": "Terron de Azucar", "cantidad": 1}
-        ],
-        "decoracion": "Piel de naranja y guinda al marraschino.",
-        "aderezos": "Mojar el terrón de azúcar con la angostura.",
-        "observaciones": "Se elabora directamente en copa de cava flauta. Receta IBA."
-      },
-      {
-        "id": 30,
-        "nombre": "Clover Club",
-        "formula": "Cóctel Clover Club",
-        "liked": false,
-        "categoria": "ginebra",
-        "temporada": "",
-        "sabor": "frutal",
-        "cristaleria": "copa cocktail",
-        "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714082209/clover_club_ypeefz.png",
-        "fondo": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714447540/clover-club-720x720-primary-eaaf8fd14169482cba9fd9873bf9239e_z2uxrv.jpg",
-        "metodo": "batido",
-        "ingredientes": [
-          {"nombre": "Ginebra", "cantidad": 4.5},
-          {"nombre": "Sirope de Frambuesa o frutilla o frutos rojos", "cantidad": 1.5},
-          {"nombre": "jugo de limón", "cantidad": 1.5},
-          {"nombre": "Clara de Huevo", "cantidad": 0.5}
-        ],
-        "decoracion": "Frambuesa.",
-        "observaciones": "Se prepara en coctelera. Se sirve en copa de cocktail. Receta IBA."
-      },
-      {
-        "id": 31,
-        "nombre": "Cosmopolitan",
-        "formula": "Cóctel Cosmopolitan",
-        "liked": false,
-        "categoria": "vodka",
-        "temporada": "",
-        "sabor": "cítrico",
-        "cristaleria": "copa cocktail",
-        "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714713060/cosmopolitan_nwjv7b.png",
-        "metodo": "batido",
-        "ingredientes": [
-          {"nombre": "Vodka", "cantidad": 4},
-          {"nombre": "Cointreau", "cantidad": 1.5},
-          {"nombre": "jugo de lima", "cantidad": 1.5},
-          {"nombre": "jugo de arándanos o frutillas o frutos rojos o frambuesas", "cantidad": 3}
-        ],
-        "decoracion": "Corteza de limón.",
-        "observaciones": "Se elabora en coctelera. Se sirve en copa de cocktail. Receta IBA."
-      },
-      {
-        "id": 32,
-        "nombre": "Cubalibre",
-        "formula": "Cóctel Cubalibre",
-        "liked": false,
-        "categoria": "ron",
-        "temporada": "",
-        "sabor": "dulce",
-        "cristaleria": "higball",
-        "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714082449/Cubalibre_arwvqg.png",
-        "fondo": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714443661/cuba_20libre_chmz9b.jpg",
-        "metodo": "mezclado",
-        "ingredientes": [
-          {"nombre": "Ron blanco", "cantidad": 5},
-          {"nombre": "Coca cola", "cantidad": 12},
-          {"nombre": "jugo de lima", "cantidad": 1}
-        ],
-        "decoracion": "Rodaja de lima.",
-        "observaciones": "Se prepara directamente en vaso de higball con hielo. Receta IBA."
-      },
-      {
-        "id": 113,
-        "nombre": "Paloma",
-        "formula": "Cóctel Paloma",
-        "liked": false,
-        "categoria": "tequila",
-        "temporada": "",
-        "sabor": "agridulce",
-        "cristaleria": "vaso alto",
-        "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714599547/paloma_kny0ja.png",
-        "fondo": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714599369/4NKXUGKFN5BCHJ46UZSH3JGPHA_azluzh.jpg",
-        "metodo": "mezclado",
-        "ingredientes": [
-          {"nombre": "Tequila", "cantidad": 6},
-          {"nombre": "Refresco de toronja (pomelo)", "cantidad": 12},
-          {"nombre": "jugo de limón", "cantidad": 1}
-        ],
-        "decoracion": "Rodaja de pomelo.",
-        "observaciones": "Se prepara directamente en vaso alto con hielo. Refresco de toronja o pomelo puede ser sustituido por soda con unas gotas de granadina."
-      },
-      
-      {
-        "id": 33,
-        "nombre": "Daiquiri",
-        "formula": "Cóctel Daiquiri",
-        "liked": false,
-        "categoria": "ron",
-        "temporada": "",
-        "sabor": "cítrico",
-        "cristaleria": "copa cocktail",
-        "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714082450/Daiquiri-150x150_jektfu.png",
-        "metodo": "batido",
-        "ingredientes": [
-          {"nombre": "Ron Carta Blanca", "cantidad": 4.5},
-          {"nombre": "jugo de lima", "cantidad": 2},
-          {"nombre": "Azúcar Blanco", "cantidad": 0.5}
-        ],
-        "decoracion": "Guinda Roja.",
-        "aderezos": "Preparar con la copa fría.",
-        "observaciones": "Se Prepara en coctelera. Se sirve en copa de cocktail. Receta IBA."
-      },
-      {
-        "id": 34,
-        "nombre": "Dark 'N' Stormy",
-        "formula": "Cóctel Dark 'N' Stormy",
-        "liked": false,
-        "categoria": "ron",
-        "temporada": "",
-        "sabor": "picante",
-        "cristaleria": "higball",
-        "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714082732/Dark-N-Stormy_ktplk5.png",
-        "fondo": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714447670/FAW-recipes-dark-n-stormy-hero-c4c68e82794f409fa86c6dbc14f5a350_attocv.jpg",
-        "metodo": "directo",
-        "ingredientes": [
-          {"nombre": "Ron dorado", "cantidad": 6},
-          {"nombre": "ginger beer", "cantidad": 10}
-        ],
-        "decoracion": "Rodaja de limón.",
-        "observaciones": "Se sirve directamente en vaso de higball con hielo. Receta IBA."
-      },
-
-      {
-        "id": 37,
-        "nombre": "Dirty Martini",
-        "formula": "Cóctel Dirty Martini",
-        "liked": false,
-        "categoria": "vodka",
-        "temporada": "",
-        "sabor": "salado",
-        "cristaleria": "copa cocktail",
-        "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714082454/Dirty_Martini_jdxkn1.png",
-        "metodo": "mezclado",
-        "ingredientes": [
-          {"nombre": "Vodka", "cantidad": 6},
-          {"nombre": "Vermouth o vermú blanco seco", "cantidad": 1},
-          {"nombre": "caldo de aceitunas", "cantidad": "1 cl"}
-        ],
-        "decoracion": "1 Aceituna verde.",
-        "observaciones": "Se elabora en vaso mezclador. Se sirve en copa de cocktail. Receta IBA."
-      },
-      {
-        "id": 39,
-        "nombre": "Dry Martini",
-        "formula": "Cóctel Dry Martini",
-        "liked": false,
-        "categoria": "ginebra",
-        "temporada": "",
-        "sabor": "herbal",
-        "cristaleria": "copa cocktail",
-        "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714712453/dry-martini_caoh1i.png",
-        "fondo": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714447676/dry-martini-header-1920x1080-1-800x800_copkhb.jpg",
-        "metodo": "mezclado",
-        "ingredientes": [
-          {"nombre": "Ginebra", "cantidad": 6},
-          {"nombre": "Vermouth o vermú seco", "cantidad": 1}
-        ],
-        "decoracion": "Twist de limón.",
-        "aderezos": "Se acompaña con una aceituna con hueso.",
-        "observaciones": "Se elabora en vaso mezclador. Se sirve en copa de cocktail. Receta IBA."
-      },
-      {
-        "id": 40,
-        "nombre": "Espresso Martini",
-        "formula": "Cóctel Espresso Martini",
-        "liked": false,
-        "categoria": "vodka",
-        "temporada": "",
-        "sabor": "café",
-        "cristaleria": "copa cocktail",
-        "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714713173/espresso-martini_xkazty.png",
-        "metodo": "batido",
-        "ingredientes": [
-          {"nombre": "Vodka", "cantidad": 5},
-          {"nombre": "Kalhua", "cantidad": 1},
-          {"nombre": "Sirope de azucar", "cantidad": "1 cucharadita"},
-          {"nombre": "Expreso de café Fuerte", "cantidad": 1}
-        ],
-        "decoracion": "Al gusto.",
-        "observaciones": "Se elabora en coctelera. Se sirve en copa de cocktail. Receta IBA."
-      },
-      {
-        "id": 41,
-        "nombre": "French 75",
-        "formula": "Cóctel French 75",
-        "liked": false,
-        "categoria": "ginebra",
-        "temporada": "",
-        "sabor": "cítrico",
-        "cristaleria": "flauta larga",
-        "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714083006/French_75_eybnkp.png",
-        "fondo": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714447724/french-75-cocktail-recipe-upgrade-1666629351_eql4to.jpg",
-        "metodo": "batido",
-        "ingredientes": [
-          {"nombre": "Ginebra", "cantidad": 3},
-          {"nombre": "jugo de limón", "cantidad": 1.5},
-          {"nombre": "Sirope de azucar", "cantidad": "2 Dash"},
-          {"nombre": "Champagne", "cantidad": 6}
-        ],
-        "decoracion": "Guinda roja.",
-        "aderezos": "Batir en la coctelera los ingredientes menos el champagne.",
-        "observaciones": "Se elabora en coctelera, colocando el champagne directamente al final y removiendo suavemente. Se sirve en copa de flauta larga. Receta IBA."
-      },
-      {
-        "id": 42,
-        "nombre": "French Connection",
-        "formula": "Cóctel French Connection",
-        "liked": false,
-        "categoria": "cognac",
-        "temporada": "",
-        "sabor": "dulce",
-        "cristaleria": "old fashioned",
-        "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714083019/French_Connection_wbbcvo.png",
-        "fondo": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714443747/french-connection-cocktail-recipe_bdgqc7.jpg",
-        "metodo": "mezclado",
-        "ingredientes": [
-          {"nombre": "Cognac", "cantidad": 3.5},
-          {"nombre": "Amaretto di saronno", "cantidad": 3.5}
-        ],
-        "decoracion": "Al gusto.",
-        "observaciones": "Se prepara directamente en vaso de old fashioned con hielo. Receta IBA."
-      },
-      {
-        "id": 43,
-        "nombre": "French Martini",
-        "formula": "Cóctel French Martini",
-        "liked": false,
-        "categoria": "vodka",
-        "temporada": "",
-        "sabor": "frutal",
-        "cristaleria": "copa cocktail",
-        "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714083041/French_Martini_ajqvtv.png",
-        "metodo": "batido",
-        "ingredientes": [
-          {"nombre": "Vodka", "cantidad": 4.5},
-          {"nombre": "Licor de moras", "cantidad": 1.5},
-          {"nombre": "jugo de piña", "cantidad": 1.5}
-        ],
-        "decoracion": "Una mora en la copa.",
-        "aderezos": "Exprimir una piel de limón por encima para extraer su aceite.",
-        "observaciones": "Se elabora en vaso mezclador. Se sirve en copa de cocktail. Receta IBA."
-      },
-      {
-        "id": 44,
-        "nombre": "Frozen Daiquiri",
-        "formula": "Cóctel Frozen Daiquiri",
-        "liked": false,
-        "categoria": "ron",
-        "temporada": "",
-        "sabor": "frutal",
-        "cristaleria": "copa cocktail grande",
-        "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714084235/frozen_daiquiri_l0lfho.png",
-        "metodo": "batido",
-        "ingredientes": [
-          {"nombre": "Ron Carta Blanca", "cantidad": 4.5},
-          {"nombre": "jugo de limón", "cantidad": 2},
-          {"nombre": "Azúcar Líquido", "cantidad": 0.5},
-          {"nombre": "Marraschino", "cantidad": 0.5}
-        ],
-        "decoracion": "Guinda roja i rodaja de limón.",
-        "observaciones": "Se prepara en batidora eléctrica con hielo picado. Se sirve en copa de cocktail grande. Receta IBA."
-      },
-
-      {
-        "id": 46,
-        "nombre": "Gibson",
-        "formula": "Cóctel Gibson",
-        "liked": false,
-        "categoria": "ginebra",
-        "temporada": "",
-        "sabor": "herbal",
-        "cristaleria": "copa cocktail",
-        "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714084237/gibson_qwrsev.png",
-        "fondo": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714447907/__opt__aboutcom__coeus__resources__content_migration__liquor__2019__01__07143012__kimchi-gibson-720x720-recipe-1-85d361e7a65b464e991817e925ea6560_iihsm7.jpg",
-        "metodo": "mezclado",
-        "ingredientes": [
-          {"nombre": "Ginebra", "cantidad": 6.5},
-          {"nombre": "Vermouth o vermú blanco Seco", "cantidad": 0.5}
-        ],
-        "decoracion": "Cebollita pickle.",
-        "observaciones": "Se elabora en vaso mezclador. Se sirve en copa de cocktail. Receta IBA."
-      },
-      {
-        "id": 47,
-        "nombre": "Gin Fizz",
-        "formula": "Cóctel Gin Fizz",
-        "liked": false,
-        "categoria": "ginebra",
-        "temporada": "",
-        "sabor": "cítrico",
-        "cristaleria": "tumbler",
-        "fondo": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714447899/Gin_Fizz_Credit_Tim_Nusog_2000x2000-primary-cd256f2f698a40258273468832d50a4c_mdypop.jpg",
-        "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714084239/gin_fizz_pdlxqq.png",
-        "metodo": "batido",
-        "ingredientes": [
-          {"nombre": "Ginebra Bombay", "cantidad": 4.5},
-          {"nombre": "jugo de limón", "cantidad": 3},
-          {"nombre": "Azúcar Blanco", "cantidad": "1.5 cl (cucharada)"},
-          {"nombre": "Soda", "cantidad": 8}
-        ],
-        "decoracion": "Rodaja de limón.",
-        "observaciones": "Se prepara en coctelera todos los ingredientes excepto el soda, servir en un vaso tumbler, terminar de llenar con la soda. Receta IBA."
-      },
-      {
-        "id": 48,
-        "nombre": "God Father",
-        "formula": "Cóctel God Father",
-        "liked": false,
-        "categoria": "whisky o whiskey",
-        "temporada": "",
-        "sabor": "dulce",
-        "cristaleria": "old fashioned",
-        "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714084242/god_father_fb5ksq.png",
-        "fondo": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714443848/Godfather-Cocktail-003_g7mngq.jpg",
-        "metodo": "mezclado",
-        "ingredientes": [
-          {"nombre": "Scotch whisky o whiskey", "cantidad": 3.5},
-          {"nombre": "Amareto di saronno", "cantidad": 3.5}
-        ],
-        "decoracion": "Al gusto.",
-        "observaciones": "Se prepara directamente en vaso de old fashioned con hielo. Receta IBA."
-      },
-      {
-        "id": 49,
-        "nombre": "God Mother",
-        "formula": "Cóctel God Mother",
-        "liked": false,
-        "categoria": "vodka",
-        "temporada": "",
-        "sabor": "dulce",
-        "cristaleria": "old fashioned",
-        "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714084245/god_mother_jgtrut.png",
-        "fondo": "https://miniboxbar.files.wordpress.com/2016/04/cc3b3mo-preparar-un-godmother-coctel.jpg",
-        "metodo": "mezclado",
-        "ingredientes": [
-          {"nombre": "Vodka", "cantidad": 3.5},
-          {"nombre": "Amaretto di saronno", "cantidad": 3.5}
-        ],
-        "decoracion": "Al gusto.",
-        "observaciones": "Se prepara directamente en vaso de old fashioned con hielo. Receta IBA."
-      },
-      {
-        "id": 51,
-        "nombre": "Horse’s Neck",
-        "formula": "Cóctel Horses Neck",
-        "liked": false,
-        "categoria": "cognac",
-        "temporada": "",
-        "sabor": "picante",
-        "cristaleria": "higball",
-        "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714712955/horse_neck_a7okxr.png",
-        "fondo": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714447877/Horses-Neck_z3uugz.jpg",
-        "metodo": "directo",
-        "ingredientes": [
-          {"nombre": "Cognac", "cantidad": 4},
-          {"nombre": "Ginger Ale", "cantidad": 12},
-          {"nombre": "Angostura", "cantidad": "1 golpe"}
-        ],
-        "decoracion": "Piel de limón en espiral.",
-        "observaciones": "Se prepara en vaso de higball directamente, añadiendo la angostura al final. Receta IBA."
-      },
-      {
-        "id": 52,
-        "nombre": "John Collins",
-        "formula": "Cóctel John Collins",
-        "liked": false,
-        "categoria": "ginebra",
-        "temporada": "",
-        "sabor": "cítrico",
-        "cristaleria": "tumbler",
-        "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714712907/john-collins_clyrl7.png",
-        "fondo": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714447855/john-collins-whiskey-highball-recipe-759714-hero-01-16a85b92c1fa41ba9d41d83eb2fdce06_lkjxwl.jpg",
-        "metodo": "mezclado",
-        "ingredientes": [
-          {"nombre": "Ginebra Bombay", "cantidad": 4.5},
-          {"nombre": "jugo de lima-limón", "cantidad": 3},
-          {"nombre": "Azúcar Líquido", "cantidad": 1.5},
-          {"nombre": "Soda", "cantidad": 6}
-        ],
-        "decoracion": "Twist de limón.",
-        "observaciones": "Colocar todos lo ingredientes en un highball con hielo, mezclar suavemente, decorar con un Twist de limón y una guinda al marrasquino. Por ultimo agregar unas gotas de Angostura."
-      },
-      {
-        "id": 53,
-        "nombre": "Kamikaze",
-        "formula": "Cóctel Kamikaze",
-        "liked": false,
-        "categoria": "vodka",
-        "temporada": "",
-        "sabor": "cítrico",
-        "cristaleria": "copa cocktail",
-        "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714084412/Kamikaze_ksroo0.png",
-        "metodo": "batido",
-        "ingredientes": [
-          {"nombre": "Vodka", "cantidad": 3},
-          {"nombre": "Triple seco", "cantidad": 3},
-          {"nombre": "jugo de lima", "cantidad": 3}
-        ],
-        "decoracion": "Guinda roja.",
-        "observaciones": "Se elabora en coctelera. Se sirve en copa de cocktail. Receta IBA."
-      },
-      {
-        "id": 54,
-        "nombre": "Kir",
-        "formula": "Cóctel Kir",
-        "liked": false,
-        "categoria": "vino",
-        "temporada": "",
-        "sabor": "frutal",
-        "cristaleria": "copa",
-        "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714084415/kir_rcqosr.png",
-        "metodo": "directo",
-        "ingredientes": [
-          {"nombre": "Vino Blanco", "cantidad": 9},
-          {"nombre": "Crema de Cassis", "cantidad": 1}
-        ],
-        "decoracion": "Guinda Roja.",
-        "aderezos": "Se puede enfriar la crema de cassis en el vaso mezclador en el caso de que no este fría.",
-        "observaciones": "Se prepara directamente en la copa. Se termina de llenar con el vino. Si utilizamos champagne entonces lo denominamos KIR ROYALE. Receta IBA."
-      },
-      {
-        "id": 55,
-        "nombre": "Kir Royale",
-        "formula": "Cóctel Kir Royale",
-        "liked": false,
-        "categoria": "champagne",
-        "temporada": "",
-        "sabor": "frutal",
-        "cristaleria": "copa",
-        "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714084417/kir_royale_p3wztc.png",
-        "metodo": "directo",
-        "ingredientes": [
-          {"nombre": "Champagne o Cava", "cantidad": 9},
-          {"nombre": "Crema de Cassis Marie Brizard", "cantidad": 1}
-        ],
-        "observaciones": "Poner el Cassis en el fondo de la copa. Terminar de llenar con el champagne o cava."
-      },
-      {
-        "id": 56,
-        "nombre": "La Cosa Rosa",
-        "formula": "Cóctel La Cosa Rosa",
-        "liked": false,
-        "categoria": "ron",
-        "temporada": "",
-        "sabor": "frutal",
-        "cristaleria": "long drink",
-        "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714084663/la_cosa_rosa_qtrbsx.png",
-        "metodo": "batido",
-        "ingredientes": [
-          {"nombre": "Ron Dorado añejo", "cantidad": 3},
-          {"nombre": "Licor de plátano", "cantidad": 2},
-          {"nombre": "Batida de Coco", "cantidad": 2},
-          {"nombre": "jugo de Piña", "cantidad": 9},
-          {"nombre": "Sirope de Fresa", "cantidad": 2}
-        ],
-        "decoracion": "Brocheta de fruta.",
-        "observaciones": "Se elabora en coctelera. Se sirve en copa de Long drink. Receta de creación."
-      },
-      {
-        "id": 57,
-        "nombre": "La Vie en Rose",
-        "formula": "Cóctel La Vie en Rose",
-        "liked": false,
-        "categoria": "vodka",
-        "temporada": "",
-        "sabor": "floral",
-        "cristaleria": "long drink",
-        "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714084423/la_vie_rose_d8mgqh.png",
-        "metodo": "batido",
-        "ingredientes": [
-          {"nombre": "Vodka", "cantidad": 3},
-          {"nombre": "Sirope de rosas", "cantidad": 2},
-          {"nombre": "Cointreau", "cantidad": 2},
-          {"nombre": "jugo de Piña", "cantidad": 5}
-        ],
-        "decoracion": "2 Rodajas de naranja, una rosa comestible, hojas de menta, sujetos con un stick.",
-        "observaciones": "Se prepara en coctelera. Se sirve en copa Long drink con hielo. Receta de creación."
-      },
-      {
-        "id": 58,
-        "nombre": "Lemon Drop Martini",
-        "formula": "Cóctel Lemon Drop Martini",
-        "liked": false,
-        "categoria": "vodka",
-        "temporada": "",
-        "sabor": "cítrico",
-        "cristaleria": "cocktail",
-        "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714084425/lemon_drop_martini_izp9uw.png",
-        "metodo": "batido",
-        "ingredientes": [
-          {"nombre": "Vodka limón", "cantidad": 2.5},
-          {"nombre": "Triple seco", "cantidad": 2},
-          {"nombre": "jugo de limón", "cantidad": 1.5}
-        ],
-        "decoracion": "Rodaja de limón.",
-        "aderezos": "Se prepara en copa escarchada con azúcar.",
-        "observaciones": "Se elabora en coctelera. Se sirve en copa de cocktail. Receta IBA."
-      },
-      {
-        "id": 59,
-        "nombre": "Long Island Iced Tea",
-        "formula": "Cóctel Long Island Iced Tea",
-        "liked": false,
-        "categoria": "coctel",
-        "temporada": "",
-        "sabor": "fuerte",
-        "cristaleria": "highball",
-        "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714084428/long_island_tea_gxmzto.png",
-        "fondo": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714448064/__opt__aboutcom__coeus__resources__content_migration__liquor__2019__03__14090749__Long-Island-Iced-Tea-720x720-article-272623f47e80457594178a552f708068_xs6s1h.jpg",
-        "metodo": "mezclado",
-        "ingredientes": [
-          {"nombre": "Tequila", "cantidad": 1.5},
-          {"nombre": "Vodka", "cantidad": 1.5},
-          {"nombre": "Ron blanco", "cantidad": 1.5},
-          {"nombre": "Triple seco", "cantidad": 1.5},
-          {"nombre": "Ginebra", "cantidad": 1.5},
-          {"nombre": "jugo de lima", "cantidad": 2.5}
-        ],
-        "decoracion": "Piel de limón en espiral, acompañada de un sorbete.",
-        "aderezos": "Se prepara en un vaso con hielo,3cl de sirope de azúcar, se le añaden todos los ingredientes y se pone un golpe de Coca-Cola a continuación remover.",
-        "observaciones": "Se prepara en vaso de higball. Receta IBA."
-      },
-    {
-        "id": 61,
-        "nombre": "Mai Tai",
-        "formula": "Cóctel Mai Tai",
-        "liked": false,
-        "categoria": "ron",
-        "temporada": "",
-        "sabor": "frutal",
-        "cristaleria": "highball",
-        "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714084431/Mai_tai_nmmxad.png",
-        "metodo": "batido",
-        "ingredientes": [
-        {"nombre": "Ron blanco", "cantidad": 4},
-        {"nombre": "Ron dorado", "cantidad": 2},
-        {"nombre": "Curaçao Naranja", "cantidad": 1.5},
-        {"nombre": "Sirope de horchata", "cantidad": 1.5},
-        {"nombre": "jugo de lima", "cantidad": 1}
-        ],
-        "decoracion": "Con triangulo de piña, hojas de menta, y piel de lima.",
-        "observaciones": "Se prepara en coctelera. Se sirve en vaso de higball. Receta IBA."
-    },
-    {
-        "id": 62,
-        "nombre": "Manhattan",
-        "formula": "Cóctel Manhattan",
-        "liked": false,
-        "categoria": "whiskey",
-        "temporada": "",
-        "sabor": "amargo",
-        "cristaleria": "copa",
-        "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714085115/Manhattan_eyjpc7.png",
-        "fondo": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714444444/Manhattan_jmyqb3.jpg",
-        "metodo": "mezclado",
-        "ingredientes": [
-        {"nombre": "Rye Whisky o Whiskey", "cantidad": 5},
-        {"nombre": "Vermouth o vermú Cinzano Rosso", "cantidad": 2},
-        {"nombre": "Angostura", "cantidad": "1 Dash (gota)"}
-        ],
-        "aderezos": "1 Guinda al Marraschino.",
-        "observaciones": "Se elabora en vaso mezclador. Se sirve en copa especial o copa de cocktail. Receta IBA."
-    },
-    {
-        "id": 63,
-        "nombre": "Margarita",
-        "formula": "Cóctel Margarita",
-        "liked": false,
-        "categoria": "tequila",
-        "temporada": "",
-        "sabor": "cítrico",
-        "cristaleria": "cocktail",
-        "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714086733/Margarita_inw4x7.png",
-        "metodo": "batido",
-        "ingredientes": [
-        {"nombre": "Tequila", "cantidad": 3.5},
-        {"nombre": "Cointreau", "cantidad": 2},
-        {"nombre": "jugo de lima", "cantidad": 1.5}
-        ],
-        "decoracion": "Guinda roja en el interior.",
-        "aderezos": "La copa ha de estar escarchada con sal.",
-        "observaciones": "Se prepara en coctelera. Se sirve en copa especial de margarita o en copa de cocktail. Receta IBA."
-    },
-
-
-    {
-        "id": 66,
-        "nombre": "Mimosa",
-        "formula": "Cóctel Mimosa",
-        "liked": false,
-        "categoria": "champagne",
-        "temporada": "",
-        "sabor": "cítrico",
-        "cristaleria": "flauta",
-        "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714086736/Mimosa_r3qxqd.png",
-        "metodo": "directo",
-        "ingredientes": [
-        {"nombre": "jugo de naranja", "cantidad": 7.5},
-        {"nombre": "Champagne", "cantidad": 7.5}
-        ],
-        "decoracion": "Guinda roja y media rodaja de naranja.",
-        "observaciones": "Se prepara directamente en copa de flauta, con los ingredientes fríos. Receta IBA."
-    },
-    {
-        "id": 67,
-        "nombre": "Mint Julep",
-        "formula": "Cóctel Mint Julep",
-        "liked": false,
-        "categoria": "whiskey",
-        "temporada": "",
-        "sabor": "menta",
-        "cristaleria": "tumbler pequeño",
-        "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714086742/mint_julep_jmygad.png",
-        "fondo": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714763610/CM-Mint-Julep-lpzm-superJumbo_le15po.jpg",
-        "metodo": "directo",
-        "ingredientes": [
-        {"nombre": "Whiskey o whisky bourbon", "cantidad": 6},
-        {"nombre": "Menta fresca", "cantidad": "3 ramitas"},
-        {"nombre": "Azucar", "cantidad": "1 cucharilla"},
-        {"nombre": "Agua", "cantidad": "2 cucharillas"}
-        ],
-        "decoracion": "Rama de menta fresca.",
-        "aderezos": "Poner en el vaso la menta, el azúcar, el agua y macerar todo junto, añadir hielo troceado y cuando el vaso este bien frío, añadir el whiskey y remover.",
-        "observaciones": "Se elabora directamente en el vaso bien frío. Se utilizan unos vasos metálicos especiales para este cocktail, si no un tumbler pequeño. Receta IBA."
-    },
-    {
-        "id": 68,
-        "nombre": "Mojito",
-        "formula": "Cóctel Mojito",
-        "liked": false,
-        "categoria": "ron",
-        "temporada": "",
-        "sabor": "menta",
-        "cristaleria": "tumbler",
-        "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714086745/mojito_rb2qae.png",
-        "metodo": "directo",
-        "ingredientes": [
-        {"nombre": "Ron cubano", "cantidad": 4},
-        {"nombre": "jugo de lima", "cantidad": 3},
-        {"nombre": "Hierbabuena o menta", "cantidad": "6 hojas"},
-        {"nombre": "Azúcar blanco", "cantidad": "2 cucharillas"},
-        {"nombre": "Soda", "cantidad": "Llenar"},
-        {"nombre": "Angostura", "cantidad": "Gota opcional"}
-        ],
-        "decoracion": "Una ramita de menta fresca.",
-        "aderezos": "En el interior del vaso colocar la menta, el azúcar y la lima, machacar todo junto, añadir el ron, hielo troceado y terminar de llenar con soda.",
-        "observaciones": "Se prepara directamente en vaso. Se sirve en vaso tumbler. Receta IBA."
-    },
-
-    {
-        "id": 70,
-        "nombre": "Moscow Mule",
-        "formula": "Cóctel Moscow Mule",
-        "liked": false,
-        "categoria": "vodka",
-        "temporada": "",
-        "sabor": "cítrico",
-        "cristaleria": "higball",
-        "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714086753/moscow_mule_jbhwqk.png",
-        "fondo": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714448079/moscow-mule-4000x4000-primary-ig-3a364d63e57b4a9b8cf82ec1dc54eb30_babgrd.jpg",
-        "metodo": "directo",
-        "ingredientes": [
-        {"nombre": "Vodka", "cantidad": 4.5},
-        {"nombre": "jugo de lima", "cantidad": 0.5},
-        {"nombre": "Ginger beer", "cantidad": 12}
-        ],
-        "decoracion": "Rodaja de lima.",
-        "aderezos": "Colocar todos los ingredientes en el vaso con hielo y remover.",
-        "observaciones": "Se elabora directamente en vaso de higball. Receta IBA."
-    },
-    {
-        "id": 71,
-        "nombre": "Negroni",
-        "formula": "Cóctel Negroni",
-        "liked": false,
-        "categoria": "ginebra",
-        "temporada": "",
-        "sabor": "amargo",
-        "cristaleria": "old fashioned",
-        "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714086754/negroni_va0usq.png",
-        "fondo": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714444580/Social-Kingston-Negroni-Rum-Cocktail-Recipe_igi6md.jpg",
-        "metodo": "directo",
-        "ingredientes": [
-          {"nombre": "Ginebra", "cantidad": 3},
-          {"nombre": "Campari", "cantidad": 3},
-          {"nombre": "Vermouth o vermú Cinzano Rosso", "cantidad": 3}
-        ],
-        "decoracion": "Rodaja de naranja.",
-        "observaciones": "Poner todos los ingredientes directamente en un vaso old fashioned con hielo, remover suavemente."
-      },
-      {
-        "id": 72,
-        "nombre": "Old Fashioned",
-        "formula": "Cóctel Old Fashioned",
-        "liked": false,
-        "categoria": "whiskey",
-        "temporada": "",
-        "sabor": "amargo",
-        "cristaleria": "old fashioned",
-        "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714086758/old_fashioned_ifyhwf.png",
-        "fondo": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714444587/__opt__aboutcom__coeus__resources__content_migration__liquor__2018__05__08113350__bourbon-old-fashioned-720x720-recipe-ade6f7780c304999be3577e565c9bcdd_hacvxx.jpg",
-        "metodo": "directo",
-        "ingredientes": [
-          {"nombre": " Whisky o Whiskey Bourbon", "cantidad": 5},
-          {"nombre": "Terrón de azúcar", "cantidad": 1},
-          {"nombre": "Angostura", "cantidad": "2 dashes"},
-          {"nombre": "Soda", "cantidad": "1 dash"}
-        ],
-        "decoracion": "Rodaja de naranja y limón con una guinda al marraschino.",
-        "aderezos": "Se pone el terrón de azúcar impregnado con la angostura y la soda, remover hasta que se disuelva en el vaso. Añadir el bourbon con hielo y remover suavemente.",
-        "observaciones": "Se prepara directamente en vaso de old fashioned. Receta IBA."
-      },
-      {
-        "id": 73,
-        "nombre": "Piña Colada",
-        "formula": "Cóctel Piña Colada",
-        "liked": false,
-        "categoria": "ron",
-        "temporada": "",
-        "sabor": "frutal",
-        "cristaleria": "long drink",
-        "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714086761/pi%C3%B1a_colada_xnetbd.png",
-        "metodo": "batido",
-        "ingredientes": [
-          {"nombre": "Ron blanco", "cantidad": 3},
-          {"nombre": "Leche de coco", "cantidad": 3},
-          {"nombre": "jugo de Piña", "cantidad": 9}
-        ],
-        "decoracion": "Adorne con un triangulo de piña, guinda y sorbetes.",
-        "aderezos": "Si se prepara con piña natural se elabora en batidora eléctrica.",
-        "observaciones": "Se prepara en coctelera. Se sirve en copa de long drink. Receta IBA."
-      },
-      {
-        "id": 74,
-        "nombre": "Pisco Sour",
-        "formula": "Cóctel Pisco Sour",
-        "liked": false,
-        "categoria": "pisco",
-        "temporada": "",
-        "sabor": "cítrico",
-        "cristaleria": "sours",
-        "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714086770/pisco_sour_gu86wb.png",
-        "metodo": "batido",
-        "ingredientes": [
-          {"nombre": "Pisco", "cantidad": 4.5},
-          {"nombre": "jugo de limón", "cantidad": 3},
-          {"nombre": "Sirope de azúcar", "cantidad": 2},
-          {"nombre": "Clara de huevo", "cantidad": "1 cucharadita"}
-        ],
-        "decoracion": "1 Guinda roja.",
-        "aderezos": "Una vez servido, poner un golpe de angostura encima.",
-        "observaciones": "Se prepara en coctelera. Se sirve en copa especial para sours. Receta IBA."
-      },
-      {
-        "id": 75,
-        "nombre": "Rob Roy",
-        "formula": "Cóctel Rob Roy",
-        "liked": false,
-        "categoria": "whiskey",
-        "temporada": "",
-        "sabor": "amargo",
-        "cristaleria": "copa martini",
-        "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714086776/rob_roy_glx2qe.png",
-        "fondo": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714444675/aa6e25577a57b11e816c389bc90dc580_skv7vx.jpg",
-        "metodo": "batido",
-        "ingredientes": [
-          {"nombre": "Scotch whisky o whiskey Dewars While Label", "cantidad": 4.5},
-          {"nombre": "Vermouth o vermú Cinzano Rosso", "cantidad": 2.5},
-          {"nombre": "Angostura", "cantidad": "1 golpe"}
-        ],
-        "decoracion": "Cereza al marrasquino.",
-        "observaciones": "Colocar todos los ingredientes en el Vaso Mezclador, batir bien. Servir en copa martini, decorando con una cereza al marrasquino."
-      },
-      {
-        "id": 76,
-        "nombre": "Rusty Nail",
-        "formula": "Cóctel Rusty Nail",
-        "liked": false,
-        "categoria": "whiskey",
-        "temporada": "",
-        "sabor": "amargo",
-        "cristaleria": "old fashioned",
-        "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714086783/rusty_nail_hwwbei.png",
-        "fondo": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714444710/Social-Bobby-heugel-Rusty-Nail-Scotch-Cocktail-Recipe_zoxj3s.jpg",
-        "metodo": "directo",
-        "ingredientes": [
-          {"nombre": "Scotch whisky o whiskey", "cantidad": 4.5},
-          {"nombre": "Drambuie", "cantidad": 2.5}
-        ],
-        "decoracion": "Twist de limón.",
-        "observaciones": "Se prepara directamente en vaso de old fashioned. Remover suavemente. Receta IBA."
-      },
-      {
-        "id": 77,
-        "nombre": "Destornillador",
-        "formula": "Cóctel Destornillador",
-        "liked": false,
-        "categoria": "vodka",
-        "temporada": "",
-        "sabor": "cítrico",
-        "cristaleria": "higball",
-        "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714713310/destornillador_ceies7.png",
-        "metodo": "directo",
-        "ingredientes": [
-          {"nombre": "Vodka", "cantidad": 5},
-          {"nombre": "jugo de naranja", "cantidad": 10}
-        ],
-        "decoracion": "Rodaja de naranja.",
-        "observaciones": "Se sirve directamente en vaso de hig-ball con hielo, y se remueve. Receta IBA."
-      },
-      {
-        "id": 78,
-        "nombre": "Sea Breeze",
-        "formula": "Cóctel Sea Breeze",
-        "liked": false,
-        "categoria": "vodka",
-        "temporada": "",
-        "sabor": "frutal",
-        "cristaleria": "old fashioned",
-        "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714086784/sea_breeze_rcb13y.png",
-        "metodo": "directo",
-        "ingredientes": [
-          {"nombre": "Vodka", "cantidad": 4},
-          {"nombre": "jugo de arándanos o frutillas o frutos rojos o frambuesas", "cantidad": 12},
-          {"nombre": "Pomelo", "cantidad": 3}
-        ],
-        "decoracion": "Con piel de lima.",
-        "observaciones": "Se prepara directamente en vaso de old fashioned con hielo. Receta IBA."
-      },
-      {
-        "id": 79,
-        "nombre": "Sex on the Beach",
-        "formula": "Cóctel Sex on the Beach",
-        "liked": false,
-        "categoria": "vodka",
-        "temporada": "",
-        "sabor": "frutal",
-        "cristaleria": "higball",
-        "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714086784/sex_on_the_beach_b1bxde.png",
-        "metodo": "directo",
-        "ingredientes": [
-          {"nombre": "Vodka", "cantidad": 4},
-          {"nombre": "Licor de Melocotón", "cantidad": 2},
-          {"nombre": "jugo de naranja", "cantidad": 4},
-          {"nombre": "jugo de arándanos o frutillas o frutos rojos o frambuesas", "cantidad": 4}
-        ],
-        "decoracion": "Rodaja de naranja.",
-        "observaciones": "Se elabora directamente en vaso de higball con hielo. Receta IBA."
-      },
-      {
-        "id": 80,
-        "nombre": "Sidecar",
-        "formula": "Cóctel Sidecar",
-        "liked": false,
-        "categoria": "cognac",
-        "temporada": "",
-        "sabor": "cítrico",
-        "cristaleria": "cocktail",
-        "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714086783/Sidecar_aaidvz.png",
-        "metodo": "batido",
-        "ingredientes": [
-          {"nombre": "Cognac", "cantidad": 5},
-          {"nombre": "Triple seco", "cantidad": 2},
-          {"nombre": "jugo de limón", "cantidad": 2}
-        ],
-        "decoracion": "Guinda roja,1/2 rodaja de limón.",
-        "observaciones": "Se elabora en coctelera. Se sirve en copa de cocktail. Receta IBA."
-      },
-      {
-        "id": 81,
-        "nombre": "Spritz Veneziano",
-        "formula": "Cóctel Spritz Veneziano",
-        "liked": false,
-        "categoria": "otro",
-        "temporada": "",
-        "sabor": "amargo",
-        "cristaleria": "old fashioned",
-        "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714086786/spritz_veneziano_aiql8d.png",
-        "fondo": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714444717/Spritz-veneziano-004_e3ejfe.jpg",
-        "metodo": "directo",
-        "ingredientes": [
-          {"nombre": "Prosecco", "cantidad": 6},
-          {"nombre": "Aperol", "cantidad": 4},
-          {"nombre": "Soda", "cantidad": 1}
-        ],
-        "decoracion": "Una rodaja de naranja.",
-        "aderezos": "Servir todos los ingredientes y terminar de llenar con la soda.",
-        "observaciones": "Se elabora directamente en copa con hielo. Receta IBA."
-      },
-      {
-        "id": 82,
-        "nombre": "Tequila Sunrise",
-        "formula": "Cóctel Tequila Sunrise",
-        "liked": false,
-        "categoria": "tequila",
-        "temporada": "",
-        "sabor": "frutal",
-        "cristaleria": "higball",
-        "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714086792/tequila_sunrise_vq3jut.png",
-        "metodo": "directo",
-        "ingredientes": [
-          {"nombre": "Tequila", "cantidad": 4.5},
-          {"nombre": "jugo de naranja", "cantidad": 9},
-          {"nombre": "Granadina", "cantidad": 1.5}
-        ],
-        "decoracion": "Rodaja de naranja y una guinda roja.",
-        "aderezos": "Colocar el jugo de naranja y el tequila directamente en el vaso de higball con hielo, a continuación poner la granadina sin remover.",
-        "observaciones": "Se prepara directamente en el vaso. Receta IBA."
-      },
-      {
-        "id": 83,
-        "nombre": "Tom Collins",
-        "formula": "Cóctel Tom Collins",
-        "liked": false,
-        "categoria": "ginebra",
-        "temporada": "",
-        "sabor": "cítrico",
-        "cristaleria": "long drink",
-        "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714086795/tom_collins_ubvb7b.png",
-        "fondo": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714448097/Tom-Collins-2_udr2la.jpg",
-        "metodo": "directo",
-        "ingredientes": [
-          {"nombre": "Ginebra", "cantidad": 4.5},
-          {"nombre": "jugo de limón", "cantidad": 3},
-          {"nombre": "Azúcar líquido", "cantidad": 1.5},
-          {"nombre": "Soda", "cantidad": 6}
-        ],
-        "decoracion": "Rodajas de limón.",
-        "aderezos": "2 Guindas al Marraschino.",
-        "observaciones": "Se elabora directamente en vaso de Long drink. Receta IBA."
-      },
-      {
-        "id": 84,
-        "nombre": "Tuxedo",
-        "formula": "Cóctel Tuxedo",
-        "liked": false,
-        "categoria": "gin",
-        "temporada": "",
-        "sabor": "herbal",
-        "cristaleria": "old fashioned",
-        "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714086798/tuxedo_bcolqd.png",
-        "fondo": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714448249/Martini-Cocktail_Tuxedo-No.-2-recipe-121219_wevsso.jpg",
-        "metodo": "directo",
-        "ingredientes": [
-          {"nombre": "Old tom gin", "cantidad": 3},
-          {"nombre": "Vermouth o vermú seco", "cantidad": 3},
-          {"nombre": "Marraschino", "cantidad": "1/2 cucharadita"},
-          {"nombre": "Absenta", "cantidad": "1/4 cucharadita"},
-          {"nombre": "Bitter orange", "cantidad": "3 Dashes"}
-        ],
-        "decoracion": "Se acompaña con una guinda roja y una piel de limón.",
-        "observaciones": "Se elabora directamente en vaso old fashion con hielo. Receta IBA."
-      },
-      {
-        "id": 85,
-        "nombre": "Whiskey Sour",
-        "formula": "Cóctel Whiskey Sour",
-        "liked": false,
-        "categoria": "whiskey",
-        "temporada": "",
-        "sabor": "cítrico",
-        "cristaleria": "sour",
-        "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714086802/whiskey_soue_e7v3qm.png",
-        "fondo": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714763579/20240401-SEA-WhiskeySour-TwoBites-HERO-01-bef64aab3cd14223be51e8db8ab4a58d_fwljhn.jpg",
-        "metodo": "batido",
-        "ingredientes": [
-          {"nombre": "Whisky o Whiskey Bourbon", "cantidad": 4.5},
-          {"nombre": "jugo de limón", "cantidad": 3},
-          {"nombre": "Azúcar líquido", "cantidad": 1.5}
-        ],
-        "decoracion": "1/2 Rodaja de naranja y una guinda al marraschino.",
-        "aderezos": "1 Dash (golpe) de clara de huevo (opcional).",
-        "observaciones": "Se elabora en coctelera. Se sirve en copa de sour o cocktail. Receta IBA."
-      },
-      {
-        "id": 86,
-        "nombre": "White Lady",
-        "formula": "Cóctel White Lady",
-        "liked": false,
-        "categoria": "gin",
-        "temporada": "",
-        "sabor": "cítrico",
-        "cristaleria": "cocktail",
-        "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714086805/white_lady_dx8s6y.png",
-        "fondo": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714448393/whitelady1_saukfa.jpg",
-        "metodo": "batido",
-        "ingredientes": [
-          {"nombre": "Ginebra", "cantidad": 4},
-          {"nombre": "Triple seco", "cantidad": 3},
-          {"nombre": "jugo de limón", "cantidad": 2}
-        ],
-        "decoracion": "Rodaja de limón y guinda roja.",
-        "aderezos": "Después de pasar por la coctelera colar al servir.",
-        "observaciones": "Se prepara en coctelera. Se sirve en copa de cocktail. Receta IBA."
-      },
+      "id": "1",
+      "name": "Union Square",
+      "category": "Exotic",
+      "rating": 5,
+      "price": 22,
+      "image": "https://www.thecocktaildb.com/images/media/drink/qvvxwy1472406424.jpg",
+      "imageLocal": "require('../assets/images/cocktails/UnionSquare.png')",
+      "backgroundColor": "#f23149",
+      "description": "Union Square is a vibrant and sophisticated cocktail that balances sweet and sour notes with a hint of exotic spice. Named after the famous New York City landmark, this cocktail embodies the energy and diversity of the city.",
+      "story": "Created by a renowned mixologist in the heart of Manhattan, Union Square was inspired by the vibrant colors and flavors found in the famous Union Square Greenmarket. The cocktail quickly gained popularity among locals and tourists alike for its unique flavor profile and stunning presentation.",
+      "ingredients": [
         {
-          "id": 90,
-          "nombre": "Fernet con Coca",
-          "formula": "Cóctel Fernet con Cola",
-          "liked": false,
-          "categoria": "Argentina",
-          "temporada": "",
-          "sabor": "herbal",
-          "cristaleria": "highball",
-          "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714086859/fernet_uf9qqb.png",
-          "fondo": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714446985/fw8gyzrzt1xicsek5bze.jpg",
-          "metodo": "directo",
-          "ingredientes": [
-            {"nombre": "Fernet", "cantidad": 5},
-            {"nombre": "Coca Cola", "cantidad": 10}
-          ],
-          "decoracion": "Rodaja de limón (opcional).",
-          "aderezos": "Remover suavemente después de servir.",
-          "observaciones": "Se sirve directamente en vaso de hig-ball con hielo."
+          "name": "Gin",
+          "amount": "2 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/920/920582.png"
         },
         {
-            "id": 87,
-            "nombre": "Gin & Tonic",
-            "formula": "Cóctel Gin & Tonic",
-            "liked": false,
-            "categoria": "gin",
-            "temporada": "",
-            "sabor": "cítrico",
-            "cristaleria": "copa",
-            "fondo": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714447338/gin-tonic-fruta-1994x1206_lkg5kq.jpg",
-            "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714086880/gintonic_txxcju.png",
-            "metodo": "directo",
-            "ingredientes": [
-              {"nombre": "Gin", "cantidad": 5},
-              {"nombre": "Tónica", "cantidad": 10}
-            ],
-            "decoracion": "Rodaja de limón o pepino (para decorar).",
-            "aderezos": "Remover suavemente después de servir.",
-            "observaciones": "Se sirve directamente en vaso de hig-ball con hielo."
-          },
-          {
-            "id": 88,
-            "nombre": "Aperol Spritz",
-            "formula": "Cóctel Aperol Spritz",
-            "liked": false,
-            "categoria": "aperitivo",
-            "temporada": "",
-            "sabor": "amargo",
-            "cristaleria": "copa de vino o flauta",
-            "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714086874/aperol_spritz_vq4v4e.png",
-            "fondo": "https://media.gq.com.mx/photos/6088b03b6846a7e7f671f70c/16:9/w_2560%2Cc_limit/aperol%2520spritz.jpg",
-            "metodo": "directo",
-            "ingredientes": [
-              {"nombre": "Aperol", "cantidad": 6},
-              {"nombre": "Prosecco", "cantidad": 4},
-              {"nombre": "Soda", "cantidad": 1}
-            ],
-            "decoracion": "Rodaja de naranja (para decorar).",
-            "aderezos": "Servir todos los ingredientes y terminar de llenar con la soda.",
-            "observaciones": "Se sirve directamente en vaso old fashioned con hielo."
-          },
-          {
-            "id": 89,
-            "nombre": "Campari Orange",
-            "formula": "Cóctel Campari Orange",
-            "liked": false,
-            "categoria": "aperitivo",
-            "temporada": "",
-            "sabor": "amargo",
-            "cristaleria": "highball",
-            "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714086866/campari_p1diol.png",
-            "fondo": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714444922/i183796-2-campari-orange_s3hvgy.webp",
-            "metodo": "directo",
-            "ingredientes": [
-              {"nombre": "Campari", "cantidad": 4},
-              {"nombre": "jugo de naranja", "cantidad": 9}
-            ],
-            "decoracion": "Rodaja de naranja (para decorar).",
-            "aderezos": "Colocar el jugo de naranja y el Campari directamente en el vaso de higball con hielo, a continuación poner la granadina sin remover.",
-            "observaciones": "Se prepara directamente en el vaso."
-          },
-            {
-              "id": 91,
-              "nombre": "Cóctel Mónaco",
-              "formula": "Cóctel Mónaco",
-              "liked": false,
-              "categoria": "cerveza",
-              "temporada": "",
-              "sabor": "elegante",
-              "cristaleria": "vazo tumbler mediano",
-              "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714360364/monaco_pcssbv.png",
-              "fondo": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714445903/blog-monaco_zrecqr.png",
-              "metodo": "mezcla",
-              "ingredientes": [
-                {"nombre": "Agua mineral", "cantidad": 150},
-                {"nombre": "Cerveza clara", "cantidad": 150},
-                {"nombre": "jugo de granada", "cantidad": 15},
-                {"nombre": "Hielo", "cantidad": 6}
-              ],
-              "aderezos": "",
-              "observaciones": "Perfecto para animar reuniones con amigos."
-            },
-            {
-              "id": 92,
-              "nombre": "Beer Mimosa",
-              "formula": "Beer Mimosa",
-              "liked": false,
-              "categoria": "cerveza",
-              "temporada": "",
-              "sabor": "refrescante",
-              "cristaleria": "higball",
-              "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714360363/mimosa_erhbhy.png",
-              "fondo": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714445898/beermosa-recipe-6_ht4qkl.jpg",
-              "metodo": "mezcla",
-              "ingredientes": [
-                {"nombre": "jugo de pomelo", "cantidad": 3},
-                {"nombre": "Cerveza estilo American IPA", "cantidad": "Completar hasta arriba"},
-                {"nombre": "Twist de piel de pomelo", "cantidad": 1}
-              ],
-              "aderezos": "",
-              "observaciones": "Versión refrescante del cóctel Mimosa."
-            },
-            {
-              "id": 93,
-              "nombre": "Raspberry Lemonade",
-              "formula": "Raspberry Lemonade",
-              "liked": false,
-              "categoria": "cerveza",
-              "temporada": "",
-              "sabor": "refrescante",
-              "cristaleria": "jarra",
-              "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714360366/raspberry-lemonade_eiucrj.png",
-              "fondo": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714446039/beer-cocktail-sl-1704105-x_c25dwn.jpg",
-              "metodo": "mezcla",
-              "ingredientes": [
-                {"nombre": "Frambuesas frescas", "cantidad": 230},
-                {"nombre": "Cerveza de cereza", "cantidad": 4},
-                {"nombre": "Concentrado de limón", "cantidad": 200},
-                {"nombre": "Vodka", "cantidad": 115}
-              ],
-              "aderezos": "",
-              "observaciones": "Preparado con frambuesas frescas, cerveza fruit beer de cereza, concentrado de limón y vodka."
-            },
-            {
-              "id": 94,
-              "nombre": "Margarita Miami",
-              "formula": "Margarita Miami",
-              "liked": false,
-              "categoria": "cerveza",
-              "temporada": "",
-              "sabor": "cítrico",
-              "cristaleria": "copa",
-              "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714360359/margarita-miami_beeads.png",
-              "fondo": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714445908/Coronarita_mh66zz.jpg",
-              "metodo": "mezcla",
-              "ingredientes": [
-                {"nombre": "Tequila", "cantidad": 45},
-                {"nombre": "Licor triple seco", "cantidad": 30},
-                {"nombre": "jugo de limón", "cantidad": 30},
-                {"nombre": "Hielo", "cantidad": 0},
-                {"nombre": "Cerveza clara", "cantidad": 310}
-              ],
-              "aderezos": "Sal",
-              "observaciones": "Combinación deliciosa que se destaca por sus sabores cítricos y dulces."
-            },
-            {
-              "id": 95,
-              "nombre": "Submarino",
-              "formula": "Submarino",
-              "categoria": "cerveza",
-              "liked": false,
-              "temporada": "",
-              "sabor": "clásico",
-              "cristaleria": "highball",
-              "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714360370/submarino_co2aww.png",
-              "fondo": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714446263/tequila-shandy-3_dpps9z.jpg",
-              "metodo": "mezcla",
-              "ingredientes": [
-                {"nombre": "Tequila", "cantidad": 45},
-                {"nombre": "Cerveza rubia", "cantidad": "Al gusto"}
-              ],
-              "aderezos": "",
-              "observaciones": "Clásico de las bebidas con cerveza, ideal para fiestas o reuniones."
-            },
-            {
-              "id": 96,
-              "nombre": "Sangría con cerveza",
-              "formula": "Sangría con cerveza",
-              "liked": false,
-              "categoria": "cerveza",
-              "temporada": "",
-              "sabor": "refrescante",
-              "cristaleria": "copa",
-              "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714360367/sangria-cerveza_kxlf8h.png",
-              "fondo": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714446253/ncsrwcxxo6bp8rlziyy9.jpg",
-              "metodo": "mezcla",
-              "ingredientes": [
-                {"nombre": "Tequila", "cantidad": 45},
-                {"nombre": "Licor triple seco", "cantidad": 30},
-                {"nombre": "jugo de limón", "cantidad": 30},
-                {"nombre": "jugo de mango o piña", "cantidad": 30},
-                {"nombre": "Cerveza rubia", "cantidad": "Al gusto"},
-                {"nombre": "Naranjas", "cantidad": 2},
-                {"nombre": "Fresas", "cantidad": 6},
-                {"nombre": "Hielo", "cantidad": 0}
-              ],
-              "aderezos": "",
-              "observaciones": "Refrescante sangría con cerveza, perfecta para disfrutar en cualquier ocasión."
-            },
-            {
-              "id": 97,
-              "nombre": "Weissen Sour",
-              "formula": "Weissen Sour",
-              "liked": false,
-              "categoria": "cerveza",
-              "temporada": "",
-              "sabor": "cítrico",
-              "cristaleria": "tumbler pequeño",
-              "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714360373/weissen_phag0e.png",
-              "fondo": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714446474/lg_Weissen_20Sour_phz5tt.jpg",
-              "metodo": "mezcla",
-              "ingredientes": [
-                {"nombre": "Whiskey o whisky bourbon", "cantidad": 60},
-                {"nombre": "Cerveza estilo Witbier", "cantidad": 60},
-                {"nombre": "Mermelada de naranja", "cantidad": 1},
-                {"nombre": "jugo de limón", "cantidad": 20},
-                {"nombre": "Jarabe simple", "cantidad": 7},
-                {"nombre": "Tiras de cáscara de naranja amarga", "cantidad": 2},
-                {"nombre": "Hielo", "cantidad": 0}
-              ],
-              "aderezos": "",
-              "observaciones": "Combina bourbon, cerveza belga, jugo de limón y dulce de naranja."
-            },
-            {
-              "id": 98,
-              "nombre": "Black velvet",
-              "formula": "Black velvet",
-              "liked": false,
-              "categoria": "cerveza",
-              "temporada": "",
-              "sabor": "refinado",
-              "cristaleria": "copa flauta",
-              "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714360359/black_velvet_iuiotk.png",
-              "fondo": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714446390/black-velvet-1200x628-email-bce5dc088370423382c0b32e2347c228_qxvocu.jpg",
-              "metodo": "mezcla",
-              "ingredientes": [
-                {"nombre": "Cerveza oscura", "cantidad": "Al gusto"},
-                {"nombre": "Champaña o Vino Espumoso Brut", "cantidad": "Al gusto"}
-              ],
-              "aderezos": "Cereza",
-              "observaciones": "Una de las bebidas con cerveza más refinadas, ideal para una noche de diversión con amigos."
-            },
-            {
-              "id": 99,
-              "nombre": "Lemon Shandy",
-              "formula": "Lemon Shandy",
-              "liked": false,
-              "categoria": "cerveza",
-              "temporada": "",
-              "sabor": "refrescante",
-              "cristaleria": "long drink",
-              "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714360359/lemon-shandy_l9irbx.png",
-              "fondo": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714446596/Summer-Shandy-002_tq0b2j.jpg",
-              "metodo": "mezcla",
-              "ingredientes": [
-                {"nombre": "Cerveza tipo Pilsner", "cantidad": 4},
-                {"nombre": "Agua con gas", "cantidad": 175},
-                {"nombre": "jugo de limón", "cantidad": 175},
-                {"nombre": "Azúcar", "cantidad": 90}
-              ],
-              "aderezos": "",
-              "observaciones": "Elaborado con cerveza Pilsner, jugo de limón, una pizca de agua con gas y un toque de azúcar."
-            },
-            {
-              "id": 100,
-              "nombre": "Sidewalker",
-              "formula": "Sidewalker",
-              "liked": false,
-              "categoria": "cerveza",
-              "temporada": "",
-              "sabor": "refrescante",
-              "cristaleria": "long drink",
-              "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714360369/sidewalker_ayhcmn.png",
-              "fondo": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714446662/HudsonHighlandCup-720x720-primary-ff6d45ee495645b0934b04463548f65e_n4i1qd.jpg",
-              "metodo": "mezcla",
-              "ingredientes": [
-                {"nombre": "Vodka", "cantidad": 30},
-                {"nombre": "Licor de naranja", "cantidad": 15},
-                {"nombre": "jugo de limón", "cantidad": 15},
-                {"nombre": "Jarabe simple", "cantidad": 15},
-                {"nombre": "Cerveza rubia o lager", "cantidad": "Al gusto"},
-                {"nombre": "Hielo", "cantidad": 0}
-              ],
-              "aderezos": "",
-              "observaciones": "Una combinación de vodka, licor de naranja, jugo de limón, jarabe simple y cerveza."
-            },
-            {
-              "id": 101,
-              "nombre": "Gin sin tonic",
-              "formula": "Gin sin tonic",
-              "liked": false,
-              "categoria": "gin",
-              "temporada": "",
-              "sabor": "refrescante",
-              "cristaleria": "copa cocktail grande",
-              "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714362761/gin-sin-tonic_ltbyix.png",
-              "fondo": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714448355/la-birra-se-hace-presente-en-la-KWI6A27DBRC3FOJPRO56TRV3SA_zbhrcy.jpg",
-              "metodo": "mezcla",
-              "ingredientes": [
-                {"nombre": "London dry gin", "cantidad": 45},
-                {"nombre": "jugo de lima", "cantidad": 15},
-                {"nombre": "Almíbar", "cantidad": 15},
-                {"nombre": "Angostura Bitters", "cantidad": 3},
-                {"nombre": "Orange Bitters", "cantidad": 3},
-                {"nombre": "IPA de Bierlife", "cantidad": 100}
-              ],
-              "aderezos": "",
-              "observaciones": "Refrescante cóctel preparado con gin y cerveza IPA."
-            },
-            {
-              "id": 102,
-              "nombre": "Sin Fronteras",
-              "formula": "Sin Fronteras",
-              "liked": false,
-              "categoria": "gin",
-              "temporada": "",
-              "sabor": "exótico",
-              "cristaleria": "long drink",
-              "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714362859/sin-fronteras_qfusqi.png",
-              "fondo": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714446830/28514_gjvfpx.jpg",
-              "metodo": "mezcla",
-              "ingredientes": [
-                {"nombre": "ron Carta Oro", "cantidad": 60},
-                {"nombre": "Almíbar de té Earl Grey", "cantidad": 30},
-                {"nombre": "jugo de limón", "cantidad": 30},
-                {"nombre": "jugo de ananá", "cantidad": 30},
-                {"nombre": "Cerveza lager", "cantidad": 30},
-                {"nombre": "Absenta", "cantidad": 3}
-              ],
-              "aderezos": "Pencas de ananá",
-              "observaciones": "Cóctel exótico con toques de ananá y té Earl Grey, complementado con cerveza lager."
-            },
-            {
-              "id": 103,
-              "nombre": "Buena Birra",
-              "formula": "Buena Birra",
-              "liked": false,
-              "categoria": "gin",
-              "temporada": "",
-              "sabor": "cítrico",
-              "cristaleria": "copa goblet",
-              "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714362760/buena-birra_scyaat.png",
-              "fondo": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714446858/images_neh0gt.jpg",
-              "metodo": "mezcla",
-              "ingredientes": [
-                {"nombre": "London dry gin", "cantidad": 30},
-                {"nombre": " whisky o whiskey Bourbon Jim Beam", "cantidad": 30},
-                {"nombre": "jugo de limón", "cantidad": 30},
-                {"nombre": "Almíbar de jengibre", "cantidad": 45},
-                {"nombre": "Cerveza Golden", "cantidad": "Al gusto"}
-              ],
-              "aderezos": "Pomelo fresco, tomillo y piel de limón",
-              "observaciones": "Cóctel cítrico y refrescante con gin, bourbon y cerveza Golden."
-            },
-            {
-              "id": 104,
-              "nombre": "Bjor Negroni",
-              "formula": "Bjor Negroni",
-              "liked": false,
-              "categoria": "gin",
-              "temporada": "",
-              "sabor": "amargo",
-              "cristaleria": "old fashioned",
-              "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714362639/bjor_negroni_ehtlzh.png",
-              "fondo": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714445018/beernegronis_xllc6p.jpg",
-              "metodo": "mezcla",
-              "ingredientes": [
-                {"nombre": "Gin Tanqueray", "cantidad": 30},
-                {"nombre": "Campari", "cantidad": 30},
-                {"nombre": "Vermouth o vermú Cinzano Rosso", "cantidad": 30},
-                {"nombre": "Cerveza Stella Artois", "cantidad": 30}
-              ],
-              "aderezos": "",
-              "observaciones": "Clásico cóctel Negroni con un toque de cerveza Stella Artois."
-            },
-            {
-              "id": 105,
-              "nombre": "Ferroviario",
-              "formula": "Ferroviario",
-              "liked": false,
-              "categoria": "Argentina",
-              "temporada": "",
-              "sabor": "amargo",
-              "cristaleria": "highball",
-              "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714442692/ferroviario_adfygh.png",
-              "fondo": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714445023/maxresdefault_ws2dl8.jpg",
-              "metodo": "mezcla",
-              "ingredientes": [
-                {"nombre": "Fernet Branca", "cantidad": 60},
-                {"nombre": "Vermouth o vermú Cinzano Rosso", "cantidad": 30},
-                {"nombre": "Soda o agua con gas", "cantidad": "al gusto"},
-                {"nombre": "Hielo", "cantidad": "al gusto"},
-                {"nombre": "Rodaja de naranja o limón para decorar", "cantidad": "opcional"}
-              ],
-              "aderezos": "",
-              "observaciones": "Llena un highball con hielo hasta la mitad. Vierte el Fernet Branca y el Vermouth o vermú Cinzano Rosso en el vaso. Remueve suavemente con una cuchara larga para mezclar los ingredientes. Completa el trago con soda o agua con gas hasta llenar el vaso. Si lo deseas, decora con una rodaja de naranja o limón en el borde del vaso para darle un toque de frescura."
-            },
-            {
-              "id": 106,
-              "nombre": "Clarito",
-              "formula": "Clarito",
-              "liked": false,
-              "categoria": "Argentina",
-              "temporada": "",
-              "sabor": "amargo",
-              "cristaleria": "copa cocktail",
-              "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714442692/clarito_wnn0wc.png",
-              "fondo": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714445133/18-09-21-Clarito-1280x720_wru6ao.jpg",
-              "metodo": "mezcla",
-              "ingredientes": [
-                {"nombre": "No3 London Dry Gin", "cantidad": 9},
-                {"nombre": "Vermouth o vermú seco", "cantidad": 1},
-                {"nombre": "Piel de limón para decorar", "cantidad": "al gusto"}
-              ],
-              "aderezos": "",
-              "observaciones": "En un vaso mezclador con hielo, añade el No3 London Dry Gin y el Vermouth o vermú seco. Mezcla bien y cuela la mezcla en una copa de cóctel previamente enfriada. Decora con una piel de limón."
-            },
-            {
-              "id": 107,
-              "nombre": "Pico y Pala",
-              "formula": "Pico y Pala",
-              "liked": false,
-              "categoria": "Argentina",
-              "temporada": "",
-              "sabor": "amargo",
-              "cristaleria": "highball",
-              "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714442731/picoypala_h214fo.png",
-              "fondo": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714445154/Pico-y-Pala-Amargo-Obrero_loqdhr.jpg",
-              "metodo": "mezcla",
-              "ingredientes": [
-                {"nombre": "Amargo Obrero", "cantidad": "50%"},
-                {"nombre": "Gaseosa de pomelo", "cantidad": "50%"},
-                {"nombre": "Abundante hielo", "cantidad": "al gusto"},
-                {"nombre": "Rodaja de pomelo rosado para decorar", "cantidad": "al gusto"}
-              ],
-              "aderezos": "",
-              "observaciones": "Mezcla el Amargo Obrero y la gaseosa de pomelo en un highball con hielo. Decora con una rodaja de pomelo rosado."
-            },
-            {
-              "id": 108,
-              "nombre": "Laburante",
-              "formula": "Laburante",
-              "liked": false,
-              "categoria": "Argentina",
-              "temporada": "",
-              "sabor": "amargo",
-              "cristaleria": "highball",
-              "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714442713/laburante_xbgmah.png",
-              "fondo": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714445240/Ch5JhbMXEAA3WuY_lm3fa4.jpg",
-              "metodo": "mezcla",
-              "ingredientes": [
-                {"nombre": "Amargo Obrero", "cantidad": 60},
-                {"nombre": "Almíbar simple", "cantidad": 30},
-                {"nombre": "jugo de pomelo", "cantidad": 30},
-                {"nombre": "Menta", "cantidad": "3 ramas"},
-                {"nombre": "Soda para completar", "cantidad": "al gusto"},
-                {"nombre": "Penacho de menta y 1/2 rodaja de pomelo para decorar", "cantidad": "al gusto"}
-              ],
-              "aderezos": "",
-              "observaciones": "En un highball con hielo, mezcla el Amargo Obrero, el almíbar simple y el jugo de pomelo. Agrega las ramas de menta y completa con soda. Decora con un penacho de menta y una 1/2 rodaja de pomelo."
-            },
-            {
-              "id": 109,
-              "nombre": "Hesperidina con Tónica",
-              "formula": "Hesperidina con Tónica",
-              "liked": false,
-              "categoria": "Argentina",
-              "temporada": "",
-              "sabor": "dulce",
-              "cristaleria": "highball",
-              "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714442712/hesperidina_toninca_zwmzyg.png",
-              "fondo": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714445406/dPNludYBc_720x0__1_ekn991.jpg",
-              "metodo": "mezcla",
-              "ingredientes": [
-                {"nombre": "Hesperidina", "cantidad": "30%"},
-                {"nombre": "Gaseosa tónica", "cantidad": "70%"},
-                {"nombre": "Abundante hielo", "cantidad": "al gusto"},
-                {"nombre": "Rodaja de limón para decorar", "cantidad": "al gusto"}
-              ],
-              "aderezos": "",
-              "observaciones": "En un highball con hielo, vierte la Hesperidina y luego la gaseosa tónica. Remueve suavemente y decora con una rodaja de limón."
-            },
-            {
-              "id": 110,
-              "nombre": "Mojito Argento",
-              "formula": "Mojito Argento",
-              "liked": false,
-              "categoria": "Argentina",
-              "temporada": "",
-              "sabor": "refrescante",
-              "cristaleria": "highball",
-              "fondo": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714448561/mojito-773x458_qw5flt.jpg",
-              "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714442743/mojito_argento_sfgazz.png",
-              "metodo": "mezcla",
-              "ingredientes": [
-                {"nombre": "Hesperidina", "cantidad": "al gusto"},
-                {"nombre": "Menta", "cantidad": "al gusto"},
-                {"nombre": "jugo de limón", "cantidad": "al gusto"},
-                {"nombre": "Almíbar simple", "cantidad": "al gusto"},
-                {"nombre": "Soda", "cantidad": "al gusto"}
-              ],
-              "aderezos": "",
-              "observaciones": "En un highball con hielo, añade la Hesperidina, la menta, el jugo de limón y el almíbar simple. Mezcla bien y completa con soda. Remueve suavemente y sirve."
-            },
-            {
-              "id": 111,
-              "nombre": "Hierroquina y Coca",
-              "formula": "Hierroquina y Coca",
-              "liked": false,
-              "categoria": "Argentina",
-              "temporada": "",
-              "sabor": "amargo",
-              "cristaleria": "long drink",
-              "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714442713/hierroquina_coca_hhssq9.png",
-              "fondo": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714445552/5ffe2f39eeca1_ttmlbw.webp",
-              "metodo": "mezcla",
-              "ingredientes": [
-                {"nombre": "Hierroquina", "cantidad": "30%"},
-                {"nombre": "Gaseosa Coca-Cola", "cantidad": "70%"},
-                {"nombre": "Abundante hielo", "cantidad": "al gusto"},
-                {"nombre": "Rodaja de limón para decorar", "cantidad": "al gusto"}
-              ],
-              "aderezos": "",
-              "observaciones": "En un highball con hielo, vierte la Hierroquina y luego la gaseosa Coca-Cola. Remueve suavemente y decora con una rodaja de limón."
-            },
-            {
-              "id": 112,
-              "nombre": "Pineral Julep",
-              "formula": "Pineral Julep",
-              "liked": false,
-              "categoria": "Argentina",
-              "temporada": "",
-              "sabor": "amargo",
-              "cristaleria": "long drink",
-              "foto": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714442731/pineral_julep_qflqjx.png",
-              "fondo": "https://res.cloudinary.com/ddlidaztt/image/upload/v1714445558/5ffe2f39b18c0_qbmkpr.webp",
-              "metodo": "mezcla",
-              "ingredientes": [
-                {"nombre": "Pineral", "cantidad": "40%"},
-                {"nombre": "jugo de pomelo", "cantidad": "60%"},
-                {"nombre": "jugo de media lima", "cantidad": "al gusto"},
-                {"nombre": "Azúcar", "cantidad": "1 cucharada"},
-                {"nombre": "ramas de menta fresca", "cantidad": "Tres"},
-                {"nombre": "Abundante hielo", "cantidad": "al gusto"}
-              ],
-              "aderezos": "",
-              "observaciones": "En un highball con hielo, mezcla el Pineral, el jugo de pomelo, el jugo de media lima y el azúcar. Añade las ramas de menta fresca y completa con abundante hielo. Sirve y disfruta."
-            }
+          "name": "Vermouth",
+          "amount": "1 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/2738/2738639.png"
+        },
+        {
+          "name": "Grenadine",
+          "amount": "0.5 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/3076/3076028.png"
+        },
+        {
+          "name": "Lime",
+          "amount": "0.5 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/6866/6866522.png"
+        }
+      ],
+      "preparation": "Shake all ingredients with ice and strain into a chilled cocktail glass. Garnish with a lime wheel and a cherry.",
+      "glassType": "Cocktail glass",
+      "garnish": "Lime wheel and cherry",
+      "alcoholContent": "18%",
+      "taste": {
+        "sweet": 3,
+        "sour": 4,
+        "bitter": 2,
+        "spicy": 1
+      },
+      "difficulty": "Intermediate",
+      "preparationTime": "5 minutes",
+      "popularity": "High",
+      "occasion": ["Evening", "Celebration", "Social gathering"],
+      "allergens": ["None"],
+      "calories": 220,
+      "tips": "For an extra kick, add a dash of chili bitters. The cocktail pairs well with seafood appetizers."
+    },
+    {
+      "id": "2",
+      "name": "Aperol Spritz",
+      "category": "Citrus",
+      "rating": 4.5,
+      "price": 19,
+      "image": "https://www.thecocktaildb.com/images/media/drink/itwkbs1622738662.jpg",
+      "imageLocal": "require('../assets/images/cocktails/aperolSpritz.png')",
+      "backgroundColor": "#FF8C42",
+      "description": "The Aperol Spritz is a refreshing Italian aperitif cocktail with a perfect balance of bitterness and sweetness. Its vibrant orange color and effervescent nature make it an ideal choice for summer gatherings.",
+      "story": "Originating in Venice, Italy in the 1950s, the Aperol Spritz gained popularity as a pre-dinner drink designed to stimulate the appetite. Its simple recipe and refreshing taste have made it a global favorite, especially during warm weather months.",
+      "ingredients": [
+        {
+          "name": "Aperol",
+          "amount": "3 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/2674/2674883.png"
+        },
+        {
+          "name": "Prosecco",
+          "amount": "2 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/1682/1682987.png"
+        },
+        {
+          "name": "Soda",
+          "amount": "1 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/2722/2722527.png"
+        },
+        {
+          "name": "Orange",
+          "amount": "1 slice",
+          "icon": "https://cdn-icons-png.flaticon.com/128/415/415682.png"
+        }
+      ],
+      "preparation": "Fill a wine glass with ice. Pour in the Aperol, followed by the Prosecco and a splash of soda water. Gently stir and garnish with an orange slice.",
+      "glassType": "Wine glass",
+      "garnish": "Orange slice",
+      "alcoholContent": "11%",
+      "taste": {
+        "sweet": 3,
+        "sour": 2,
+        "bitter": 4,
+        "spicy": 0
+      },
+      "difficulty": "Easy",
+      "preparationTime": "3 minutes",
+      "popularity": "Very high",
+      "occasion": ["Brunch", "Afternoon", "Summer"],
+      "allergens": ["Sulfites"],
+      "calories": 170,
+      "tips": "Use chilled ingredients for the best taste. The ratio can be adjusted to your preference, but traditionally it's 3-2-1 (Aperol-Prosecco-Soda)."
+    },
+    {
+      "id": "3",
+      "name": "Dry Martini",
+      "category": "Classic",
+      "rating": 4,
+      "price": 11,
+      "image": "https://www.thecocktaildb.com/images/media/drink/6ck9yi1589574317.jpg",
+      "imageLocal": "require('../assets/images/cocktails/DryMartini.png')",
+      "backgroundColor": "#E5F7F7",
+      "description": "The dirty martini has a pleasant saltiness that contrasts against a gin and vermouth background. \"Dirty\" simply refers to the addition of olive juice or brine. It's a classic cocktail that is very easy to mix up and one of the most popular variations on the original gin martini.",
+      "story": "The Martini has a disputed origin, with multiple claims to its creation dating back to the late 19th century. The 'dirty' variation became popular in the mid-20th century when Franklin D. Roosevelt was known to enjoy this olive-infused version of the classic cocktail.",
+      "ingredients": [
+        {
+          "name": "Gin",
+          "amount": "2.5 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/920/920582.png"
+        },
+        {
+          "name": "Vermouth",
+          "amount": "0.5 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/2738/2738639.png"
+        },
+        {
+          "name": "Olives",
+          "amount": "3",
+          "icon": "https://cdn-icons-png.flaticon.com/128/2909/2909808.png"
+        }
+      ],
+      "preparation": "Stir gin and vermouth with ice in a mixing glass until well-chilled. Strain into a chilled martini glass. Add olive juice to taste. Garnish with olives.",
+      "glassType": "Martini glass",
+      "garnish": "Green olives",
+      "alcoholContent": "32%",
+      "taste": {
+        "sweet": 1,
+        "sour": 0,
+        "bitter": 3,
+        "spicy": 0
+      },
+      "difficulty": "Easy",
+      "preparationTime": "4 minutes",
+      "popularity": "High",
+      "occasion": ["Evening", "Formal", "Business"],
+      "allergens": ["None"],
+      "calories": 210,
+      "tips": "Some bartenders suggest using a few dashes of olive oil instead of brine."
+    },
+    {
+      "id": "4",
+      "name": "Mojito",
+      "category": "Citrus",
+      "rating": 4.5,
+      "price": 18,
+      "image": "https://www.thecocktaildb.com/images/media/drink/metwgh1606770327.jpg",
+      "imageLocal": "require('../assets/images/cocktails/Mojito.png')",
+      "backgroundColor": "#C7F9CC",
+      "description": "The Mojito is a traditional Cuban highball that combines the freshness of mint with the tartness of lime and the sweetness of sugar. It's a refreshing cocktail perfect for hot summer days.",
+      "story": "The Mojito originated in Cuba and is one of the nation's oldest cocktails. It was said to be a favorite of author Ernest Hemingway and has roots dating back to the 16th century when Sir Francis Drake's crew used a primitive version of the drink to combat scurvy and dysentery.",
+      "ingredients": [
+        {
+          "name": "White Rum",
+          "amount": "2 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/2738/2738638.png"
+        },
+        {
+          "name": "Lime",
+          "amount": "1",
+          "icon": "https://cdn-icons-png.flaticon.com/128/6866/6866522.png"
+        },
+        {
+          "name": "Mint",
+          "amount": "8 leaves",
+          "icon": "https://cdn-icons-png.flaticon.com/128/6866/6866562.png"
+        },
+        {
+          "name": "Sugar",
+          "amount": "2 tsp",
+          "icon": "https://cdn-icons-png.flaticon.com/128/2455/2455576.png"
+        },
+        {
+          "name": "Soda",
+          "amount": "Top up",
+          "icon": "https://cdn-icons-png.flaticon.com/128/2722/2722527.png"
+        }
+      ],
+      "preparation": "Muddle mint leaves with sugar and lime juice. Add a splash of soda water and fill the glass with cracked ice. Pour the rum and top with soda water. Garnish with mint leaves and a lime wedge.",
+      "glassType": "Highball glass",
+      "garnish": "Mint sprig and lime wedge",
+      "alcoholContent": "13%",
+      "taste": {
+        "sweet": 3,
+        "sour": 4,
+        "bitter": 0,
+        "spicy": 0
+      },
+      "difficulty": "Intermediate",
+      "preparationTime": "7 minutes",
+      "popularity": "Very high",
+      "occasion": ["Summer", "Beach", "Casual"],
+      "allergens": ["None"],
+      "calories": 160,
+      "tips": "Gently muddle the mint to release the oils without breaking the leaves, which can create a bitter taste."
+    },
+    {
+      "id": "5",
+      "name": "Campari & Orange",
+      "category": "Citrus",
+      "rating": 4,
+      "price": 16,
+      "image": "https://www.thecocktaildb.com/images/media/drink/x8lhp41513703167.jpg",
+      "imageLocal": "require('../assets/images/cocktails/campariOrange.png')",
+      "backgroundColor": "#FF3D00",
+      "description": "A simple yet sophisticated Italian aperitif that combines the bitter complexity of Campari with the sweet freshness of orange juice. Perfect for brunch or as a pre-dinner drink.",
+      "story": "This classic combination dates back to the early 20th century when Campari became popular in Italy. The addition of orange juice helped balance Campari's bitterness, making it more approachable while maintaining its distinctive character.",
+      "ingredients": [
+        {
+          "name": "Campari",
+          "amount": "1.5 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/2674/2674883.png"
+        },
+        {
+          "name": "Orange Juice",
+          "amount": "4.5 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/415/415682.png"
+        },
+        {
+          "name": "Orange",
+          "amount": "1 slice",
+          "icon": "https://cdn-icons-png.flaticon.com/128/415/415682.png"
+        }
+      ],
+      "preparation": "Fill a highball glass with ice. Pour Campari first, then top with fresh orange juice. Stir gently and garnish with an orange slice.",
+      "glassType": "Highball glass",
+      "garnish": "Orange slice",
+      "alcoholContent": "8%",
+      "taste": {
+        "sweet": 3,
+        "sour": 2,
+        "bitter": 4,
+        "spicy": 0
+      },
+      "difficulty": "Easy",
+      "preparationTime": "2 minutes",
+      "popularity": "Medium",
+      "occasion": ["Brunch", "Afternoon", "Aperitif"],
+      "allergens": ["None"],
+      "calories": 150,
+      "tips": "Use freshly squeezed orange juice for the best flavor. The ratio can be adjusted to taste (typically 1:3 Campari to orange juice)."
+    },
+    {
+      "id": "6",
+      "name": "Gin & Tonic",
+      "category": "Classic",
+      "rating": 4.5,
+      "price": 14,
+      "image": "https://www.thecocktaildb.com/images/media/drink/z0myp71504351051.jpg",
+      "imageLocal": "require('../assets/images/cocktails/GinTonic.png')",
+      "backgroundColor": "#E5F7F7",
+      "description": "The quintessential British highball that showcases the botanicals of gin with the crisp bitterness of tonic water. Simple yet endlessly customizable with different garnishes.",
+      "story": "Originally developed as a way to make quinine (an anti-malarial drug) more palatable for British soldiers in colonial India, the Gin & Tonic became a global classic. Its popularity soared in the 19th century and remains a staple cocktail worldwide.",
+      "ingredients": [
+        {
+          "name": "Gin",
+          "amount": "2 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/920/920582.png"
+        },
+        {
+          "name": "Tonic Water",
+          "amount": "5 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/2722/2722527.png"
+        },
+        {
+          "name": "Lime",
+          "amount": "1 wedge",
+          "icon": "https://cdn-icons-png.flaticon.com/128/6866/6866522.png"
+        }
+      ],
+      "preparation": "Fill a highball glass with ice. Add gin, then top with tonic water. Squeeze a lime wedge and drop it in. Stir gently.",
+      "glassType": "Highball glass",
+      "garnish": "Lime wedge",
+      "alcoholContent": "12%",
+      "taste": {
+        "sweet": 1,
+        "sour": 2,
+        "bitter": 3,
+        "spicy": 0
+      },
+      "difficulty": "Easy",
+      "preparationTime": "3 minutes",
+      "popularity": "Very high",
+      "occasion": ["Any time", "Casual", "Summer"],
+      "allergens": ["Quinine"],
+      "calories": 180,
+      "tips": "Use premium tonic water and a good quality gin. Experiment with different garnishes like cucumber, grapefruit, or herbs to complement your gin's botanicals."
+    },
+    {
+      "id": "7",
+      "name": "Fernandito",
+      "category": "Exotic",
+      "rating": 3.5,
+      "price": 15,
+      "image": "https://www.thecocktaildb.com/images/media/drink/2n6bvk1504379973.jpg",
+      "imageLocal": "require('../assets/images/cocktails/fernandito.png')",
+      "backgroundColor": "#F5E6CA",
+      "description": "A refreshing Argentine cocktail that combines Fernet, a bitter herbal liqueur, with cola for a surprisingly balanced and energizing drink. Popular among young Argentinians as a social drink.",
+      "story": "Originating in Argentina in the 20th century, the Fernandito (or 'Fernet con Coca') became the unofficial national drink. Its popularity spread throughout South America as a digestif and party drink, often consumed in large quantities during celebrations.",
+      "ingredients": [
+        {
+          "name": "Fernet Branca",
+          "amount": "1.5 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/2674/2674883.png"
+        },
+        {
+          "name": "Cola",
+          "amount": "4.5 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/2909/2909761.png"
+        },
+        {
+          "name": "Ice",
+          "amount": "To fill",
+          "icon": "https://cdn-icons-png.flaticon.com/128/2965/2965879.png"
+        }
+      ],
+      "preparation": "Fill a tall glass with ice. Pour Fernet first, then top with cola. Stir gently and serve.",
+      "glassType": "Highball glass",
+      "garnish": "None",
+      "alcoholContent": "10%",
+      "taste": {
+        "sweet": 2,
+        "sour": 1,
+        "bitter": 5,
+        "spicy": 2
+      },
+      "difficulty": "Easy",
+      "preparationTime": "2 minutes",
+      "popularity": "High (in South America)",
+      "occasion": ["Night out", "After dinner", "Social gathering"],
+      "allergens": ["Caffeine"],
+      "calories": 190,
+      "tips": "The traditional ratio is 1:3 Fernet to cola, but adjust to your taste. Some prefer it with more Fernet for a stronger herbal flavor."
+    },
+    {
+      "id": "8",
+      "name": "Cuba Libre",
+      "category": "Classic",
+      "rating": 4,
+      "price": 13,
+      "image": "https://www.thecocktaildb.com/images/media/drink/wmkbfj1606853905.jpg",
+      "imageLocal": "require('../assets/images/cocktails/CubaLibre.png')",
+      "backgroundColor": "#D4A76A",
+      "description": "The Cuba Libre is a simple yet satisfying cocktail that combines rum, cola, and lime into a refreshing highball. Its name translates to 'Free Cuba,' reflecting its origins during the Cuban War of Independence.",
+      "story": "Created around 1900 when Cuba was fighting for independence from Spain, the drink became popular among American soldiers. The addition of Coca-Cola (a new product at the time) to traditional rum and lime created an instant classic that spread worldwide.",
+      "ingredients": [
+        {
+          "name": "White Rum",
+          "amount": "2 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/2738/2738638.png"
+        },
+        {
+          "name": "Cola",
+          "amount": "4 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/2909/2909761.png"
+        },
+        {
+          "name": "Lime",
+          "amount": "0.5 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/6866/6866522.png"
+        }
+      ],
+      "preparation": "Squeeze lime juice into a highball glass with ice. Add rum, then top with cola. Stir gently and garnish with a lime wedge.",
+      "glassType": "Highball glass",
+      "garnish": "Lime wedge",
+      "alcoholContent": "12%",
+      "taste": {
+        "sweet": 4,
+        "sour": 2,
+        "bitter": 1,
+        "spicy": 0
+      },
+      "difficulty": "Easy",
+      "preparationTime": "3 minutes",
+      "popularity": "High",
+      "occasion": ["Casual", "Summer", "Beach"],
+      "allergens": ["Caffeine"],
+      "calories": 185,
+      "tips": "Use Cuban-style rum if available. For a more authentic version, use Mexican Coca-Cola made with cane sugar."
+    },
+    {
+      "id": "9",
+      "name": "Cosmopolitan",
+      "category": "Exotic",
+      "rating": 4.5,
+      "price": 20,
+      "image": "https://www.thecocktaildb.com/images/media/drink/kpsajh1504368362.jpg",
+      "imageLocal": "require('../assets/images/cocktails/Cosmopolitan.png')",
+      "backgroundColor": "#fd5f8a",
+      "description": "A stylish, pink-hued cocktail that balances vodka's crispness with cranberry's tartness and lime's acidity, finished with a touch of orange liqueur sophistication.",
+      "story": "Popularized in the 1990s by Madonna and the TV show 'Sex and the City,' the Cosmopolitan actually originated in 1970s Miami before being perfected in New York. It became the defining drink of a generation seeking glamorous but approachable cocktails.",
+      "ingredients": [
+        {
+          "name": "Citrus Vodka",
+          "amount": "1.5 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/3132/3132735.png"
+        },
+        {
+          "name": "Triple Sec",
+          "amount": "0.5 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/2738/2738639.png"
+        },
+        {
+          "name": "Cranberry Juice",
+          "amount": "1 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/2909/2909763.png"
+        },
+        {
+          "name": "Lime",
+          "amount": "0.5 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/6866/6866522.png"
+        }
+      ],
+      "preparation": "Shake all ingredients with ice and strain into a chilled martini glass. Garnish with an orange twist or lime wheel.",
+      "glassType": "Martini glass",
+      "garnish": "Orange twist",
+      "alcoholContent": "20%",
+      "taste": {
+        "sweet": 3,
+        "sour": 4,
+        "bitter": 1,
+        "spicy": 0
+      },
+      "difficulty": "Intermediate",
+      "preparationTime": "5 minutes",
+      "popularity": "High",
+      "occasion": ["Night out", "Celebration", "Girls' night"],
+      "allergens": ["None"],
+      "calories": 200,
+      "tips": "Use high-quality cranberry juice (not cranberry cocktail) for proper tartness. The perfect Cosmo should be translucent pink, not opaque red."
+    },
+    {
+      "id": "10",
+      "name": "Old Fashioned",
+      "category": "Classic",
+      "rating": 4.7,
+      "price": 18,
+      "image": "https://www.thecocktaildb.com/images/media/drink/vrwquq1478252802.jpg",
+      "imageLocal": "require('../assets/images/cocktails/OldFashioned.png')",
+      "backgroundColor": "#971403",
+      "description": "The grandfather of all cocktails, featuring whiskey subtly enhanced by sugar and bitters, served over a single large ice cube to control dilution.",
+      "story": "First mentioned in 1806 as a 'whiskey cocktail,' the Old Fashioned got its name when drinkers requested their cocktails made the 'old fashioned way' during the late 19th century cocktail renaissance. It's survived prohibition and trends to remain a bartender's favorite.",
+      "ingredients": [
+        {
+          "name": "Bourbon/Rye",
+          "amount": "2 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/3132/3132736.png"
+        },
+        {
+          "name": "Sugar Cube",
+          "amount": "1",
+          "icon": "https://cdn-icons-png.flaticon.com/128/2455/2455576.png"
+        },
+        {
+          "name": "Angostura Bitters",
+          "amount": "2 dashes",
+          "icon": "https://cdn-icons-png.flaticon.com/128/2738/2738640.png"
+        },
+        {
+          "name": "Orange Peel",
+          "amount": "1",
+          "icon": "https://cdn-icons-png.flaticon.com/128/415/415682.png"
+        }
+      ],
+      "preparation": "Muddle sugar cube with bitters and a splash of water in a rocks glass. Add whiskey and ice, then stir gently. Express orange peel over drink and use as garnish.",
+      "glassType": "Rocks glass",
+      "garnish": "Orange peel",
+      "alcoholContent": "32%",
+      "taste": {
+        "sweet": 2,
+        "sour": 0,
+        "bitter": 3,
+        "spicy": 1
+      },
+      "difficulty": "Intermediate",
+      "preparationTime": "6 minutes",
+      "popularity": "Very high",
+      "occasion": ["Evening", "After dinner", "Winter"],
+      "allergens": ["None"],
+      "calories": 180,
+      "tips": "Use a single large ice cube to minimize dilution. Quality whiskey is key - the drink showcases the spirit's character."
+    },
+    {
+      "id": "11",
+      "name": "New York Sour",
+      "category": "Classic",
+      "rating": 4.3,
+      "price": 21,
+      "image": "https://www.thecocktaildb.com/images/media/drink/61wgch1504882795.jpg",
+      "imageLocal": "require('../assets/images/cocktails/NewYorkSour.png')",
+      "backgroundColor": "#f5f4ee",
+      "description": "A whiskey sour with a sophisticated twist - a float of red wine adds depth and visual drama, creating a layered cocktail experience.",
+      "story": "An evolution of the classic Whiskey Sour that emerged in late 19th century New York bars. The wine float was likely inspired by the 'continental' practice of adding wine to cocktails, creating what some call 'the most beautiful cocktail in the world.'",
+      "ingredients": [
+        {
+          "name": "Rye Whiskey",
+          "amount": "2 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/3132/3132736.png"
+        },
+        {
+          "name": "Lemon Juice",
+          "amount": "1 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/6866/6866522.png"
+        },
+        {
+          "name": "Simple Syrup",
+          "amount": "0.75 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/2455/2455576.png"
+        },
+        {
+          "name": "Red Wine",
+          "amount": "0.5 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/1682/1682987.png"
+        }
+      ],
+      "preparation": "Shake whiskey, lemon juice and syrup with ice. Strain into a rocks glass with fresh ice. Slowly float red wine on top by pouring over the back of a spoon.",
+      "glassType": "Rocks glass",
+      "garnish": "Lemon twist and cherry",
+      "alcoholContent": "22%",
+      "taste": {
+        "sweet": 3,
+        "sour": 4,
+        "bitter": 1,
+        "spicy": 0
+      },
+      "difficulty": "Advanced",
+      "preparationTime": "7 minutes",
+      "popularity": "Medium",
+      "occasion": ["Evening", "Dinner party", "Special occasion"],
+      "allergens": ["Sulfites"],
+      "calories": 210,
+      "tips": "Use a dry, fruity red wine like Malbec or Shiraz. The perfect float should create a distinct layer about 1/4 inch thick."
+    },
+    {
+      "id": "12",
+      "name": "Daiquiri",
+      "category": "Classic",
+      "rating": 4.6,
+      "price": 16,
+      "image": "https://www.thecocktaildb.com/images/media/drink/mrz9091589574515.jpg",
+      "imageLocal": "require('../assets/images/cocktails/Daiquiri.png')",
+      "backgroundColor": "#F7F7F7",
+      "description": "A deceptively simple Cuban classic that transforms rum, lime and sugar into the perfect balance of sweet and sour, served ice-cold in a elegant coupe.",
+      "story": "Created in 1898 in the mining town of Daiquiri near Santiago, Cuba, by American engineer Jennings Cox. Later popularized by Hemingway during his Cuba years, it became a worldwide favorite and spawned countless variations from frozen strawberry to Hemingway's own 'Papa Doble' version.",
+      "ingredients": [
+        {
+          "name": "White Rum",
+          "amount": "2 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/2738/2738638.png"
+        },
+        {
+          "name": "Lime Juice",
+          "amount": "1 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/6866/6866522.png"
+        },
+        {
+          "name": "Simple Syrup",
+          "amount": "0.75 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/2455/2455576.png"
+        }
+      ],
+      "preparation": "Shake all ingredients vigorously with ice and strain into a chilled coupe glass. No garnish needed.",
+      "glassType": "Coupe glass",
+      "garnish": "None",
+      "alcoholContent": "20%",
+      "taste": {
+        "sweet": 3,
+        "sour": 4,
+        "bitter": 0,
+        "spicy": 0
+      },
+      "difficulty": "Easy",
+      "preparationTime": "4 minutes",
+      "popularity": "High",
+      "occasion": ["Summer", "Beach", "Brunch"],
+      "allergens": ["None"],
+      "calories": 175,
+      "tips": "Use freshly squeezed lime juice and quality rum. The perfect Daiquiri should be slightly cloudy from tiny ice shards - a sign of proper shaking."
+    },
+    {
+      "id": "13",
+      "name": "Mai Tai",
+      "category": "Tiki",
+      "rating": 4.8,
+      "price": 24,
+      "image": "https://www.thecocktaildb.com/images/media/drink/twyrrp1439907470.jpg",
+      "imageLocal": "require('../assets/images/cocktails/MaiTai.png')",
+      "backgroundColor": "#F9C74F",
+      "description": "The quintessential tiki cocktail featuring a complex rum blend, orange curaçao, and orgeat syrup that creates a perfect harmony of sweet, sour, and nutty flavors beneath its iconic mint garnish.",
+      "story": "Invented in 1944 by Victor J. Bergeron (Trader Vic) in Oakland, California. The name comes from the Tahitian expression 'maita'i' meaning 'good'. Its creation sparked the tiki cocktail revolution and remains the gold standard of Polynesian-inspired drinks.",
+      "ingredients": [
+        {
+          "name": "Aged Rum",
+          "amount": "2 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/2738/2738638.png"
+        },
+        {
+          "name": "Orange Curaçao",
+          "amount": "0.5 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/2738/2738639.png"
+        },
+        {
+          "name": "Orgeat Syrup",
+          "amount": "0.5 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/2455/2455576.png"
+        },
+        {
+          "name": "Lime Juice",
+          "amount": "0.75 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/6866/6866522.png"
+        },
+        {
+          "name": "Dark Rum Float",
+          "amount": "0.5 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/2738/2738638.png"
+        }
+      ],
+      "preparation": "Shake all ingredients except dark rum with crushed ice. Pour unstrained into a double old-fashioned glass. Float dark rum on top. Garnish with mint sprig and lime shell.",
+      "glassType": "Double old-fashioned glass",
+      "garnish": "Mint sprig and lime shell",
+      "alcoholContent": "22%",
+      "taste": {
+        "sweet": 4,
+        "sour": 3,
+        "bitter": 1,
+        "spicy": 0
+      },
+      "difficulty": "Advanced",
+      "preparationTime": "8 minutes",
+      "popularity": "High",
+      "occasion": ["Summer", "Beach", "Tiki party"],
+      "allergens": ["Tree nuts (orgeat)"],
+      "calories": 250,
+      "tips": "Use a blend of aged rums for complexity. The authentic version doesn't contain pineapple juice - that's a modern variation."
+    },
+    {
+      "id": "14",
+      "name": "Amargo Obrero",
+      "category": "Bitter",
+      "rating": 3.9,
+      "price": 12,
+      "image": "https://www.thecocktaildb.com/images/media/drink/xwxyux1441253913.jpg",
+      "imageLocal": "require('../assets/images/cocktails/AmargoObrero.png')",
+      "backgroundColor": "#8B4513",
+      "description": "A bold Argentine digestif cocktail that combines Fernet Branca with cola and a squeeze of lemon, creating a medicinal yet refreshing after-dinner drink favored by the working class.",
+      "story": "Originating in the working-class neighborhoods of Buenos Aires, this drink became the unofficial cocktail of Argentine laborers. Its name translates to 'Worker's Bitter,' reflecting its popularity among factory workers who valued its digestive properties after heavy meals.",
+      "ingredients": [
+        {
+          "name": "Fernet Branca",
+          "amount": "1.5 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/2674/2674883.png"
+        },
+        {
+          "name": "Cola",
+          "amount": "4 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/2909/2909761.png"
+        },
+        {
+          "name": "Lemon Juice",
+          "amount": "0.5 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/6866/6866522.png"
+        }
+      ],
+      "preparation": "Fill a tall glass with ice. Add Fernet and lemon juice, then top with cola. Stir gently and serve.",
+      "glassType": "Highball glass",
+      "garnish": "Lemon wedge",
+      "alcoholContent": "10%",
+      "taste": {
+        "sweet": 2,
+        "sour": 3,
+        "bitter": 5,
+        "spicy": 2
+      },
+      "difficulty": "Easy",
+      "preparationTime": "3 minutes",
+      "popularity": "Regional (Argentina)",
+      "occasion": ["After dinner", "Digestif", "Casual"],
+      "allergens": ["Caffeine"],
+      "calories": 180,
+      "tips": "The traditional Argentine ratio is 1:3 Fernet to cola. Add lemon to taste - some prefer it more tart."
+    },
+    {
+      "id": "15",
+      "name": "Whiskey Sour",
+      "category": "Classic",
+      "rating": 4.4,
+      "price": 17,
+      "image": "https://www.thecocktaildb.com/images/media/drink/hbkfsh1589574990.jpg",
+      "imageLocal": "require('../assets/images/cocktails/WhiskeySour.png')",
+      "backgroundColor": "#F4A261",
+      "description": "A perfectly balanced trio of whiskey, lemon, and sugar that creates a refreshing yet spirit-forward cocktail, optionally smoothed with a foamy egg white topping.",
+      "story": "First appearing in print in 1870, the Whiskey Sour evolved from the British 'gin sour' of the 18th century. Sailors originally drank sours to prevent scurvy during long voyages. It became a Prohibition-era favorite for masking the taste of poor-quality whiskey.",
+      "ingredients": [
+        {
+          "name": "Whiskey Bourbon",
+          "amount": "2 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/3132/3132736.png"
+        },
+        {
+          "name": "Lemon Juice",
+          "amount": "0.75 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/6866/6866522.png"
+        },
+        {
+          "name": "Simple Syrup",
+          "amount": "0.75 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/2455/2455576.png"
+        },
+        {
+          "name": "Egg White (optional)",
+          "amount": "1",
+          "icon": "https://cdn-icons-png.flaticon.com/128/3514/3514494.png"
+        }
+      ],
+      "preparation": "Dry shake (without ice) all ingredients for 10 seconds if using egg white. Add ice and shake again until chilled. Strain into a rocks glass over fresh ice or into a coupe if served up.",
+      "glassType": "Rocks glass or coupe",
+      "garnish": "Angostura bitters drops and cherry",
+      "alcoholContent": "18%",
+      "taste": {
+        "sweet": 3,
+        "sour": 4,
+        "bitter": 1,
+        "spicy": 0
+      },
+      "difficulty": "Intermediate",
+      "preparationTime": "6 minutes",
+      "popularity": "Very high",
+      "occasion": ["Any time", "Brunch", "After work"],
+      "allergens": ["Egg (optional)"],
+      "calories": 195,
+      "tips": "For a silky texture, use egg white and dry shake first. The 'inverse dry shake' (shake with ice first, then strain and dry shake) creates even more foam."
+    },
+    {
+      "id": "16",
+      "name": "Penicillin",
+      "category": "Modern Classic",
+      "rating": 4.9,
+      "price": 26,
+      "image": "https://www.thecocktaildb.com/images/media/drink/hc9b1a1521853096.jpg",
+      "imageLocal": "require('../assets/images/cocktails/Penicillin.png')",
+      "backgroundColor":"#8b4606",
+      "description": "A modern masterpiece blending peated Scotch with ginger and honey, featuring a smoky float that creates evolving layers of flavor with each sip.",
+      "story": "Created in 2005 by Sam Ross at Milk & Honey in New York, this cocktail revolutionized modern mixology by demonstrating how Scotch could be used creatively. Its name references both the medicine-like honey-ginger combination and how it 'cures' what ails you.",
+      "ingredients": [
+        {
+          "name": "Whiskey Blended Scotch",
+          "amount": "2 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/3132/3132736.png"
+        },
+        {
+          "name": "Lemon Juice",
+          "amount": "0.75 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/6866/6866522.png"
+        },
+        {
+          "name": "Honey-Ginger Syrup",
+          "amount": "0.75 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/2455/2455576.png"
+        },
+        {
+          "name": "Islay Scotch Float",
+          "amount": "0.25 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/3132/3132736.png"
+        }
+      ],
+      "preparation": "Shake blended Scotch, lemon juice, and syrup with ice. Strain over fresh ice in a rocks glass. Float Islay Scotch on top by pouring over the back of a spoon. Garnish with candied ginger.",
+      "glassType": "Rocks glass",
+      "garnish": "Candied ginger",
+      "alcoholContent": "20%",
+      "taste": {
+        "sweet": 3,
+        "sour": 3,
+        "bitter": 1,
+        "spicy": 2,
+        "smoky": 4
+      },
+      "difficulty": "Advanced",
+      "preparationTime": "8 minutes",
+      "popularity": "Growing",
+      "occasion": ["Evening", "Cold weather", "Cocktail enthusiasts"],
+      "allergens": ["None"],
+      "calories": 210,
+      "tips": "Make honey-ginger syrup by combining equal parts honey and hot water with freshly grated ginger. The float should create an aromatic layer that emerges with each sip."
+    },
+    {
+      "id": "17",
+      "name": "Bloody Mary",
+      "category": "Savory",
+      "rating": 4.2,
+      "price": 18,
+      "image": "https://www.thecocktaildb.com/images/media/drink/t6caa21582485702.jpg",
+      "imageLocal": "require('../assets/images/cocktails/BloodyMary.png')",
+      "backgroundColor": "#D72638",
+      "description": "The ultimate savory cocktail featuring vodka, tomato juice, and a complex blend of spices, often garnished extravagantly and served as the world's most popular brunch drink.",
+      "story": "Created in 1921 by Fernand Petiot at Harry's New York Bar in Paris, it gained fame at the St. Regis Hotel in New York. The name allegedly references Queen Mary I of England, though modern versions bear little resemblance to the original simple combination of vodka and tomato juice.",
+      "ingredients": [
+        {
+          "name": "Vodka",
+          "amount": "1.5 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/3132/3132735.png"
+        },
+        {
+          "name": "Tomato Juice",
+          "amount": "3 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/2909/2909770.png"
+        },
+        {
+          "name": "Lemon Juice",
+          "amount": "0.5 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/6866/6866522.png"
+        },
+        {
+          "name": "Worcestershire Sauce",
+          "amount": "2 dashes",
+          "icon": "https://cdn-icons-png.flaticon.com/128/3144/3144416.png"
+        },
+        {
+          "name": "Tabasco",
+          "amount": "1 dash",
+          "icon": "https://cdn-icons-png.flaticon.com/128/3144/3144416.png"
+        },
+        {
+          "name": "Horseradish",
+          "amount": "0.25 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/3514/3514494.png"
+        }
+      ],
+      "preparation": "Build all ingredients in a tall glass filled with ice. Stir vigorously for 30 seconds to combine and chill. Garnish extravagantly with celery, olives, lemon wedge, and other savory elements.",
+      "glassType": "Highball glass",
+      "garnish": "Celery stalk, lemon wedge, olives, pepperoncini",
+      "alcoholContent": "12%",
+      "taste": {
+        "sweet": 1,
+        "sour": 3,
+        "bitter": 1,
+        "spicy": 4,
+        "umami": 5
+      },
+      "difficulty": "Intermediate",
+      "preparationTime": "7 minutes",
+      "popularity": "Very high",
+      "occasion": ["Brunch", "Hangover cure", "Day drinking"],
+      "allergens": ["Celery"],
+      "calories": 150,
+      "tips": "For best results, use freshly made tomato juice. The 'rolling' mixing technique (pouring between glasses) creates perfect integration. Customize spice levels to taste."
+    },
+    {
+      "id": "18",
+      "name": "Black Russian",
+      "category": "Classic",
+      "rating": 3.8,
+      "price": 14,
+      "image": "https://www.thecocktaildb.com/images/media/drink/2k5gbb1504367689.jpg",
+      "imageLocal": "require('../assets/images/cocktails/BlackRussian.png')",
+      "backgroundColor": "#3A3335",
+      "description": "A simple yet sophisticated combination of vodka and coffee liqueur that creates a smooth, slightly sweet after-dinner drink or nightcap.",
+      "story": "Created in 1949 by Gustave Tops at Hotel Metropole in Brussels for Perle Mesta, the American ambassador to Luxembourg. Its name references both the Russian vodka and the dark color during Cold War tensions.",
+      "ingredients": [
+        {
+          "name": "Vodka",
+          "amount": "2 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/3132/3132735.png"
+        },
+        {
+          "name": "Coffee Liqueur",
+          "amount": "1 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/2738/2738641.png"
+        }
+      ],
+      "preparation": "Build directly in an old-fashioned glass filled with ice cubes. Stir gently for proper integration without excessive dilution.",
+      "glassType": "Old-fashioned glass",
+      "garnish": "None",
+      "alcoholContent": "26%",
+      "taste": {
+        "sweet": 3,
+        "sour": 0,
+        "bitter": 2,
+        "spicy": 0
+      },
+      "difficulty": "Easy",
+      "preparationTime": "2 minutes",
+      "popularity": "Medium",
+      "occasion": ["After dinner", "Nightcap", "Cold weather"],
+      "allergens": ["None"],
+      "calories": 175,
+      "tips": "Use quality coffee liqueur like Kahlúa. For a creamier version, float fresh cream on top to make a White Russian."
+    },
+    {
+      "id": "19",
+      "name": "Basil Smash",
+      "category": "Herbal",
+      "rating": 4.5,
+      "price": 19,
+      "image": "https://www.thecocktaildb.com/images/media/drink/j2q6xq1582476337.jpg",
+      "imageLocal": "require('../assets/images/cocktails/BasilSmash.png')",
+      "backgroundColor": "#6A994E",
+      "description": "A refreshing herbal cocktail that highlights fresh basil's aromatic qualities, balanced with lemon and gin for a garden-fresh drinking experience.",
+      "story": "Created in 2008 by German bartender Jörg Meyer as a modern twist on the Gin Smash. Its vibrant green color and fresh herbal notes made it an instant hit in the craft cocktail renaissance.",
+      "ingredients": [
+        {
+          "name": "Gin",
+          "amount": "2 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/920/920582.png"
+        },
+        {
+          "name": "Lemon Juice",
+          "amount": "0.75 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/6866/6866522.png"
+        },
+        {
+          "name": "Simple Syrup",
+          "amount": "0.5 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/2455/2455576.png"
+        },
+        {
+          "name": "Fresh Basil",
+          "amount": "8 leaves",
+          "icon": "https://cdn-icons-png.flaticon.com/128/6866/6866562.png"
+        }
+      ],
+      "preparation": "Muddle basil leaves gently with syrup in a shaker. Add remaining ingredients and shake with ice. Double strain into a rocks glass filled with crushed ice. Slap a basil leaf to release oils and use as garnish.",
+      "glassType": "Rocks glass",
+      "garnish": "Basil leaf",
+      "alcoholContent": "18%",
+      "taste": {
+        "sweet": 2,
+        "sour": 3,
+        "bitter": 1,
+        "herbal": 5
+      },
+      "difficulty": "Intermediate",
+      "preparationTime": "6 minutes",
+      "popularity": "Growing",
+      "occasion": ["Summer", "Garden party", "Afternoon"],
+      "allergens": ["None"],
+      "calories": 160,
+      "tips": "Use fresh, vibrant basil leaves. The 'slap' technique releases aromatic oils without bitter chlorophyll. Perfect for showcasing botanical gins."
+    },
+    {
+      "id": "20",
+      "name": "Caipirinha",
+      "category": "Exotic",
+      "rating": 4.7,
+      "price": 16,
+      "image": "https://www.thecocktaildb.com/images/media/drink/xyrppt1469090521.jpg",
+      "imageLocal": "require('../assets/images/cocktails/Caipirinha.png')",
+      "backgroundColor": "#C1D7AE",
+      "description": "Brazil's national cocktail featuring cachaça, lime, and sugar - a vibrant balance of sweet and sour served over crushed ice for maximum refreshment.",
+      "story": "Originated in rural São Paulo state in the early 20th century as a farmer's drink. Gained national popularity in the 1950s and became Brazil's official national cocktail in 1986. The name comes from 'caipira' meaning country person.",
+      "ingredients": [
+        {
+          "name": "Cachaça",
+          "amount": "2 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/2738/2738638.png"
+        },
+        {
+          "name": "Lime",
+          "amount": "1",
+          "icon": "https://cdn-icons-png.flaticon.com/128/6866/6866522.png"
+        },
+        {
+          "name": "Sugar",
+          "amount": "2 tsp",
+          "icon": "https://cdn-icons-png.flaticon.com/128/2455/2455576.png"
+        }
+      ],
+      "preparation": "Cut lime into wedges and muddle with sugar in an old-fashioned glass. Fill the glass with crushed ice, add cachaça, and stir well to combine. No straining - drink with the muddled lime.",
+      "glassType": "Old-fashioned glass",
+      "garnish": "Lime wheel",
+      "alcoholContent": "20%",
+      "taste": {
+        "sweet": 3,
+        "sour": 4,
+        "bitter": 1,
+        "spicy": 0
+      },
+      "difficulty": "Easy",
+      "preparationTime": "5 minutes",
+      "popularity": "High (global)",
+      "occasion": ["Summer", "Beach", "Barbecue"],
+      "allergens": ["None"],
+      "calories": 180,
+      "tips": "Use fresh, unwaxed limes. The perfect Caipirinha should be slightly cloudy from lime oils. For variation, try fruits like passionfruit or strawberry."
+    },
+    {
+      "id": "21",
+      "name": "Clover Club",
+      "category": "Classic",
+      "rating": 4.3,
+      "price": 19,
+      "image": "https://www.thecocktaildb.com/images/media/drink/t0aja61504348715.jpg",
+      "imageLocal": "require('../assets/images/cocktails/CloverClub.png')",
+      "backgroundColor": "#F4ACB7",
+      "description": "A pre-Prohibition pink-hued gin cocktail with raspberry syrup and egg white, offering a perfect balance of tart, sweet, and silky textures in an elegant coupe.",
+      "story": "Named after Philadelphia's men-only Clover Club (1882-1920s), this drink was created as the house cocktail for members' literary gatherings. Nearly forgotten after Prohibition, it was revived by modern mixologists as a showcase for classic technique.",
+      "ingredients": [
+        {
+          "name": "Gin",
+          "amount": "2 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/920/920582.png"
+        },
+        {
+          "name": "Raspberry Syrup",
+          "amount": "0.5 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/2455/2455576.png"
+        },
+        {
+          "name": "Lemon Juice",
+          "amount": "0.5 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/6866/6866522.png"
+        },
+        {
+          "name": "Egg White",
+          "amount": "1",
+          "icon": "https://cdn-icons-png.flaticon.com/128/3514/3514494.png"
+        }
+      ],
+      "preparation": "Dry shake (without ice) all ingredients for 15 seconds. Add ice and shake again until chilled. Double strain into a chilled coupe glass. Garnish with fresh raspberries.",
+      "glassType": "Coupe glass",
+      "garnish": "3 fresh raspberries on a pick",
+      "alcoholContent": "18%",
+      "taste": {
+        "sweet": 3,
+        "sour": 4,
+        "bitter": 1,
+        "silky": 5
+      },
+      "difficulty": "Intermediate",
+      "preparationTime": "7 minutes",
+      "popularity": "Revival",
+      "occasion": ["Brunch", "Garden party", "Formal"],
+      "allergens": ["Egg"],
+      "calories": 185,
+      "tips": "Make raspberry syrup by muddling fresh raspberries with simple syrup. The double shake creates perfect foam - listen for the 'whip' sound during dry shake."
+    },
+    {
+      "id": "22",
+      "name": "Dirty Martini",
+      "category": "Savory",
+      "rating": 4.1,
+      "price": 17,
+      "image": "https://www.thecocktaildb.com/images/media/drink/vcyvpq1485083300.jpg",
+      "imageLocal": "require('../assets/images/cocktails/DirtyMartini.png')",
+      "backgroundColor": "#D5D8DC",
+      "description": "A briny twist on the classic martini where olive juice transforms the drink into a savory, umami-rich experience, garnished with blue cheese-stuffed olives for the perfect finish.",
+      "story": "Popularized in the 1970s as a variation of FDR's preferred martini (who liked his 'with an olive's worth of juice'). The 'dirty' style gained cult status among those who preferred more saline complexity in their martinis.",
+      "ingredients": [
+        {
+          "name": "Gin or Vodka",
+          "amount": "2.5 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/920/920582.png"
+        },
+        {
+          "name": "Dry Vermouth",
+          "amount": "0.5 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/2738/2738639.png"
+        },
+        {
+          "name": "Olive Brine",
+          "amount": "0.5 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/2909/2909808.png"
+        }
+      ],
+      "preparation": "Stir all ingredients with ice for 30 seconds until properly diluted and chilled. Strain into a frozen martini glass. Garnish with olives on a pick.",
+      "glassType": "Martini glass",
+      "garnish": "3 blue cheese-stuffed olives",
+      "alcoholContent": "28%",
+      "taste": {
+        "sweet": 1,
+        "sour": 0,
+        "bitter": 3,
+        "umami": 4,
+        "salty": 4
+      },
+      "difficulty": "Intermediate",
+      "preparationTime": "5 minutes",
+      "popularity": "High",
+      "occasion": ["Aperitif", "Evening", "Formal"],
+      "allergens": ["None"],
+      "calories": 195,
+      "tips": "Use high-quality olive brine from jarred cocktail olives. For extra decadence, rinse glass with olive oil before pouring. The perfect dirty martini should be slightly cloudy."
+    },
+    {
+      "id": "23",
+      "name": "Espresso Martini",
+      "category": "Coffee",
+      "rating": 4.6,
+      "price": 22,
+      "image": "https://www.thecocktaildb.com/images/media/drink/n0sx531504372951.jpg",
+      "imageLocal": "require('../assets/images/cocktails/EspressoMartini.png')",
+      "backgroundColor": "#3E2723",
+      "description": "A sophisticated coffee cocktail featuring vodka, fresh espresso, and coffee liqueur, crowned with a luxurious crema layer and coffee bean garnish - the perfect after-dinner energizer.",
+      "story": "Invented in 1983 by Dick Bradsell at London's Soho Brasserie for a model who requested a drink that would 'wake me up and then fuck me up.' Originally called 'Vodka Espresso,' it became a global phenomenon in the 1990s club scene.",
+      "ingredients": [
+        {
+          "name": "Vodka",
+          "amount": "2 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/3132/3132735.png"
+        },
+        {
+          "name": "Fresh Espresso",
+          "amount": "1 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/2738/2738641.png"
+        },
+        {
+          "name": "Coffee Liqueur",
+          "amount": "0.5 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/2738/2738641.png"
+        },
+        {
+          "name": "Simple Syrup",
+          "amount": "0.25 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/2455/2455576.png"
+        }
+      ],
+      "preparation": "Shake all ingredients vigorously with ice for 15 seconds - the espresso's heat creates vacuum pressure. Double strain into a chilled coupe glass. Garnish with floating coffee beans.",
+      "glassType": "Coupe glass",
+      "garnish": "3 coffee beans floating on crema",
+      "alcoholContent": "20%",
+      "taste": {
+        "sweet": 3,
+        "bitter": 4,
+        "creamy": 5,
+        "caffeinated": 5
+      },
+      "difficulty": "Advanced",
+      "preparationTime": "8 minutes",
+      "popularity": "Very high",
+      "occasion": ["After dinner", "Nightclub", "Dessert pairing"],
+      "allergens": ["Caffeine"],
+      "calories": 210,
+      "tips": "Use freshly pulled espresso (cooled slightly). The 'reverse dry shake' (shake with ice first, then strain and shake without ice) creates thicker foam. The perfect pour should show distinct crema separation."
+    },
+    {
+      "id": "24",
+      "name": "Gimlet",
+      "category": "Classic",
+      "rating": 4.2,
+      "price": 15,
+      "image": "https://www.thecocktaildb.com/images/media/drink/3xgldt1513707271.jpg",
+      "imageLocal": "require('../assets/images/cocktails/Gimlet.png')",
+      "backgroundColor": "#D5E8D0",
+      "description": "A crisp gin cocktail featuring lime cordial that balances sweet and sour perfectly, served either straight up or on the rocks - the epitome of British colonial elegance.",
+      "story": "Originally created as a means to prevent scurvy among British sailors in the 19th century (who received gin rations with lime cordial). Popularized in 1920s Malaya, then immortalized in Raymond Chandler's 'The Long Goodbye' as the drink of choice for detective Philip Marlowe.",
+      "ingredients": [
+        {
+          "name": "Gin",
+          "amount": "2.5 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/920/920582.png"
+        },
+        {
+          "name": "Lime Cordial",
+          "amount": "0.5 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/6866/6866522.png"
+        }
+      ],
+      "preparation": "Shake ingredients with ice and strain into a chilled coupe glass, or build over ice in a rocks glass. Garnish with a thin lime wheel.",
+      "glassType": "Coupe or rocks glass",
+      "garnish": "Lime wheel",
+      "alcoholContent": "25%",
+      "taste": {
+        "sweet": 3,
+        "sour": 4,
+        "bitter": 1,
+        "crisp": 5
+      },
+      "difficulty": "Easy",
+      "preparationTime": "4 minutes",
+      "popularity": "High",
+      "occasion": ["Summer", "Afternoon", "Pre-dinner"],
+      "allergens": ["Sulfites (in some cordials)"],
+      "calories": 165,
+      "tips": "For authentic flavor, use Rose's Lime Cordial. Modern versions often substitute fresh lime juice and simple syrup (2:1:1 gin:lime:syrup ratio). The perfect Gimlet should be translucent green."
+    }
   ]
   

@@ -1,103 +1,246 @@
-import React, { useEffect, useRef } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Animated, Easing } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+"use client"
 
-const WelcomeScreen = () => {
-  const navigation = useNavigation();
-  const handleNavigation = () => {
-    navigation.navigate('Main');
-  };
+import { useRef, useEffect } from "react"
+import { View, Text, StyleSheet, Image, TouchableOpacity, Animated, Dimensions } from "react-native"
+import { useSafeAreaInsets } from "react-native-safe-area-context"
+import { Ionicons } from "@expo/vector-icons"
+import TexturedBackground from "../components/TexturedBackground"
+import { getLocalImage } from "../utils/imageMapping"
 
-  const animatedValue = useRef(new Animated.Value(-200)).current;
-  const animatedOpacity = useRef(new Animated.Value(0)).current;
-  const isMounted = useRef(true);
+const { width, height } = Dimensions.get("window")
+
+export default function WelcomeScreen({ navigation }) {
+  const insets = useSafeAreaInsets()
+  const fadeAnim = useRef(new Animated.Value(0)).current
+  const slideAnim = useRef(new Animated.Value(50)).current
+  const imageAnim = useRef(new Animated.Value(0)).current
 
   useEffect(() => {
-    Animated.sequence([
-      Animated.delay(250),
-      Animated.timing(animatedValue, {
-        toValue: -200,
-        duration: 500,
-        useNativeDriver: true,
-      }),
-      Animated.timing(animatedValue, {
-        toValue: 0,
-        duration: 500,
-        useNativeDriver: true,
-      }),
-      Animated.timing(animatedOpacity, {
+    // Fade in animation
+    Animated.parallel([
+      Animated.timing(fadeAnim, {
         toValue: 1,
+        duration: 1000,
+        useNativeDriver: true,
+      }),
+      Animated.timing(slideAnim, {
+        toValue: 0,
         duration: 800,
         useNativeDriver: true,
       }),
-      Animated.delay(1000),
-    ]).start();
+      Animated.timing(imageAnim, {
+        toValue: 1,
+        duration: 1200,
+        useNativeDriver: true,
+      }),
+    ]).start()
+  }, [])
 
-    // Simulamos la navegación a la pantalla "Main" después de 6 segundos
-    const timeout = setTimeout(() => {
-      if (isMounted.current) {
-        navigation.navigate('Main');
-      }
-    }, 3000);
-
-    return () => {
-      isMounted.current = false;
-      clearTimeout(timeout);
-    };
-  }, []);
+  // Rotate animation for the cocktail image
+  const spin = imageAnim.interpolate({
+    inputRange: [0, 1],
+    outputRange: ["0deg", "0deg"],
+  })
 
   return (
-    <View style={styles.container}>
-      <Animated.Image
-        source={require('../assets/LOGO/logoedit.png')}
-        style={[styles.logo, { transform: [{ translateY: animatedValue }]}]}
-      />
-      <Animated.Text style={[styles.title, { opacity: animatedOpacity }]}>Cócteler</Animated.Text>
-      <TouchableOpacity style={styles.button} onPress={handleNavigation}>
-        <Animated.Text style={[styles.buttonText, { opacity: animatedOpacity }]}>Acceder</Animated.Text>
-      </TouchableOpacity>
-      <Animated.Text style={{position: 'absolute', bottom: 20, fontSize: 12, textTransform: 'uppercase', fontWeight:'700'}}>Por Tiziano Rios</Animated.Text>
-    </View>
-  );
-};
+    <TexturedBackground textureType="pinkLight" style={[styles.container, { paddingTop: insets.top }]}>
+      {/* Logo and title */}
+      <Animated.View
+        style={[
+          styles.headerContainer,
+          {
+            opacity: fadeAnim,
+            transform: [{ translateY: slideAnim }],
+          },
+        ]}
+      >
+        <View style={styles.logoContainer}>
+        <Image 
+        source={require("../assets/images/logo/logo.png")} 
+        style={styles.logo} 
+        resizeMode="contain" 
+      />        
+      </View>
+        <Text style={styles.appName}>Cocteler</Text>
+        <Text style={styles.appTagline}>Your personal mixologist</Text>
+      </Animated.View>
+
+      {/* Cocktail image */}
+      <Animated.View
+        style={[
+          styles.imageContainer,
+          {
+            opacity: imageAnim,
+            transform: [{ rotate: spin }],
+          },
+        ]}
+      >
+        <Image
+          source={getLocalImage("../assets/images/cocktails/campariOrange.png")}
+          style={styles.cocktailImage}
+          resizeMode="contain"
+        />
+      </Animated.View>
+
+      {/* Welcome text */}
+      <Animated.View
+        style={[
+          styles.welcomeContainer,
+          {
+            opacity: fadeAnim,
+            transform: [{ translateY: slideAnim }],
+          },
+        ]}
+      >
+        <Text style={styles.welcomeTitle}>Welcome to Cocteler</Text>
+        <Text style={styles.welcomeText}>
+          Discover, create and enjoy the perfect cocktails tailored to your taste preferences.
+        </Text>
+      </Animated.View>
+
+      {/* Get started button */}
+      <Animated.View
+        style={[
+          styles.buttonContainer,
+          {
+            opacity: fadeAnim,
+            transform: [{ translateY: slideAnim }],
+          },
+        ]}
+      >
+        <TouchableOpacity style={styles.getStartedButton} onPress={() => navigation.navigate("NameInput")}>
+          <Text style={styles.getStartedText}>Get Started</Text>
+          <Ionicons name="arrow-forward" size={20} color="#FFFFFF" style={styles.buttonIcon} />
+        </TouchableOpacity>
+      </Animated.View>
+
+      {/* Skip for now */}
+      <Animated.View
+        style={[
+          styles.skipContainer,
+          {
+            opacity: fadeAnim,
+          },
+        ]}
+      >
+        <TouchableOpacity style={styles.skipButton} onPress={() => navigation.navigate("MainTabs")}>
+          <Text style={styles.skipText}>Skip for now</Text>
+        </TouchableOpacity>
+      </Animated.View>
+    </TexturedBackground>
+  )
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'white',
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  headerContainer: {
+    alignItems: "center",
+    marginBottom: 40,
+  },
+  logoContainer: {
+    width: 0,
+    height: 0,
+    borderRadius: 40,
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: 20,
   },
   logo: {
-    width: 200,
-    height: 200,
-    marginBottom: 10,
+    width: 80,
+    height: 80,
   },
-  title: {
-    fontSize: 30,
+  appName: {
+    fontSize: 36,
+    fontWeight: "bold",
+    color: "#4A3F41",
+    marginBottom: 8,
+    // In a real app, we would use a custom font
+    // fontFamily: "Playfair Display",
     letterSpacing: 1,
-    fontWeight: 'bold',
-    textTransform: 'uppercase',
+  },
+  appTagline: {
+    fontSize: 16,
+    color: "#6B5E62",
+    // In a real app, we would use a custom font
+    // fontFamily: "Poppins",
+    letterSpacing: 0.5,
+  },
+  imageContainer: {
+    width: 220,
+    height: 220,
+    marginBottom: 40,
+  },
+  cocktailImage: {
+    width: "100%",
+    height: "100%",
+  },
+  welcomeContainer: {
+    alignItems: "center",
+    paddingHorizontal: 40,
+    marginBottom: 40,
+  },
+  welcomeTitle: {
+    fontSize: 24,
+    fontWeight: "600",
+    color: "#4A3F41",
+    marginBottom: 12,
+    textAlign: "center",
+    // In a real app, we would use a custom font
+    // fontFamily: "Playfair Display",
+    letterSpacing: 0.5,
+  },
+  welcomeText: {
+    fontSize: 16,
+    color: "#6B5E62",
+    textAlign: "center",
+    lineHeight: 24,
+    // In a real app, we would use a custom font
+    // fontFamily: "Poppins",
+    letterSpacing: 0.2,
+  },
+  buttonContainer: {
+    width: "80%",
     marginBottom: 20,
-    color: '#9e0f09', // Color del texto
-    textShadowColor: 'rgba(0, 0, 0, 0.3)', // Color de la sombra del texto
-    textShadowOffset: { width: 2, height: 2 }, // Desplazamiento de la sombra
-    textShadowRadius: 5, // Radio de la sombra
-    // También puedes agregar otros estilos como degradados, animaciones, etc.
   },
-  button: {
-    backgroundColor: '#9e0f09',
-    paddingVertical: 12,
-    paddingHorizontal: 24,
-    borderRadius: 20,
+  getStartedButton: {
+    backgroundColor: "#FF6B6B",
+    borderRadius: 30,
+    paddingVertical: 16,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.15,
+    shadowRadius: 8,
+    elevation: 6,
   },
-  buttonText: {
-    color: 'white',
+  getStartedText: {
+    color: "#FFFFFF",
+    fontSize: 18,
+    fontWeight: "600",
+    // In a real app, we would use a custom font
+    // fontFamily: "Poppins",
+    letterSpacing: 0.5,
+  },
+  buttonIcon: {
+    marginLeft: 8,
+  },
+  skipContainer: {
+    marginTop: 10,
+  },
+  skipButton: {
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+  },
+  skipText: {
+    color: "#6B5E62",
     fontSize: 14,
-    letterSpacing: -0.5,
-    fontWeight: '800',
-    textTransform: 'uppercase',
+    // In a real app, we would use a custom font
+    // fontFamily: "Poppins",
   },
-});
-
-export default WelcomeScreen;
+})

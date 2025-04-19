@@ -1,113 +1,286 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, ScrollView, StyleSheet } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import FavoritesCard from '../components/FavoritesCard';
+"use client"
 
+import { useState, useEffect } from "react"
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image, Dimensions } from "react-native"
+import { useSafeAreaInsets } from "react-native-safe-area-context"
+import { Ionicons } from "@expo/vector-icons"
+import TexturedBackground from "../components/TexturedBackground"
+import { getLocalImage } from "../utils/imageMapping"
+import BottomNavigation from "../components/BottomNavigation"
+import StarRating from "../components/StarRating"
+import FavoriteButton from "../components/FavoriteButton"
+import { useFavorites } from "../context/favoritesContext"
+import cocktailsData from "../data/api.json"
 
-const FavoritesScreen = ({ route, navigation }) => {
-  const [favoriteTragos, setFavoriteTragos] = useState([]);
+const { width } = Dimensions.get("window")
+const cardWidth = (width - 50) / 2 // Two cards per row with margins
 
+export default function FavoritesScreen({ navigation }) {
+  const insets = useSafeAreaInsets()
+  const { favorites, isLoading } = useFavorites()
+  const [favoriteCocktails, setFavoriteCocktails] = useState([])
+
+  // Get favorite cocktails whenever favorites change
   useEffect(() => {
-    // Carga los favoritos al iniciar la pantalla
-    const loadFavorites = async () => {
-      try {
-        const storedFavorites = await AsyncStorage.getItem('favoriteTragos');
-        if (storedFavorites) {
-          setFavoriteTragos(JSON.parse(storedFavorites));
-        }
-      } catch (error) {
-        console.error('Error loading favorites from AsyncStorage:', error);
-      }
-    };
+    const cocktails = cocktailsData.filter((cocktail) => favorites.includes(cocktail.id))
+    setFavoriteCocktails(cocktails)
+  }, [favorites])
 
-    loadFavorites();
-  }, []);
+  // Render a favorite cocktail card
+  const renderFavoriteCard = (cocktail) => {
+    // Get the local image for the cocktail
+    const localImagePath = cocktail.imageLocal?.replace("require('", "").replace("')", "")
+    const cocktailImage = getLocalImage(localImagePath)
 
-  useEffect(() => {
-    const { trago, removeFavorite, isLiked } = route.params || {};
+    return (
+      <View key={cocktail.id} style={styles.favoriteCard}>
+        <TexturedBackground textureType="subtle" style={styles.favoriteCardBg}>
+          <TouchableOpacity
+            style={styles.favoriteCardContent}
+            onPress={() => navigation.navigate("CocktailDetail", { cocktail })}
+          >
+            <Image source={cocktailImage} style={styles.favoriteCardImage} resizeMode="contain" />
+            <Text style={styles.favoriteCardName}>{cocktail.name}</Text>
+            <Text style={styles.favoriteCardCategory}>{cocktail.category}</Text>
+            <View style={styles.favoriteCardRating}>
+              <StarRating rating={cocktail.rating} size={14} />
+            </View>
+          </TouchableOpacity>
+          <FavoriteButton cocktailId={cocktail.id} style={styles.removeButton} />
+        </TexturedBackground>
+      </View>
+    )
+  }
 
-    if (trago && isLiked) {
-      const isDuplicate = favoriteTragos.some(item => item.nombre === trago.nombre);
-      
-      if (!isDuplicate) {
-        // Agrega el nuevo favorito
-        const updatedFavorites = [...favoriteTragos, trago];
-        setFavoriteTragos(updatedFavorites);
-        AsyncStorage.setItem('favoriteTragos', JSON.stringify(updatedFavorites));
-      }
-    }
+  // Render empty state
+  const renderEmptyState = () => {
+    return (
+      <TexturedBackground textureType="pinkLight" style={styles.emptyStateContainer}>
+        <Ionicons name="heart-outline" size={60} color="#FF6B6B" />
+        <Text style={styles.emptyStateTitle}>No favorites yet</Text>
+        <Text style={styles.emptyStateText}>Tap the heart icon on any cocktail to add it to your favorites</Text>
+        <TouchableOpacity style={styles.exploreButton} onPress={() => navigation.navigate("Home")}>
+          <Text style={styles.exploreButtonText}>Explore Cocktails</Text>
+        </TouchableOpacity>
+      </TexturedBackground>
+    )
+  }
 
-    if (removeFavorite) {
-      // Elimina el favorito
-      const updatedFavorites = favoriteTragos.filter(item => item !== removeFavorite);
-      setFavoriteTragos(updatedFavorites);
-      AsyncStorage.setItem('favoriteTragos', JSON.stringify(updatedFavorites));
-    }
-  }, [route.params]);
-
-  const handleRemoveFavorite = (tragoToRemove) => {
-    // Elimina un favorito y actualiza AsyncStorage
-    const updatedFavorites = favoriteTragos.filter(item => item !== tragoToRemove);
-    setFavoriteTragos(updatedFavorites);
-    AsyncStorage.setItem('favoriteTragos', JSON.stringify(updatedFavorites));
-    navigation.setParams({ removeFavorite: tragoToRemove });
-  };
-
-  const handlePressTragoDetail = (trago) => {
-    // Navega a TragoDetail pasando el trago como parámetro
-    navigation.navigate('TragoDetail', { trago });
-  };
+  // Render loading state
+  const renderLoadingState = () => {
+    return (
+      <View style={styles.loadingContainer}>
+        <Text style={styles.loadingText}>Loading your favorites...</Text>
+      </View>
+    )
+  }
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      {favoriteTragos.length === 0 ? (
-        <>
-          <Text style={{ fontSize: 18, fontWeight: '800', letterSpacing: -0.5, marginBottom: 10, textAlign: 'center' }}>
-            <Text style={{ textTransform: 'uppercase', color: '#000' }}>Mis </Text>
-            <Text style={{ textTransform: 'uppercase' }}>
-              <Text style={{ color: '#C11326' }}>Favoritos</Text>
-            </Text>
-          </Text>
-          <Text style={{ textTransform: 'uppercase', fontSize: 12, fontWeight: 'bold', color: 'black', marginBottom: 10, textAlign: 'center' }}>¡Aquí están los tragos que más te gustan!</Text>
-          <Text style={styles.noFavoritesText}>Aún no tienes ningún trago en favoritos</Text>
-        </>
-      ) : (
-        <>
-          <Text style={{ fontSize: 18, fontWeight: '800', letterSpacing: -0.5, marginBottom: 10, textAlign: 'center' }}>
-            <Text style={{ textTransform: 'uppercase', color: '#000' }}>Mis </Text>
-            <Text style={{ textTransform: 'uppercase' }}>
-              <Text style={{ color: '#C11326' }}>Favoritos</Text>
-            </Text>
-          </Text>
-          <Text style={{ textTransform: 'uppercase', fontSize: 12, fontWeight: 'bold', color: 'black', marginBottom: 10, textAlign: 'center' }}>¡Aquí están los tragos que más te gustan!</Text>
-          <View>
-            {favoriteTragos.map((trago, index) => (
-              <FavoritesCard
-                key={index}
-                trago={trago}
-                onPressRemove={() => handleRemoveFavorite(trago)}
-                onPressTragoDetail={() => handlePressTragoDetail(trago)}
-              />
-            ))}
-          </View>
-        </>
-      )}
-    </ScrollView>
-  );
-};
+    <View style={[styles.container, { paddingTop: insets.top }]}>
+      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
+        {/* Header */}
+        <TexturedBackground textureType="pinkLight" style={styles.header}>
+          <Text style={styles.headerTitle}>Favorites</Text>
+          <Text style={styles.headerSubtitle}>Your saved cocktails</Text>
+        </TexturedBackground>
+
+        {/* Content */}
+        <View style={styles.content}>
+          {isLoading ? (
+            renderLoadingState()
+          ) : favoriteCocktails.length > 0 ? (
+            <>
+              <View style={styles.favoritesHeader}>
+                <Text style={styles.favoritesTitle}>Your Collection</Text>
+                <Text style={styles.favoritesCount}>{favoriteCocktails.length} cocktails</Text>
+              </View>
+              <View style={styles.favoritesGrid}>{favoriteCocktails.map(renderFavoriteCard)}</View>
+            </>
+          ) : (
+            renderEmptyState()
+          )}
+        </View>
+
+        {/* Extra padding at bottom for navigation */}
+        <View style={styles.bottomPadding} />
+      </ScrollView>
+
+      <BottomNavigation />
+    </View>
+  )
+}
 
 const styles = StyleSheet.create({
   container: {
-    flexGrow: 1,
-    backgroundColor: '#fff',
+    flex: 1,
+    backgroundColor: "#FFF5F5", // Soft pink background
+  },
+  scrollContent: {
+    paddingBottom: 100,
+    minHeight: "100%",
+  },
+  header: {
     paddingHorizontal: 20,
-    paddingTop: 70,
+    paddingVertical: 25,
+    borderBottomLeftRadius: 30,
+    borderBottomRightRadius: 30,
   },
-  noFavoritesText: {
+  headerTitle: {
+    fontSize: 32,
+    fontWeight: "bold",
+    color: "#4A3F41",
+    marginBottom: 8,
+    // In a real app, we would use a custom font
+    // fontFamily: "Playfair Display",
+    letterSpacing: 0.5,
+  },
+  headerSubtitle: {
     fontSize: 16,
-    textAlign: 'center',
-    color: 'red'
+    color: "#6B5E62",
+    // In a real app, we would use a custom font
+    // fontFamily: "Poppins",
+    letterSpacing: 0.2,
   },
-});
-
-export default FavoritesScreen;
+  content: {
+    flex: 1,
+    padding: 20,
+  },
+  favoritesHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 20,
+  },
+  favoritesTitle: {
+    fontSize: 20,
+    fontWeight: "600",
+    color: "#4A3F41",
+    // In a real app, we would use a custom font
+    // fontFamily: "Playfair Display",
+    letterSpacing: 0.3,
+  },
+  favoritesCount: {
+    fontSize: 14,
+    color: "#6B5E62",
+    // In a real app, we would use a custom font
+    // fontFamily: "Poppins",
+  },
+  favoritesGrid: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+  },
+  favoriteCard: {
+    width: cardWidth,
+    marginBottom: 15,
+    borderRadius: 15,
+    overflow: "hidden",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 2,
+  },
+  favoriteCardBg: {
+    borderRadius: 15,
+    padding: 15,
+    height: 200,
+    position: "relative",
+  },
+  favoriteCardContent: {
+    alignItems: "center",
+  },
+  favoriteCardImage: {
+    width: 100,
+    height: 100,
+    marginBottom: 10,
+  },
+  favoriteCardName: {
+    fontSize: 16,
+    fontWeight: "600",
+    color: "#4A3F41",
+    textAlign: "center",
+    marginBottom: 4,
+    // In a real app, we would use a custom font
+    // fontFamily: "Playfair Display",
+    letterSpacing: 0.2,
+  },
+  favoriteCardCategory: {
+    fontSize: 12,
+    color: "#6B5E62",
+    textAlign: "center",
+    marginBottom: 8,
+    // In a real app, we would use a custom font
+    // fontFamily: "Poppins",
+  },
+  favoriteCardRating: {
+    alignItems: "center",
+  },
+  removeButton: {
+    position: "absolute",
+    top: 10,
+    right: 10,
+  },
+  emptyStateContainer: {
+    borderRadius: 15,
+    padding: 40,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 20,
+  },
+  emptyStateTitle: {
+    fontSize: 20,
+    fontWeight: "600",
+    color: "#4A3F41",
+    textAlign: "center",
+    marginTop: 20,
+    marginBottom: 10,
+    // In a real app, we would use a custom font
+    // fontFamily: "Playfair Display",
+    letterSpacing: 0.3,
+  },
+  emptyStateText: {
+    fontSize: 14,
+    color: "#6B5E62",
+    textAlign: "center",
+    marginBottom: 20,
+    // In a real app, we would use a custom font
+    // fontFamily: "Poppins",
+    letterSpacing: 0.2,
+    paddingHorizontal: 20,
+  },
+  exploreButton: {
+    backgroundColor: "#FF6B6B",
+    paddingHorizontal: 20,
+    paddingVertical: 12,
+    borderRadius: 25,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 2,
+  },
+  exploreButtonText: {
+    color: "#FFFFFF",
+    fontSize: 14,
+    fontWeight: "600",
+    // In a real app, we would use a custom font
+    // fontFamily: "Poppins",
+    letterSpacing: 0.2,
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    paddingVertical: 50,
+  },
+  loadingText: {
+    fontSize: 16,
+    color: "#6B5E62",
+    // In a real app, we would use a custom font
+    // fontFamily: "Poppins",
+  },
+  bottomPadding: {
+    height: 80,
+  },
+})
