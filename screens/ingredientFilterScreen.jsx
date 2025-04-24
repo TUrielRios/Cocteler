@@ -1,13 +1,26 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, TextInput, Image, Dimensions } from "react-native"
+import { useState, useEffect, useRef } from "react"
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  TextInput,
+  Image,
+  Dimensions,
+  Animated,
+  Platform,
+  FlatList,
+} from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { Ionicons } from "@expo/vector-icons"
-import TexturedBackground from "../components/TexturedBackground"
+import { LinearGradient } from "expo-linear-gradient"
 import { getLocalImage } from "../utils/imageMapping"
 import BottomNavigation from "../components/BottomNavigation"
 import cocktailsData from "../data/api.json"
+import StarRating from "../components/StarRating"
+import FavoriteButton from "../components/FavoriteButton"
 
 const { width } = Dimensions.get("window")
 const cardWidth = (width - 60) / 2 // Two cards per row with margins
@@ -33,12 +46,38 @@ const ingredientIcons = {
   default: "ellipse-outline",
 }
 
+// Ingredient colors for visual variety
+const ingredientColors = [
+  ["#FF6B6B", "#FF8E8E"], // Red
+  ["#4ECDC4", "#6EE7B7"], // Teal
+  ["#A78BFA", "#C4B5FD"], // Purple
+  ["#F59E0B", "#FBBF24"], // Amber
+  ["#60A5FA", "#93C5FD"], // Blue
+  ["#EC4899", "#F472B6"], // Pink
+]
+
 export default function IngredientFilterScreen({ navigation }) {
   const insets = useSafeAreaInsets()
   const [searchText, setSearchText] = useState("")
   const [selectedIngredients, setSelectedIngredients] = useState([])
   const [matchingCocktails, setMatchingCocktails] = useState([])
   const [popularIngredients, setPopularIngredients] = useState([])
+  const [isSearchFocused, setIsSearchFocused] = useState(false)
+  const [isAccordionExpanded, setIsAccordionExpanded] = useState(false)
+  const accordionHeight = useRef(new Animated.Value(0)).current
+
+  // Animation values
+  const fadeAnim = useRef(new Animated.Value(0)).current
+  const slideAnim = useRef(new Animated.Value(30)).current
+  const searchBarAnim = useRef(new Animated.Value(0)).current
+  const scrollY = useRef(new Animated.Value(0)).current
+
+  // Header animation based on scroll
+  const headerOpacity = scrollY.interpolate({
+    inputRange: [0, 100],
+    outputRange: [0, 1],
+    extrapolate: "clamp",
+  })
 
   // Extract all unique ingredients from cocktails data
   useEffect(() => {
@@ -67,6 +106,20 @@ export default function IngredientFilterScreen({ navigation }) {
       "Aperol",
       "Prosecco",
     ])
+
+    // Entrance animation
+    Animated.parallel([
+      Animated.timing(fadeAnim, {
+        toValue: 1,
+        duration: 800,
+        useNativeDriver: true,
+      }),
+      Animated.timing(slideAnim, {
+        toValue: 0,
+        duration: 600,
+        useNativeDriver: true,
+      }),
+    ]).start()
   }, [])
 
   // Filter cocktails based on selected ingredients
@@ -90,6 +143,20 @@ export default function IngredientFilterScreen({ navigation }) {
   // Add an ingredient to the selected list
   const addIngredient = (ingredient) => {
     if (!selectedIngredients.includes(ingredient) && ingredient.trim() !== "") {
+      // Animate the search bar
+      Animated.sequence([
+        Animated.timing(searchBarAnim, {
+          toValue: 1,
+          duration: 150,
+          useNativeDriver: true,
+        }),
+        Animated.timing(searchBarAnim, {
+          toValue: 0,
+          duration: 150,
+          useNativeDriver: true,
+        }),
+      ]).start()
+
       setSelectedIngredients([...selectedIngredients, ingredient])
       setSearchText("")
     }
@@ -120,23 +187,32 @@ export default function IngredientFilterScreen({ navigation }) {
     return ingredientIcons.default
   }
 
+  // Get color for ingredient
+  const getIngredientColor = (ingredient) => {
+    // Use the first character of the ingredient name to determine color
+    const index = ingredient.charCodeAt(0) % ingredientColors.length
+    return ingredientColors[index]
+  }
+
   // Render an ingredient chip
   const renderIngredientChip = (ingredient, isSelected = false) => {
+    const colors = getIngredientColor(ingredient)
+
     return (
       <TouchableOpacity
         key={ingredient}
         style={[
           styles.ingredientChip,
           isSelected
-            ? { backgroundColor: "#FF6B6B" }
-            : { backgroundColor: "#FFF5F5", borderColor: "#FFCACA", borderWidth: 1 },
+            ? { backgroundColor: colors[0] }
+            : { backgroundColor: "#FFF5F5", borderColor: colors[0], borderWidth: 1 },
         ]}
         onPress={() => (isSelected ? removeIngredient(ingredient) : addIngredient(ingredient))}
       >
         <Ionicons
           name={getIngredientIcon(ingredient)}
           size={16}
-          color={isSelected ? "#FFFFFF" : "#FF6B6B"}
+          color={isSelected ? "#FFFFFF" : colors[0]}
           style={styles.ingredientIcon}
         />
         <Text style={[styles.ingredientChipText, isSelected ? { color: "#FFFFFF" } : { color: "#4A3F41" }]}>
@@ -147,14 +223,56 @@ export default function IngredientFilterScreen({ navigation }) {
     )
   }
 
-  // Render a cocktail card
-  const renderCocktailCard = (cocktail) => {
+  // Create a soft tint from a color
+  const createSoftTint = (color, intensity = 0.15) => {
+    // If color is not in hex format or not provided, return white
+    if (!color || !color.startsWith("#")) {
+      return "#FFFFFF"
+    }
+
+    // Remove the # if it exists
+    color = color.replace("#", "")
+
+    // Parse the hex values
+    let r = Number.parseInt(color.substring(0, 2), 16)
+    let g = Number.parseInt(color.substring(2, 4), 16)
+    let b = Number.parseInt(color.substring(4, 6), 16)
+
+    // Create a very soft tint by mixing with white
+    r = Math.round(255 - (255 - r) * intensity)
+    g = Math.round(255 - (255 - g) * intensity)
+    b = Math.round(255 - (255 - b) * intensity)
+
+    // Convert back to hex
+    return `#${r.toString(16).padStart(2, "0")}${g.toString(16).padStart(2, "0")}${b.toString(16).padStart(2, "0")}`
+  }
+
+  // Toggle accordion expansion
+  const toggleAccordion = () => {
+    const toValue = isAccordionExpanded ? 0 : 1
+
+    Animated.timing(accordionHeight, {
+      toValue,
+      duration: 300,
+      useNativeDriver: false,
+    }).start()
+
+    setIsAccordionExpanded(!isAccordionExpanded)
+  }
+
+  // Render a cocktail card in the same style as SearchScreen
+  const renderCocktailCard = ({ item }) => {
     // Get the local image for the cocktail
-    const localImagePath = cocktail.imageLocal?.replace("require('", "").replace("')", "")
+    const localImagePath = item.imageLocal?.replace("require('", "").replace("')", "")
     const cocktailImage = getLocalImage(localImagePath)
 
+    // Get the background color from the cocktail data or use a default
+    const baseColor = item.backgroundColor || "#F9F9F9"
+    // Create a very soft tint for the gradient
+    const softTint = createSoftTint(baseColor, 0.3)
+
     // Calculate how many ingredients the user has
-    const cocktailIngredients = cocktail.ingredients.map((i) => i.name.toLowerCase())
+    const cocktailIngredients = item.ingredients.map((i) => i.name.toLowerCase())
     const userHasIngredients = selectedIngredients.filter((selected) =>
       cocktailIngredients.some((ingredient) => ingredient.toLowerCase().includes(selected.toLowerCase())),
     ).length
@@ -163,65 +281,100 @@ export default function IngredientFilterScreen({ navigation }) {
 
     return (
       <TouchableOpacity
-        key={cocktail.id}
         style={styles.cocktailCard}
-        onPress={() => navigation.navigate("CocktailDetail", { cocktail })}
+        onPress={() => navigation.navigate("CocktailDetail", { cocktail: item })}
       >
-        <TexturedBackground textureType="subtle" style={styles.cocktailCardBg}>
+        <LinearGradient
+          colors={["#FFFFFF", softTint]}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 1 }}
+          style={styles.cocktailCardBg}
+        >
+          <View style={styles.cocktailCardFooter}>
+            <FavoriteButton cocktailId={item.id} size={18} />
+          </View>
           <Image source={cocktailImage} style={styles.cocktailCardImage} resizeMode="contain" />
           <View style={styles.cocktailCardContent}>
-            <Text style={styles.cocktailCardName}>{cocktail.name}</Text>
-            <View style={styles.cocktailCardDetails}>
-              <View style={styles.cocktailCardDetail}>
-                <Ionicons name="wine-outline" size={14} color="#FF6B6B" />
-                <Text style={styles.cocktailCardDetailText}>{cocktail.category}</Text>
-              </View>
-              <View style={styles.cocktailCardDetail}>
-                <Ionicons name="list-outline" size={14} color="#FF6B6B" />
-                <Text style={styles.cocktailCardDetailText}>{cocktail.ingredients.length} ingredients</Text>
-              </View>
+            <Text style={styles.cocktailCardName}>{item.name}</Text>
+            <Text style={styles.cocktailCardCategory}>{item.category}</Text>
+            <StarRating rating={item.rating} size={14} />
+            <View style={styles.matchBadge}>
+              <Text style={styles.matchBadgeText}>{percentComplete}% match</Text>
             </View>
-            <View style={styles.progressBarContainer}>
-              <View style={[styles.progressBar, { width: `${percentComplete}%` }]} />
-            </View>
-            <Text style={styles.progressText}>{percentComplete}% match</Text>
-            <TouchableOpacity style={styles.viewButton}>
-              <Text style={styles.viewButtonText}>View Recipe</Text>
-            </TouchableOpacity>
           </View>
-        </TexturedBackground>
+        </LinearGradient>
       </TouchableOpacity>
     )
   }
 
   return (
     <View style={[styles.container, { paddingTop: insets.top }]}>
-      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
-        {/* Header with textured background */}
-        <TexturedBackground textureType="pinkLight" style={styles.header}>
+      {/* Animated header */}
+      <Animated.View
+        style={[
+          styles.animatedHeader,
+          {
+            opacity: headerOpacity,
+            paddingTop: insets.top,
+          },
+        ]}
+      >
+        <Text style={styles.headerTitle}>Mix Your Cocktail</Text>
+      </Animated.View>
+
+      <Animated.ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.scrollContent}
+        onScroll={Animated.event([{ nativeEvent: { contentOffset: { y: scrollY } } }], { useNativeDriver: false })}
+        scrollEventThrottle={16}
+        style={{ opacity: fadeAnim, transform: [{ translateY: slideAnim }] }}
+      >
+        {/* Header with gradient background */}
+        <LinearGradient
+          colors={["white", "lightblue"]}
+          start={{ x: 1, y: 1 }}
+          end={{ x: 0, y: 0 }}
+          style={styles.header}
+        >
           <View style={styles.headerContent}>
             <Text style={styles.headerTitle}>Mix Your Cocktail</Text>
-            <Text style={styles.headerSubtitle}>Find recipes with ingredients you have</Text>
+            <Text style={styles.headerSubtitle}>Find recipes with your ingredients</Text>
           </View>
           <View style={styles.headerImageContainer}>
             <Image
-              source={getLocalImage("../assets/images/cocktails/aperolSpritz.png")}
+              source={getLocalImage("../assets/images/cocktails/DryMartini.png")}
               style={styles.headerImage}
               resizeMode="contain"
             />
           </View>
-        </TexturedBackground>
+        </LinearGradient>
 
         {/* Search bar */}
-        <View style={styles.searchContainer}>
-          <View style={styles.searchBar}>
-            <Ionicons name="search" size={20} color="#AAAAAA" />
+        <Animated.View
+          style={[
+            styles.searchContainer,
+            {
+              transform: [
+                {
+                  scale: searchBarAnim.interpolate({
+                    inputRange: [0, 1],
+                    outputRange: [1, 1.03],
+                  }),
+                },
+              ],
+            },
+          ]}
+        >
+          <View style={[styles.searchBar, isSearchFocused && styles.searchBarFocused]}>
+            <Ionicons name="search" size={20} color={isSearchFocused ? "#FF6B6B" : "#AAAAAA"} />
             <TextInput
               style={styles.searchInput}
               placeholder="Search ingredients..."
               value={searchText}
               onChangeText={setSearchText}
               onSubmitEditing={() => searchText.trim() && addIngredient(searchText)}
+              onFocus={() => setIsSearchFocused(true)}
+              onBlur={() => setIsSearchFocused(false)}
               returnKeyType="done"
               placeholderTextColor="#AAAAAA"
             />
@@ -231,7 +384,7 @@ export default function IngredientFilterScreen({ navigation }) {
               </TouchableOpacity>
             )}
           </View>
-        </View>
+        </Animated.View>
 
         {/* Search results */}
         {searchText.length > 0 && getFilteredIngredients().length > 0 && (
@@ -242,9 +395,14 @@ export default function IngredientFilterScreen({ navigation }) {
                 style={styles.searchResultItem}
                 onPress={() => addIngredient(ingredient)}
               >
-                <Ionicons name={getIngredientIcon(ingredient)} size={20} color="#FF6B6B" />
+                <Ionicons name={getIngredientIcon(ingredient)} size={20} color={getIngredientColor(ingredient)[0]} />
                 <Text style={styles.searchResultText}>{ingredient}</Text>
-                <Ionicons name="add-circle" size={20} color="#FF6B6B" style={styles.addIcon} />
+                <Ionicons
+                  name="add-circle"
+                  size={20}
+                  color={getIngredientColor(ingredient)[0]}
+                  style={styles.addIcon}
+                />
               </TouchableOpacity>
             ))}
           </View>
@@ -253,7 +411,14 @@ export default function IngredientFilterScreen({ navigation }) {
         {/* Selected ingredients */}
         <View style={styles.selectedIngredientsContainer}>
           <View style={styles.sectionTitleContainer}>
-            <Ionicons name="checkmark-circle" size={20} color="#FF6B6B" />
+            <LinearGradient
+              colors={["#FF6B6B", "#FF8E8E"]}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 0 }}
+              style={styles.sectionIconContainer}
+            >
+              <Ionicons name="checkmark-circle" size={20} color="#FFFFFF" />
+            </LinearGradient>
             <Text style={styles.sectionTitle}>Your ingredients</Text>
             {selectedIngredients.length > 0 && (
               <View style={styles.countBadge}>
@@ -261,7 +426,12 @@ export default function IngredientFilterScreen({ navigation }) {
               </View>
             )}
           </View>
-          <View style={styles.selectedIngredientsCard}>
+          <LinearGradient
+            colors={["#FFFFFF", "#F9F9F9"]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 0, y: 1 }}
+            style={styles.selectedIngredientsCard}
+          >
             {selectedIngredients.length > 0 ? (
               <View style={styles.ingredientChipsContainer}>
                 {selectedIngredients.map((ingredient) => renderIngredientChip(ingredient, true))}
@@ -272,54 +442,112 @@ export default function IngredientFilterScreen({ navigation }) {
                 <Text style={styles.emptyStateText}>Add ingredients to see what cocktails you can make</Text>
               </View>
             )}
-          </View>
+          </LinearGradient>
         </View>
+              {/* Matching cocktails */}
+              {selectedIngredients.length > 0 && (
+          <View style={styles.matchingCocktailsContainer}>
+            <TouchableOpacity style={styles.accordionHeader} onPress={toggleAccordion}>
+              <View style={styles.sectionTitleContainer}>
+                <LinearGradient
+                  colors={["#4ECDC4", "#6EE7B7"]}
+                  start={{ x: 0, y: 0 }}
+                  end={{ x: 1, y: 0 }}
+                  style={styles.sectionIconContainer}
+                >
+                  <Ionicons name="wine" size={20} color="#FFFFFF" />
+                </LinearGradient>
+                <Text style={styles.sectionTitle}>
+                  {matchingCocktails.length > 0
+                    ? `Cocktails you can make (${matchingCocktails.length})`
+                    : "No matching cocktails found"}
+                </Text>
+              </View>
+              <Animated.View
+                style={{
+                  transform: [
+                    {
+                      rotate: accordionHeight.interpolate({
+                        inputRange: [0, 1],
+                        outputRange: ["0deg", "180deg"],
+                      }),
+                    },
+                  ],
+                }}
+              >
+                <Ionicons name="chevron-down" size={24} color="#4A3F41" />
+              </Animated.View>
+            </TouchableOpacity>
+
+            <Animated.View
+              style={{
+                maxHeight: accordionHeight.interpolate({
+                  inputRange: [0, 1],
+                  outputRange: [0, 1000],
+                }),
+                overflow: "hidden",
+                opacity: accordionHeight,
+              }}
+            >
+              {matchingCocktails.length > 0 ? (
+                <FlatList
+                  data={matchingCocktails}
+                  renderItem={renderCocktailCard}
+                  keyExtractor={(item) => item.id}
+                  horizontal
+                  showsHorizontalScrollIndicator={false}
+                  contentContainerStyle={styles.cocktailsListContent}
+                />
+              ) : (
+                <View style={styles.noMatchContainer}>
+                  <LinearGradient
+                    colors={["#FFF5F5", "#FFE6E6"]}
+                    start={{ x: 0, y: 0 }}
+                    end={{ x: 0, y: 1 }}
+                    style={styles.noMatchBg}
+                  >
+                    <Ionicons name="wine-outline" size={50} color="#FF6B6B" />
+                    <Text style={styles.noMatchTitle}>No matches found</Text>
+                    <Text style={styles.noMatchText}>Try adding more ingredients to find matching cocktails</Text>
+                  </LinearGradient>
+                </View>
+              )}
+            </Animated.View>
+          </View>
+        )}
 
         {/* Popular ingredients */}
         <View style={styles.popularIngredientsContainer}>
           <View style={styles.sectionTitleContainer}>
-            <Ionicons name="star" size={20} color="#FF6B6B" />
+            <LinearGradient
+              colors={["#F59E0B", "#FBBF24"]}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 0 }}
+              style={styles.sectionIconContainer}
+            >
+              <Ionicons name="star" size={20} color="#FFFFFF" />
+            </LinearGradient>
             <Text style={styles.sectionTitle}>Popular ingredients</Text>
           </View>
-          <TexturedBackground textureType="subtle" style={styles.popularIngredientsCard}>
+          <LinearGradient
+            colors={["#FFFFFF", "#F9F9F9"]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 0, y: 1 }}
+            style={styles.popularIngredientsCard}
+          >
             <View style={styles.ingredientChipsContainer}>
               {popularIngredients
                 .slice(0, 10)
                 .map((ingredient) => !selectedIngredients.includes(ingredient) && renderIngredientChip(ingredient))}
             </View>
-          </TexturedBackground>
+          </LinearGradient>
         </View>
 
-        {/* Matching cocktails */}
-        {selectedIngredients.length > 0 && (
-          <View style={styles.matchingCocktailsContainer}>
-            <View style={styles.sectionTitleContainer}>
-              <Ionicons name="wine" size={20} color="#FF6B6B" />
-              <Text style={styles.sectionTitle}>
-                {matchingCocktails.length > 0
-                  ? `Cocktails you can make (${matchingCocktails.length})`
-                  : "No matching cocktails found"}
-              </Text>
-            </View>
-            {matchingCocktails.length > 0 ? (
-              <View style={styles.cocktailsGrid}>
-                {matchingCocktails.map((cocktail) => renderCocktailCard(cocktail))}
-              </View>
-            ) : (
-              <View style={styles.noMatchContainer}>
-                <TexturedBackground textureType="pinkLight" style={styles.noMatchBg}>
-                  <Ionicons name="wine-outline" size={50} color="#FF6B6B" />
-                  <Text style={styles.noMatchTitle}>No matches found</Text>
-                  <Text style={styles.noMatchText}>Try adding more ingredients to find matching cocktails</Text>
-                </TexturedBackground>
-              </View>
-            )}
-          </View>
-        )}
+  
 
         {/* Extra padding at bottom for navigation */}
         <View style={styles.bottomPadding} />
-      </ScrollView>
+      </Animated.ScrollView>
 
       <BottomNavigation />
     </View>
@@ -330,6 +558,26 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#FFF5F5", // Soft pink background
+    margin: 15
+  },
+  animatedHeader: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    height: 60,
+    backgroundColor: "rgba(255,255,255,0.95)",
+    zIndex: 100,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    borderBottomWidth: 1,
+    borderBottomColor: "#F0F0F0",
+  },
+  headerTitle: {
+    fontSize: 18,
+    fontWeight: "600",
+    color: "#4A3F41",
   },
   scrollContent: {
     paddingBottom: 100,
@@ -340,8 +588,8 @@ const styles = StyleSheet.create({
     paddingVertical: 25,
     borderBottomLeftRadius: 30,
     borderBottomRightRadius: 30,
-    height: 190,
-    borderRadius: 30,
+    height: 160,
+    overflow: "hidden",
   },
   headerContent: {
     flex: 1,
@@ -350,18 +598,19 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontSize: 32,
     fontWeight: "bold",
-    color: "#4A3F41",
+    color: "#FFFFFF",
     marginBottom: 8,
-    // In a real app, we would use a custom font
-    // fontFamily: "Playfair Display",
-    letterSpacing: 0.5,
+    textShadowColor: "rgba(0, 0, 0, 0.1)",
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 3,
+    fontFamily: Platform.OS === "ios" ? "System" : "Roboto",
   },
   headerSubtitle: {
     fontSize: 16,
-    color: "#6B5E62",
-    // In a real app, we would use a custom font
-    // fontFamily: "Poppins",
-    letterSpacing: 0.2,
+    width:150,
+    color: "#FFFFFF",
+    fontWeight: "700",
+    fontFamily: Platform.OS === "ios" ? "System" : "Roboto",
   },
   headerImageContainer: {
     width: 140,
@@ -370,14 +619,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   headerImage: {
-    width: 270,
-    height: 270,
+    width: 230,
+    height: 230,
     transform: [{ rotate: "15deg" }],
-    
   },
   searchContainer: {
     paddingHorizontal: 20,
-    marginTop: 20,
+    marginTop: 25,
+    zIndex: 10,
   },
   searchBar: {
     flexDirection: "row",
@@ -392,13 +641,20 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 3,
   },
+  searchBarFocused: {
+    borderWidth: 1,
+    borderColor: "#FF6B6B",
+    shadowColor: "#FF6B6B",
+    shadowOpacity: 0.2,
+    shadowRadius: 8,
+    elevation: 5,
+  },
   searchInput: {
     flex: 1,
     marginLeft: 10,
     fontSize: 16,
     color: "#4A3F41",
-    // In a real app, we would use a custom font
-    // fontFamily: "Poppins",
+    fontFamily: Platform.OS === "ios" ? "System" : "Roboto",
   },
   addButton: {
     width: 30,
@@ -433,8 +689,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     fontSize: 16,
     color: "#4A3F41",
-    // In a real app, we would use a custom font
-    // fontFamily: "Poppins",
+    fontFamily: Platform.OS === "ios" ? "System" : "Roboto",
   },
   addIcon: {
     marginLeft: 10,
@@ -444,13 +699,19 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginBottom: 15,
   },
+  sectionIconContainer: {
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    justifyContent: "center",
+    alignItems: "center",
+    marginRight: 10,
+  },
   sectionTitle: {
     fontSize: 20,
     fontWeight: "600",
     color: "#4A3F41",
-    marginLeft: 8,
-    // In a real app, we would use a custom font
-    // fontFamily: "Playfair Display",
+    fontFamily: Platform.OS === "ios" ? "System" : "Roboto",
     letterSpacing: 0.3,
   },
   countBadge: {
@@ -464,15 +725,13 @@ const styles = StyleSheet.create({
     color: "#FFFFFF",
     fontSize: 12,
     fontWeight: "bold",
-    // In a real app, we would use a custom font
-    // fontFamily: "Poppins",
+    fontFamily: Platform.OS === "ios" ? "System" : "Roboto",
   },
   selectedIngredientsContainer: {
     paddingHorizontal: 20,
     marginTop: 25,
   },
   selectedIngredientsCard: {
-    backgroundColor: "#FFFFFF",
     borderRadius: 15,
     padding: 15,
     shadowColor: "#000",
@@ -500,8 +759,7 @@ const styles = StyleSheet.create({
   },
   ingredientChipText: {
     fontSize: 14,
-    // In a real app, we would use a custom font
-    // fontFamily: "Poppins",
+    fontFamily: Platform.OS === "ios" ? "System" : "Roboto",
     letterSpacing: 0.2,
   },
   chipIcon: {
@@ -517,8 +775,7 @@ const styles = StyleSheet.create({
     color: "#6B5E62",
     textAlign: "center",
     marginTop: 10,
-    // In a real app, we would use a custom font
-    // fontFamily: "Poppins",
+    fontFamily: Platform.OS === "ios" ? "System" : "Roboto",
     letterSpacing: 0.2,
   },
   popularIngredientsContainer: {
@@ -534,18 +791,9 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 2,
   },
-  matchingCocktailsContainer: {
-    paddingHorizontal: 20,
-    marginTop: 25,
-  },
-  cocktailsGrid: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "space-between",
-  },
   cocktailCard: {
-    width: cardWidth,
-    marginBottom: 15,
+    width: 170,
+    marginRight: 15,
     borderRadius: 15,
     overflow: "hidden",
     shadowColor: "#000",
@@ -557,77 +805,80 @@ const styles = StyleSheet.create({
   cocktailCardBg: {
     borderRadius: 15,
     padding: 15,
-    alignItems: "center",
-    height: 240,
+    height: 250,
+    position: "relative",
   },
   cocktailCardImage: {
-    width: 100,
-    height: 100,
+    width: 120,
+    height: 120,
+    alignSelf: "center",
     marginBottom: 10,
   },
   cocktailCardContent: {
-    width: "100%",
     alignItems: "center",
   },
   cocktailCardName: {
-    fontSize: 16,
-    fontWeight: "600",
+    fontSize: 14,
+    fontWeight: "700",
     color: "#4A3F41",
-    marginBottom: 5,
+    marginBottom: 4,
     textAlign: "center",
-    // In a real app, we would use a custom font
-    // fontFamily: "Playfair Display",
     letterSpacing: 0.2,
   },
-  cocktailCardDetails: {
-    flexDirection: "row",
-    justifyContent: "center",
-    marginBottom: 10,
-  },
-  cocktailCardDetail: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginHorizontal: 5,
-  },
-  cocktailCardDetailText: {
-    fontSize: 12,
+  cocktailCardCategory: {
+    fontSize: 10,
     color: "#6B5E62",
-    marginLeft: 3,
-    // In a real app, we would use a custom font
-    // fontFamily: "Poppins",
+    marginBottom: 8,
+    letterSpacing: 0.2,
   },
-  progressBarContainer: {
-    height: 6,
-    backgroundColor: "#F0F0F0",
-    borderRadius: 3,
-    width: "100%",
-    marginBottom: 5,
+  cocktailCardFooter: {
+    position: "absolute",
+    top: 10,
+    right: 10,
+    zIndex: 10,
   },
-  progressBar: {
-    height: 6,
+  cocktailsListContent: {
+    paddingVertical: 15,
+    paddingLeft: 5,
+    paddingRight: 20,
+  },
+  matchBadge: {
     backgroundColor: "#FF6B6B",
-    borderRadius: 3,
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+    borderRadius: 12,
+    marginTop: 8,
   },
-  progressText: {
-    fontSize: 12,
-    color: "#6B5E62",
-    marginBottom: 10,
-    // In a real app, we would use a custom font
-    // fontFamily: "Poppins",
-  },
-  viewButton: {
-    backgroundColor: "#FF6B6B",
-    paddingHorizontal: 15,
-    paddingVertical: 8,
-    borderRadius: 20,
-  },
-  viewButtonText: {
+  matchBadgeText: {
     color: "#FFFFFF",
-    fontSize: 12,
+    fontSize: 10,
     fontWeight: "600",
-    // In a real app, we would use a custom font
-    // fontFamily: "Poppins",
-    letterSpacing: 0.2,
+  },
+  accordionHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingVertical: 5,
+    paddingRight: 10,
+  },
+  noMatchContainer: {
+    borderRadius: 15,
+    overflow: "hidden",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 2,
+    marginTop: 15,
+  },
+  matchingCocktailsContainer: {
+    paddingHorizontal: 20,
+    marginTop: 25,
+  },
+  cocktailsGrid: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
   },
   noMatchContainer: {
     borderRadius: 15,
@@ -649,16 +900,14 @@ const styles = StyleSheet.create({
     color: "#4A3F41",
     marginTop: 15,
     marginBottom: 5,
-    // In a real app, we would use a custom font
-    // fontFamily: "Playfair Display",
+    fontFamily: Platform.OS === "ios" ? "System" : "Roboto",
     letterSpacing: 0.3,
   },
   noMatchText: {
     fontSize: 14,
     color: "#6B5E62",
     textAlign: "center",
-    // In a real app, we would use a custom font
-    // fontFamily: "Poppins",
+    fontFamily: Platform.OS === "ios" ? "System" : "Roboto",
     letterSpacing: 0.2,
   },
   bottomPadding: {

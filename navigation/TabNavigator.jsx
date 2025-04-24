@@ -8,7 +8,7 @@ import HomeScreen from "../screens/HomeScreen"
 import SearchScreen from "../screens/SearchScreen"
 import IngredientFilterScreen from "../screens/ingredientFilterScreen"
 import FavoritesScreen from "../screens/FavoritesScreen"
-import CartScreen from "../screens/CartScreen"
+import SettingsScreen from "../screens/SettingsScreen"
 
 const Tab = createBottomTabNavigator()
 
@@ -74,11 +74,11 @@ export default function TabNavigator() {
         }}
       />
       <Tab.Screen
-        name="CartTab"
-        component={CartScreen}
+        name="SettingsTab"
+        component={SettingsScreen}
         options={{
           tabBarIcon: ({ focused }) => (
-            <Ionicons name="cart-outline" size={24} color={focused ? "#FF6B6B" : "#CCCCCC"} />
+            <Ionicons name="settings-outline" size={24} color={focused ? "#FF6B6B" : "#CCCCCC"} />
           ),
         }}
       />
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
     borderRadius: 30,
-    backgroundColor: "#FF6B6B", // Teal color matching the order button
+    backgroundColor: "#FF6B6B", // main color matching the focus button
     justifyContent: "center",
     alignItems: "center",
     shadowColor: "#000",

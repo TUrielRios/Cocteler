@@ -14,7 +14,7 @@ export const getLocalImage = (imagePath) => {
       "../assets/images/cocktails/OldFashioned.png": require("../assets/images/cocktails/OldFashioned.png"),
       "../assets/images/cocktails/MaiTai.png": require("../assets/images/cocktails/MaiTai.png"),
       "../assets/images/cocktails/NewYorkSour.png": require("../assets/images/cocktails/NewYorkSour.png"),
-
+      "../assets/images/cocktails/CubaLibre.png": require("../assets/images/cocktails/CubaLibre.png"),
       "../assets/images/cocktails/Daiquiri.png": require("../assets/images/cocktails/Daiquiri.png"),
       "../assets/images/cocktails/Penicillin.png": require("../assets/images/cocktails/Penicillin.png"),
       "../assets/images/cocktails/WhiskeySour.png": require("../assets/images/cocktails/WhiskeySour.png"),
@@ -22,6 +22,14 @@ export const getLocalImage = (imagePath) => {
       "../assets/images/cocktails/BloodyMary.png": require("../assets/images/cocktails/BloodyMary.png"),
       "../assets/images/cocktails/BasilSmash.png": require("../assets/images/cocktails/BasilSmash.png"),
       "../assets/images/cocktails/Caipirinha.png": require("../assets/images/cocktails/Caipirinha.png"),
+      "../assets/images/cocktails/DirtyMartini.png": require("../assets/images/cocktails/DirtyMartini.png"),
+      "../assets/images/cocktails/CloverClub.png": require("../assets/images/cocktails/CloverClub.png"),
+      "../assets/images/cocktails/EspressoMartini.png": require("../assets/images/cocktails/EspressoMartini.png"),
+      "../assets/images/cocktails/Gimlet.png": require("../assets/images/cocktails/gimlet.png"),
+      "../assets/images/cocktails/BlackRussian.png": require("../assets/images/cocktails/BlackRussian.png"),
+
+
+
 
 
 

@@ -1,11 +1,11 @@
 "use client"
 
-import { useState } from "react"
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Image, Dimensions } from "react-native"
+import { useState, useRef, useEffect } from "react"
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Image, Dimensions, Animated } from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { Ionicons } from "@expo/vector-icons"
-import TexturedBackground from "../components/TexturedBackground"
 import { useOnboarding } from "../context/OnboardingContext"
+import { LinearGradient } from "expo-linear-gradient"
 
 const { width } = Dimensions.get("window")
 const cardWidth = (width - 60) / 2 // Two cards per row with margins
@@ -55,6 +55,26 @@ export default function FavoriteBaseScreen({ navigation }) {
   const { updatePreferences } = useOnboarding()
   const [selectedBase, setSelectedBase] = useState(null)
 
+  // Animation values
+  const fadeAnim = useRef(new Animated.Value(0)).current
+  const slideAnim = useRef(new Animated.Value(30)).current
+
+  useEffect(() => {
+    // Fade in animation
+    Animated.parallel([
+      Animated.timing(fadeAnim, {
+        toValue: 1,
+        duration: 800,
+        useNativeDriver: true,
+      }),
+      Animated.timing(slideAnim, {
+        toValue: 0,
+        duration: 600,
+        useNativeDriver: true,
+      }),
+    ]).start()
+  }, [])
+
   // Handle continue button press
   const handleContinue = () => {
     if (selectedBase) {
@@ -89,30 +109,46 @@ export default function FavoriteBaseScreen({ navigation }) {
 
   return (
     <View style={[styles.container, { paddingTop: insets.top }]}>
-      <TexturedBackground textureType="pinkLight" style={styles.header}>
+      <LinearGradient colors={["#A8CABA", "#5D8466"]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={styles.header}>
         <Text style={styles.headerTitle}>Favorite Base</Text>
         <Text style={styles.headerSubtitle}>What's your preferred spirit?</Text>
-      </TexturedBackground>
+        <Image source={{ uri: "https://cdn-icons-png.flaticon.com/128/2738/2738639.png" }} style={styles.headerIcon} />
+      </LinearGradient>
 
       <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
-        <View style={styles.instructionContainer}>
-          <Text style={styles.instructionText}>
-            Select your favorite base spirit. We'll use this to recommend cocktails you'll enjoy.
-          </Text>
-        </View>
+        <Animated.View
+          style={{
+            opacity: fadeAnim,
+            transform: [{ translateY: slideAnim }],
+          }}
+        >
+          <View style={styles.instructionContainer}>
+            <Ionicons name="information-circle" size={24} color="#5D8466" style={styles.instructionIcon} />
+            <Text style={styles.instructionText}>
+              Select your favorite base spirit. We'll use this to recommend cocktails you'll enjoy.
+            </Text>
+          </View>
 
-        <View style={styles.baseGrid}>{baseOptions.map(renderBaseCard)}</View>
+          <View style={styles.baseGrid}>{baseOptions.map(renderBaseCard)}</View>
 
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity
-            style={[styles.continueButton, !selectedBase && styles.continueButtonDisabled]}
-            onPress={handleContinue}
-            disabled={!selectedBase}
-          >
-            <Text style={styles.continueButtonText}>Continue</Text>
-            <Ionicons name="arrow-forward" size={20} color="#FFFFFF" style={styles.buttonIcon} />
-          </TouchableOpacity>
-        </View>
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity
+              style={[styles.continueButton, !selectedBase && styles.continueButtonDisabled]}
+              onPress={handleContinue}
+              disabled={!selectedBase}
+            >
+              <LinearGradient
+                colors={selectedBase ? ["#5D8466", "#7DA990"] : ["#CCCCCC", "#AAAAAA"]}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 0 }}
+                style={styles.buttonGradient}
+              >
+                <Text style={styles.continueButtonText}>Continue</Text>
+                <Ionicons name="arrow-forward" size={20} color="#FFFFFF" style={styles.buttonIcon} />
+              </LinearGradient>
+            </TouchableOpacity>
+          </View>
+        </Animated.View>
       </ScrollView>
 
       {/* Progress indicator */}
@@ -136,45 +172,64 @@ const styles = StyleSheet.create({
     paddingVertical: 25,
     borderBottomLeftRadius: 30,
     borderBottomRightRadius: 30,
+    position: "relative",
+    overflow: "hidden",
   },
   headerTitle: {
     fontSize: 32,
     fontWeight: "bold",
-    color: "#4A3F41",
+    color: "#FFFFFF",
     marginBottom: 8,
     // In a real app, we would use a custom font
     // fontFamily: "Playfair Display",
     letterSpacing: 0.5,
+    textShadowColor: "rgba(0, 0, 0, 0.1)",
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 3,
   },
   headerSubtitle: {
     fontSize: 16,
-    color: "#6B5E62",
+    color: "#FFFFFF",
     // In a real app, we would use a custom font
     // fontFamily: "Poppins",
     letterSpacing: 0.2,
+    opacity: 0.9,
+  },
+  headerIcon: {
+    position: "absolute",
+    right: 20,
+    bottom: -15,
+    width: 80,
+    height: 80,
+    opacity: 0.3,
   },
   content: {
     flex: 1,
     padding: 20,
   },
   instructionContainer: {
-    marginBottom: 30,
-    backgroundColor: "rgba(255, 255, 255, 0.8)",
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "rgba(255, 255, 255, 0.9)",
     borderRadius: 15,
     padding: 15,
-    shadowColor: "#000",
+    marginBottom: 25,
+    shadowColor: "#5D8466",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 2,
+    shadowRadius: 8,
+    elevation: 4,
+  },
+  instructionIcon: {
+    marginRight: 10,
   },
   instructionText: {
-    fontSize: 16,
+    flex: 1,
+    fontSize: 15,
     color: "#4A3F41",
-    lineHeight: 24,
+    lineHeight: 22,
     // In a real app, we would use a custom font
     // fontFamily: "Poppins",
-    textAlign: "center",
   },
   baseGrid: {
     flexDirection: "row",
@@ -183,7 +238,7 @@ const styles = StyleSheet.create({
   },
   baseCard: {
     width: cardWidth,
-    backgroundColor: "rgba(255, 255, 255, 0.8)",
+    backgroundColor: "rgba(255, 255, 255, 0.9)",
     borderRadius: 15,
     padding: 15,
     marginBottom: 20,
@@ -194,9 +249,12 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 2,
     position: "relative",
+    borderWidth: 1,
+    borderColor: "rgba(0,0,0,0.05)",
   },
   baseCardSelected: {
-    backgroundColor: "#FF6B6B",
+    backgroundColor: "#5D8466",
+    borderColor: "#5D8466",
   },
   baseIconContainer: {
     width: 60,
@@ -206,6 +264,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginBottom: 10,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 3,
+    elevation: 2,
   },
   baseIconContainerSelected: {
     backgroundColor: "rgba(255, 255, 255, 0.9)",
@@ -245,20 +308,22 @@ const styles = StyleSheet.create({
     marginBottom: 40,
   },
   continueButton: {
-    backgroundColor: "#FF6B6B",
     borderRadius: 30,
-    paddingVertical: 16,
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    shadowColor: "#000",
+    overflow: "hidden",
+    shadowColor: "#5D8466",
     shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.15,
+    shadowOpacity: 0.3,
     shadowRadius: 8,
     elevation: 6,
   },
   continueButtonDisabled: {
-    backgroundColor: "#CCCCCC",
+    opacity: 0.8,
+  },
+  buttonGradient: {
+    paddingVertical: 16,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
   },
   continueButtonText: {
     color: "#FFFFFF",
@@ -285,7 +350,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
   },
   progressDotActive: {
-    backgroundColor: "#FF6B6B",
+    backgroundColor: "#5D8466",
     width: 12,
     height: 12,
     borderRadius: 6,

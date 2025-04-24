@@ -8,6 +8,7 @@ import { FavoritesProvider } from "./context/favoritesContext"
 import { OnboardingProvider, useOnboarding } from "./context/OnboardingContext"
 import TabNavigator from "./navigation/TabNavigator"
 import CocktailDetailScreen from "./screens/CocktailDetailScreen"
+import CollectionDetailScreen from "./screens/CollectionDetailScreen"
 import WelcomeScreen from "./screens/WelcomeScreen"
 import NameInputScreen from "./screens/NameInputScreen"
 import TastePreferencesScreen from "./screens/TastePreferenceScreen"
@@ -29,21 +30,29 @@ function AppNavigator() {
   }
 
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
-      {!onboardingCompleted ? (
-        // Onboarding flow
-        <>
-          <Stack.Screen name="Welcome" component={WelcomeScreen} />
-          <Stack.Screen name="NameInput" component={NameInputScreen} />
-          <Stack.Screen name="TastePreferences" component={TastePreferencesScreen} />
-          <Stack.Screen name="FavoriteBase" component={FavoriteBaseScreen} />
-          <Stack.Screen name="OccasionPreferences" component={OccasionPreferencesScreen} />
-        </>
-      ) : null}
+    <Stack.Navigator
+      screenOptions={{ headerShown: false }}
+      initialRouteName={onboardingCompleted ? "MainTabs" : "Welcome"}
+    >
+      {/* Always include onboarding screens, but they'll only be the initial route when onboardingCompleted is false */}
+      <Stack.Screen name="Welcome" component={WelcomeScreen} />
+      <Stack.Screen name="NameInput" component={NameInputScreen} />
+      <Stack.Screen name="FavoriteBase" component={FavoriteBaseScreen} />
+      <Stack.Screen name="OccasionPreferences" component={OccasionPreferencesScreen} />
+
       <Stack.Screen name="MainTabs" component={TabNavigator} />
+      <Stack.Screen name="TastePreferences" component={TastePreferencesScreen} />
       <Stack.Screen
         name="CocktailDetail"
         component={CocktailDetailScreen}
+        options={{
+          cardStyle: { backgroundColor: "transparent" },
+          presentation: "modal",
+        }}
+      />
+      <Stack.Screen
+        name="CollectionDetail"
+        component={CollectionDetailScreen}
         options={{
           cardStyle: { backgroundColor: "transparent" },
           presentation: "modal",

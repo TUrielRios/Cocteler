@@ -10,10 +10,13 @@ import { LinearGradient } from "expo-linear-gradient"
 const { width } = Dimensions.get("window")
 const SLIDER_WIDTH = width - 100
 
-export default function TastePreferencesScreen({ navigation }) {
+// Update the TastePreferencesScreen to handle navigation differently when accessed from Settings
+
+export default function TastePreferencesScreen({ navigation, route }) {
   const insets = useSafeAreaInsets()
-  const { updatePreferences } = useOnboarding()
+  const { updatePreferences, userPreferences } = useOnboarding()
   const fadeAnim = useRef(new Animated.Value(0)).current
+  const fromSettings = route.params?.fromSettings
 
   // Taste preferences state
   const [tastePreferences, setTastePreferences] = useState({
@@ -30,6 +33,22 @@ export default function TastePreferencesScreen({ navigation }) {
     bitter: useRef(new Animated.Value(2)).current,
     spicy: useRef(new Animated.Value(2)).current,
   }
+
+  // Load existing preferences if coming from settings
+  useEffect(() => {
+    if (fromSettings) {
+      if (userPreferences?.tastePreferences) {
+        setTastePreferences(userPreferences.tastePreferences)
+
+        // Update slider animations
+        Object.keys(userPreferences.tastePreferences).forEach((key) => {
+          if (sliderAnims[key]) {
+            sliderAnims[key].setValue(userPreferences.tastePreferences[key])
+          }
+        })
+      }
+    }
+  }, [fromSettings, userPreferences])
 
   // Taste icons and colors
   const tasteConfig = {
@@ -80,10 +99,17 @@ export default function TastePreferencesScreen({ navigation }) {
     }).start()
   }
 
-  // Handle continue button press
+  // Handle continue button press - update for settings flow
   const handleContinue = () => {
     updatePreferences({ tastePreferences })
-    navigation.navigate("FavoriteBase")
+
+    if (fromSettings) {
+      // If coming from settings, go back to settings
+      navigation.goBack()
+    } else {
+      // Normal onboarding flow
+      navigation.navigate("FavoriteBase")
+    }
   }
 
   // Calculate the width percentage for the fill based on the value (0-5)
@@ -161,8 +187,16 @@ export default function TastePreferencesScreen({ navigation }) {
     )
   }
 
+  // Add a back button when accessed from Settings
+
   return (
     <View style={[styles.container, { paddingTop: insets.top }]}>
+      {fromSettings && (
+        <TouchableOpacity style={[styles.backButton, { top: insets.top + 10 }]} onPress={() => navigation.goBack()}>
+          <Ionicons name="arrow-back" size={24} color="#FFFFFF" />
+        </TouchableOpacity>
+      )}
+
       <LinearGradient colors={["#FF9A9E", "#FECFEF"]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={styles.header}>
         <Text style={styles.headerTitle}>Taste Preferences</Text>
         <Text style={styles.headerSubtitle}>Tell us what you like</Text>
@@ -191,8 +225,13 @@ export default function TastePreferencesScreen({ navigation }) {
                 end={{ x: 1, y: 0 }}
                 style={styles.buttonGradient}
               >
-                <Text style={styles.continueButtonText}>Continue</Text>
-                <Ionicons name="arrow-forward" size={20} color="#FFFFFF" style={styles.buttonIcon} />
+                <Text style={styles.continueButtonText}>{fromSettings ? "Save Changes" : "Continue"}</Text>
+                <Ionicons
+                  name={fromSettings ? "checkmark" : "arrow-forward"}
+                  size={20}
+                  color="#FFFFFF"
+                  style={styles.buttonIcon}
+                />
               </LinearGradient>
             </TouchableOpacity>
           </View>
@@ -210,10 +249,23 @@ export default function TastePreferencesScreen({ navigation }) {
   )
 }
 
+// Add back button styles
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#FFF5F5",
+  },
+  backButton: {
+    position: "absolute",
+    left: 15,
+    zIndex: 110,
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: "rgba(0,0,0,0.3)",
+    alignItems: "center",
+    justifyContent: "center",
   },
   header: {
     paddingHorizontal: 20,

@@ -37,8 +37,8 @@ export default function BottomNavigation() {
         <Ionicons name="heart-outline" size={24} color={getIconColor("Favorites")} />
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.tabItem} onPress={() => navigation.navigate("Cart")}>
-        <Ionicons name="cart-outline" size={24} color={getIconColor("Cart")} />
+      <TouchableOpacity style={styles.tabItem} onPress={() => navigation.navigate("Settings")}>
+        <Ionicons name="settings-outline" size={24} color={getIconColor("Settings")} />
       </TouchableOpacity>
     </View>
   )
@@ -47,7 +47,7 @@ export default function BottomNavigation() {
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
-    height: 90,
+    height: 60,
     backgroundColor: "white",
     borderTopWidth: 1,
     borderTopColor: "#F0F0F0",
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
     borderRadius: 30,
-    backgroundColor: "#FF6B6B", // Teal color matching the order button
+    backgroundColor: "#26C6B9", // Teal color matching the order button
     justifyContent: "center",
     alignItems: "center",
     shadowColor: "#000",

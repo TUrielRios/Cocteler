@@ -1,11 +1,11 @@
 "use client"
 
-import { useState } from "react"
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Dimensions } from "react-native"
+import { useState, useRef, useEffect } from "react"
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Dimensions, Animated, Image } from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { Ionicons } from "@expo/vector-icons"
-import TexturedBackground from "../components/TexturedBackground"
 import { useOnboarding } from "../context/OnboardingContext"
+import { LinearGradient } from "expo-linear-gradient"
 
 const { width } = Dimensions.get("window")
 
@@ -58,6 +58,26 @@ export default function OccasionPreferencesScreen({ navigation }) {
   const { completeOnboarding } = useOnboarding()
   const [selectedOccasions, setSelectedOccasions] = useState([])
 
+  // Animation values
+  const fadeAnim = useRef(new Animated.Value(0)).current
+  const slideAnim = useRef(new Animated.Value(30)).current
+
+  useEffect(() => {
+    // Fade in animation
+    Animated.parallel([
+      Animated.timing(fadeAnim, {
+        toValue: 1,
+        duration: 800,
+        useNativeDriver: true,
+      }),
+      Animated.timing(slideAnim, {
+        toValue: 0,
+        duration: 600,
+        useNativeDriver: true,
+      }),
+    ]).start()
+  }, [])
+
   // Toggle occasion selection
   const toggleOccasion = (id) => {
     setSelectedOccasions((prev) => {
@@ -97,31 +117,47 @@ export default function OccasionPreferencesScreen({ navigation }) {
 
   return (
     <View style={[styles.container, { paddingTop: insets.top }]}>
-      <TexturedBackground textureType="pinkLight" style={styles.header}>
+      <LinearGradient colors={["#FF9A9E", "#FF6B6B"]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={styles.header}>
         <Text style={styles.headerTitle}>Occasions</Text>
         <Text style={styles.headerSubtitle}>When do you enjoy cocktails?</Text>
-      </TexturedBackground>
+        <Image source={{ uri: "https://cdn-icons-png.flaticon.com/128/2674/2674883.png" }} style={styles.headerIcon} />
+      </LinearGradient>
 
       <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
-        <View style={styles.instructionContainer}>
-          <Text style={styles.instructionText}>
-            Select the occasions when you typically enjoy cocktails. This helps us recommend the perfect drinks for your
-            lifestyle.
-          </Text>
-        </View>
+        <Animated.View
+          style={{
+            opacity: fadeAnim,
+            transform: [{ translateY: slideAnim }],
+          }}
+        >
+          <View style={styles.instructionContainer}>
+            <Ionicons name="information-circle" size={24} color="#FF6B6B" style={styles.instructionIcon} />
+            <Text style={styles.instructionText}>
+              Select the occasions when you typically enjoy cocktails. This helps us recommend the perfect drinks for
+              your lifestyle.
+            </Text>
+          </View>
 
-        <View style={styles.occasionsContainer}>{occasionOptions.map(renderOccasionOption)}</View>
+          <View style={styles.occasionsContainer}>{occasionOptions.map(renderOccasionOption)}</View>
 
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.finishButton} onPress={handleFinish}>
-            <Text style={styles.finishButtonText}>Finish</Text>
-            <Ionicons name="checkmark-circle" size={20} color="#FFFFFF" style={styles.buttonIcon} />
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity style={styles.finishButton} onPress={handleFinish}>
+              <LinearGradient
+                colors={["#FF6B6B", "#FF8E8E"]}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 0 }}
+                style={styles.buttonGradient}
+              >
+                <Text style={styles.finishButtonText}>Finish</Text>
+                <Ionicons name="checkmark-circle" size={20} color="#FFFFFF" style={styles.buttonIcon} />
+              </LinearGradient>
+            </TouchableOpacity>
+          </View>
+
+          <TouchableOpacity style={styles.skipButton} onPress={() => navigation.navigate("MainTabs")}>
+            <Text style={styles.skipButtonText}>Skip this step</Text>
           </TouchableOpacity>
-        </View>
-
-        <TouchableOpacity style={styles.skipButton} onPress={() => navigation.navigate("MainTabs")}>
-          <Text style={styles.skipButtonText}>Skip this step</Text>
-        </TouchableOpacity>
+        </Animated.View>
       </ScrollView>
 
       {/* Progress indicator */}
@@ -145,42 +181,62 @@ const styles = StyleSheet.create({
     paddingVertical: 25,
     borderBottomLeftRadius: 30,
     borderBottomRightRadius: 30,
+    position: "relative",
+    overflow: "hidden",
   },
   headerTitle: {
     fontSize: 32,
     fontWeight: "bold",
-    color: "#4A3F41",
+    color: "#FFFFFF",
     marginBottom: 8,
     // In a real app, we would use a custom font
     // fontFamily: "Playfair Display",
     letterSpacing: 0.5,
+    textShadowColor: "rgba(0, 0, 0, 0.1)",
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 3,
   },
   headerSubtitle: {
     fontSize: 16,
-    color: "#6B5E62",
+    color: "#FFFFFF",
     // In a real app, we would use a custom font
     // fontFamily: "Poppins",
     letterSpacing: 0.2,
+    opacity: 0.9,
+  },
+  headerIcon: {
+    position: "absolute",
+    right: 20,
+    bottom: -15,
+    width: 80,
+    height: 80,
+    opacity: 0.3,
   },
   content: {
     flex: 1,
     padding: 20,
   },
   instructionContainer: {
-    marginBottom: 30,
-    backgroundColor: "rgba(255, 255, 255, 0.8)",
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "rgba(255, 255, 255, 0.9)",
     borderRadius: 15,
     padding: 15,
-    shadowColor: "#000",
+    marginBottom: 25,
+    shadowColor: "#FF6B6B",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 2,
+    shadowRadius: 8,
+    elevation: 4,
+  },
+  instructionIcon: {
+    marginRight: 10,
   },
   instructionText: {
-    fontSize: 16,
+    flex: 1,
+    fontSize: 15,
     color: "#4A3F41",
-    lineHeight: 24,
+    lineHeight: 22,
     // In a real app, we would use a custom font
     // fontFamily: "Poppins",
     textAlign: "center",
@@ -191,7 +247,7 @@ const styles = StyleSheet.create({
   occasionOption: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "rgba(255, 255, 255, 0.8)",
+    backgroundColor: "rgba(255, 255, 255, 0.9)",
     borderRadius: 15,
     padding: 15,
     marginBottom: 10,
@@ -200,9 +256,12 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 2,
+    borderWidth: 1,
+    borderColor: "rgba(0,0,0,0.05)",
   },
   occasionOptionSelected: {
     backgroundColor: "#FF6B6B",
+    borderColor: "#FF6B6B",
   },
   occasionIcon: {
     marginRight: 15,
@@ -226,17 +285,19 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   finishButton: {
-    backgroundColor: "#FF6B6B",
     borderRadius: 30,
+    overflow: "hidden",
+    shadowColor: "#FF6B6B",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    elevation: 6,
+  },
+  buttonGradient: {
     paddingVertical: 16,
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.15,
-    shadowRadius: 8,
-    elevation: 6,
   },
   finishButtonText: {
     color: "#FFFFFF",

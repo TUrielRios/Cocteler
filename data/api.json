@@ -349,7 +349,7 @@
       "price": 13,
       "image": "https://www.thecocktaildb.com/images/media/drink/wmkbfj1606853905.jpg",
       "imageLocal": "require('../assets/images/cocktails/CubaLibre.png')",
-      "backgroundColor": "#D4A76A",
+      "backgroundColor": "#ed830a",
       "description": "The Cuba Libre is a simple yet satisfying cocktail that combines rum, cola, and lime into a refreshing highball. Its name translates to 'Free Cuba,' reflecting its origins during the Cuban War of Independence.",
       "story": "Created around 1900 when Cuba was fighting for independence from Spain, the drink became popular among American soldiers. The addition of Coca-Cola (a new product at the time) to traditional rum and lime created an instant classic that spread worldwide.",
       "ingredients": [
@@ -497,7 +497,7 @@
       "price": 21,
       "image": "https://www.thecocktaildb.com/images/media/drink/61wgch1504882795.jpg",
       "imageLocal": "require('../assets/images/cocktails/NewYorkSour.png')",
-      "backgroundColor": "#f5f4ee",
+      "backgroundColor": "#f8eedf",
       "description": "A whiskey sour with a sophisticated twist - a float of red wine adds depth and visual drama, creating a layered cocktail experience.",
       "story": "An evolution of the classic Whiskey Sour that emerged in late 19th century New York bars. The wine float was likely inspired by the 'continental' practice of adding wine to cocktails, creating what some call 'the most beautiful cocktail in the world.'",
       "ingredients": [
@@ -861,7 +861,7 @@
       "price": 14,
       "image": "https://www.thecocktaildb.com/images/media/drink/2k5gbb1504367689.jpg",
       "imageLocal": "require('../assets/images/cocktails/BlackRussian.png')",
-      "backgroundColor": "#3A3335",
+      "backgroundColor": "#4d0f1e",
       "description": "A simple yet sophisticated combination of vodka and coffee liqueur that creates a smooth, slightly sweet after-dinner drink or nightcap.",
       "story": "Created in 1949 by Gustave Tops at Hotel Metropole in Brussels for Perle Mesta, the American ambassador to Luxembourg. Its name references both the Russian vodka and the dark color during Cold War tensions.",
       "ingredients": [
@@ -1097,7 +1097,7 @@
       "price": 22,
       "image": "https://www.thecocktaildb.com/images/media/drink/n0sx531504372951.jpg",
       "imageLocal": "require('../assets/images/cocktails/EspressoMartini.png')",
-      "backgroundColor": "#3E2723",
+      "backgroundColor": "#b08562",
       "description": "A sophisticated coffee cocktail featuring vodka, fresh espresso, and coffee liqueur, crowned with a luxurious crema layer and coffee bean garnish - the perfect after-dinner energizer.",
       "story": "Invented in 1983 by Dick Bradsell at London's Soho Brasserie for a model who requested a drink that would 'wake me up and then fuck me up.' Originally called 'Vodka Espresso,' it became a global phenomenon in the 1990s club scene.",
       "ingredients": [

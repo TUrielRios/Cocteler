@@ -20,9 +20,34 @@ import BottomNavigation from "../components/BottomNavigation"
 import StarRating from "../components/StarRating"
 import FavoriteButton from "../components/FavoriteButton"
 import cocktailsData from "../data/api.json"
+import { LinearGradient } from "expo-linear-gradient"
 
 const { width } = Dimensions.get("window")
 const cardWidth = width * 0.7 // Card width for horizontal scroll
+
+// Replace the lightenColor function with this new function that creates a very soft tint
+const createSoftTint = (color, intensity = 0.5) => {
+  // If color is not in hex format or not provided, return white
+  if (!color || !color.startsWith("#")) {
+    return "#FFFFFF"
+  }
+
+  // Remove the # if it exists
+  color = color.replace("#", "")
+
+  // Parse the hex values
+  let r = Number.parseInt(color.substring(0, 2), 16)
+  let g = Number.parseInt(color.substring(2, 4), 16)
+  let b = Number.parseInt(color.substring(4, 6), 16)
+
+  // Create a very soft tint by mixing with white
+  r = Math.round(255 - (255 - r) * intensity)
+  g = Math.round(255 - (255 - g) * intensity)
+  b = Math.round(255 - (255 - b) * intensity)
+
+  // Convert back to hex
+  return `#${r.toString(16).padStart(2, "0")}${g.toString(16).padStart(2, "0")}${b.toString(16).padStart(2, "0")}`
+}
 
 export default function SearchScreen({ navigation }) {
   const insets = useSafeAreaInsets()
@@ -144,29 +169,38 @@ export default function SearchScreen({ navigation }) {
     setSearchResults(results)
   }, [searchText])
 
-  // Render a cocktail card for horizontal scroll
+  // Update the renderCocktailCard function to use white to soft tint gradient
   const renderCocktailCard = ({ item }) => {
     // Get the local image for the cocktail
     const localImagePath = item.imageLocal?.replace("require('", "").replace("')", "")
     const cocktailImage = getLocalImage(localImagePath)
+
+    // Get the background color from the cocktail data or use a default
+    const baseColor = item.backgroundColor || "#F9F9F9"
+    // Create a very soft tint for the gradient
+    const softTint = createSoftTint(baseColor, 0.3)
 
     return (
       <TouchableOpacity
         style={styles.cocktailCard}
         onPress={() => navigation.navigate("CocktailDetail", { cocktail: item })}
       >
-        <TexturedBackground textureType="subtle" style={styles.cocktailCardBg}>
+        <LinearGradient
+          colors={["#FFFFFF", softTint]}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 1 }}
+          style={styles.cocktailCardBg}
+        >
+          <View style={styles.cocktailCardFooter}>
+            <FavoriteButton cocktailId={item.id} size={18} />
+          </View>
           <Image source={cocktailImage} style={styles.cocktailCardImage} resizeMode="contain" />
           <View style={styles.cocktailCardContent}>
             <Text style={styles.cocktailCardName}>{item.name}</Text>
             <Text style={styles.cocktailCardCategory}>{item.category}</Text>
             <StarRating rating={item.rating} size={14} />
-            <View style={styles.cocktailCardFooter}>
-              <Text style={styles.cocktailCardAlcohol}>{item.alcoholContent}</Text>
-              <FavoriteButton cocktailId={item.id} size={18} />
-            </View>
           </View>
-        </TexturedBackground>
+        </LinearGradient>
       </TouchableOpacity>
     )
   }
@@ -199,7 +233,7 @@ export default function SearchScreen({ navigation }) {
     )
   }
 
-  // Render search results
+  // Update the search results rendering to also use white to soft tint gradients
   const renderSearchResults = () => {
     if (searchText.trim() === "") return null
 
@@ -211,24 +245,36 @@ export default function SearchScreen({ navigation }) {
 
         {searchResults.length > 0 ? (
           <View style={styles.searchResultsGrid}>
-            {searchResults.map((cocktail) => (
-              <TouchableOpacity
-                key={cocktail.id}
-                style={styles.searchResultCard}
-                onPress={() => navigation.navigate("CocktailDetail", { cocktail })}
-              >
-                <TexturedBackground textureType="subtle" style={styles.searchResultCardBg}>
-                  <Image
-                    source={getLocalImage(cocktail.imageLocal?.replace("require('", "").replace("')", ""))}
-                    style={styles.searchResultCardImage}
-                    resizeMode="contain"
-                  />
-                  <Text style={styles.searchResultCardName}>{cocktail.name}</Text>
-                  <Text style={styles.searchResultCardCategory}>{cocktail.category}</Text>
-                  <FavoriteButton cocktailId={cocktail.id} size={18} style={styles.searchResultFavorite} />
-                </TexturedBackground>
-              </TouchableOpacity>
-            ))}
+            {searchResults.map((cocktail) => {
+              // Get the background color from the cocktail data or use a default
+              const baseColor = cocktail.backgroundColor || "#F9F9F9"
+              // Create a very soft tint for the gradient
+              const softTint = createSoftTint(baseColor, 0.9)
+
+              return (
+                <TouchableOpacity
+                  key={cocktail.id}
+                  style={styles.searchResultCard}
+                  onPress={() => navigation.navigate("CocktailDetail", { cocktail })}
+                >
+                  <LinearGradient
+                    colors={["#FFFFFF", softTint]}
+                    start={{ x: 0, y: 0 }}
+                    end={{ x: 1, y: 1 }}
+                    style={styles.searchResultCardBg}
+                  >
+                    <Image
+                      source={getLocalImage(cocktail.imageLocal?.replace("require('", "").replace("')", ""))}
+                      style={styles.searchResultCardImage}
+                      resizeMode="contain"
+                    />
+                    <Text style={styles.searchResultCardName}>{cocktail.name}</Text>
+                    <Text style={styles.searchResultCardCategory}>{cocktail.category}</Text>
+                    <FavoriteButton cocktailId={cocktail.id} size={18} style={styles.searchResultFavorite} />
+                  </LinearGradient>
+                </TouchableOpacity>
+              )
+            })}
           </View>
         ) : (
           <TexturedBackground textureType="pinkLight" style={styles.noResultsContainer}>
@@ -246,8 +292,7 @@ export default function SearchScreen({ navigation }) {
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
         {/* Header */}
         <TexturedBackground textureType="pinkLight" style={styles.header}>
-          <Text style={styles.headerTitle}>Discover</Text>
-          <Text style={styles.headerSubtitle}>Find your perfect cocktail</Text>
+          
         </TexturedBackground>
 
         {/* Search bar */}
@@ -318,7 +363,7 @@ const styles = StyleSheet.create({
   },
   searchContainer: {
     paddingHorizontal: 20,
-    marginTop: 10,
+    marginTop: -25,
   },
   searchBar: {
     flexDirection: "row",
@@ -388,7 +433,7 @@ const styles = StyleSheet.create({
     paddingRight: 10,
   },
   cocktailCard: {
-    width: 170,
+    width: 155,
     marginRight: 15,
     borderRadius: 15,
     overflow: "hidden",
@@ -402,6 +447,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     padding: 15,
     height: 250,
+    position: "relative",
   },
   cocktailCardImage: {
     width: 120,
@@ -413,65 +459,23 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   cocktailCardName: {
-    fontSize: 18,
-    fontWeight: "600",
+    fontSize: 14,
+    fontWeight: "700",
     color: "#4A3F41",
     marginBottom: 4,
-    // In a real app, we would use a custom font
-    // fontFamily: "Playfair Display",
     letterSpacing: 0.2,
   },
   cocktailCardCategory: {
-    fontSize: 12,
+    fontSize: 10,
     color: "#6B5E62",
     marginBottom: 8,
-    // In a real app, we would use a custom font
-    // fontFamily: "Poppins",
+    letterSpacing: 0.2,
   },
   cocktailCardFooter: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginTop: 8,
-  },
-  cocktailCardPrice: {
-    fontSize: 16,
-    fontWeight: "600",
-    color: "#FF6B6B",
-    // In a real app, we would use a custom font
-    // fontFamily: "Poppins",
-  },
-  cocktailCardBadge: {
-    backgroundColor: "#FFF0F0",
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: "#FFCACA",
-  },
-  cocktailCardBadgeText: {
-    fontSize: 10,
-    color: "#FF6B6B",
-    fontWeight: "500",
-    // In a real app, we would use a custom font
-    // fontFamily: "Poppins",
-  },
-  searchResultsContainer: {
-    padding: 20,
-  },
-  searchResultsTitle: {
-    fontSize: 18,
-    fontWeight: "600",
-    color: "#4A3F41",
-    marginBottom: 15,
-    // In a real app, we would use a custom font
-    // fontFamily: "Playfair Display",
-    letterSpacing: 0.3,
-  },
-  searchResultsGrid: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "space-between",
+    position: "absolute",
+    top: 10,
+    right: 10,
+    zIndex: 10,
   },
   searchResultCard: {
     width: (width - 50) / 2,
@@ -489,6 +493,7 @@ const styles = StyleSheet.create({
     padding: 15,
     alignItems: "center",
     height: 160,
+    position: "relative",
   },
   searchResultCardImage: {
     width: 80,
@@ -501,16 +506,17 @@ const styles = StyleSheet.create({
     color: "#4A3F41",
     textAlign: "center",
     marginBottom: 4,
-    // In a real app, we would use a custom font
-    // fontFamily: "Playfair Display",
     letterSpacing: 0.2,
   },
   searchResultCardCategory: {
     fontSize: 12,
     color: "#6B5E62",
     textAlign: "center",
-    // In a real app, we would use a custom font
-    // fontFamily: "Poppins",
+  },
+  searchResultFavorite: {
+    position: "absolute",
+    top: 10,
+    right: 10,
   },
   noResultsContainer: {
     borderRadius: 15,

@@ -1,24 +1,75 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { View, Text, StyleSheet, ScrollView, Image, TouchableOpacity, Dimensions, Platform } from "react-native"
+import { useState, useEffect, useRef } from "react"
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  Image,
+  TouchableOpacity,
+  Dimensions,
+  Platform,
+  Animated,
+} from "react-native"
+import TexturedBackground from "../components/TexturedBackground"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { Ionicons } from "@expo/vector-icons"
-import TexturedBackground from "../components/TexturedBackground"
+import { LinearGradient } from "expo-linear-gradient"
 import { getLocalImage } from "../utils/imageMapping"
 import { useOnboarding } from "../context/OnboardingContext"
+import { useFavorites } from "../context/favoritesContext"
 import cocktailsData from "../data/api.json"
 
 // Get screen dimensions
 const { width } = Dimensions.get("window")
 const cardWidth = width - 40 // Card width with margins
 
+// Category data
+const categories = [
+  {
+    id: "citrus",
+    name: "Citrus",
+    icon: "nutrition-outline",
+    gradient: ["#FF9E7A", "#FFCA80"],
+    description: "Zesty & refreshing",
+  },
+  {
+    id: "beer",
+    name: "Beer",
+    icon: "beer-outline",
+    gradient: ["#60A5FA", "#93C5FD"],
+    description: "Hoppy & malty",
+  },
+  {
+    id: "exotic",
+    name: "Exotic",
+    icon: "globe-outline",
+    gradient: ["#A78BFA", "#C4B5FD"],
+    description: "Unique flavors",
+  },
+  {
+    id: "vegan",
+    name: "Vegan",
+    icon: "leaf-outline",
+    gradient: ["#34D399", "#6EE7B7"],
+    description: "Plant-based",
+  },
+]
+
 export default function HomeScreen({ navigation }) {
   const [cocktails, setCocktails] = useState([])
   const [featuredCocktail, setFeaturedCocktail] = useState(null)
   const [activeTab, setActiveTab] = useState("Recommended")
+  const [selectedCategory, setSelectedCategory] = useState(null)
   const insets = useSafeAreaInsets()
   const { userPreferences } = useOnboarding()
+  const { favorites } = useFavorites()
+
+  // Animation values
+  const scrollY = useRef(new Animated.Value(0)).current
+  const fadeAnim = useRef(new Animated.Value(0)).current
+  const categoryAnimations = useRef(categories.map(() => new Animated.Value(0))).current
 
   // Tabs for filtering
   const tabs = ["Recommended", "Popular", "Newest"]
@@ -31,51 +82,128 @@ export default function HomeScreen({ navigation }) {
     // Get the rest of the cocktails
     const otherCocktails = cocktailsData.filter((cocktail) => cocktail.name !== "Union Square")
     setCocktails(otherCocktails)
+
+    // Fade in animation
+    Animated.timing(fadeAnim, {
+      toValue: 1,
+      duration: 800,
+      useNativeDriver: true,
+    }).start()
+
+    // Staggered animation for categories
+    Animated.stagger(
+      100,
+      categoryAnimations.map((anim) =>
+        Animated.spring(anim, {
+          toValue: 1,
+          friction: 6,
+          tension: 40,
+          useNativeDriver: true,
+        }),
+      ),
+    ).start()
   }, [])
 
-  // Filter cocktails based on active tab
+  // Filter cocktails based on active tab and limit to 5
   const getFilteredCocktails = () => {
+    let filtered = [...cocktails]
+
+    // Apply category filter if selected
+    if (selectedCategory) {
+      filtered = filtered.filter((cocktail) => {
+        if (selectedCategory === "citrus") return cocktail.category === "Citrus"
+        if (selectedCategory === "beer") return cocktail.name.toLowerCase().includes("beer")
+        if (selectedCategory === "exotic") return cocktail.category === "Exotic"
+        if (selectedCategory === "vegan") return !cocktail.ingredients.some((i) => i.name.includes("Cream"))
+        return true
+      })
+    }
+
+    // Apply tab filter
     switch (activeTab) {
       case "Popular":
-        return [...cocktails].sort((a, b) => b.rating - a.rating)
+        filtered = filtered.sort((a, b) => b.rating - a.rating)
+        break
       case "Newest":
-        return [...cocktails].reverse()
+        filtered = filtered.reverse()
+        break
       case "Recommended":
       default:
-        return cocktails
+        // For recommended, prioritize based on user preferences if available
+        if (userPreferences.tastePreferences) {
+          filtered = filtered.sort((a, b) => {
+            // Simple algorithm to match user preferences with cocktail taste profiles
+            if (a.taste && b.taste) {
+              const aScore =
+                Math.abs(a.taste.sweet - userPreferences.tastePreferences.sweet) +
+                Math.abs(a.taste.sour - userPreferences.tastePreferences.sour) +
+                Math.abs(a.taste.bitter - userPreferences.tastePreferences.bitter) +
+                Math.abs(a.taste.spicy - userPreferences.tastePreferences.spicy)
+
+              const bScore =
+                Math.abs(b.taste.sweet - userPreferences.tastePreferences.sweet) +
+                Math.abs(b.taste.sour - userPreferences.tastePreferences.sour) +
+                Math.abs(b.taste.bitter - userPreferences.tastePreferences.bitter) +
+                Math.abs(b.taste.spicy - userPreferences.tastePreferences.spicy)
+
+              return aScore - bScore // Lower score means better match
+            }
+            return 0
+          })
+        }
+        break
     }
+
+    // Limit to 5 cocktails
+    return filtered.slice(0, 5)
   }
 
-  // Generate star rating component
-  const renderStars = (rating) => {
-    const stars = []
-    const fullStars = Math.floor(rating)
-    const hasHalfStar = rating - fullStars >= 0.5
+  // Header animation based on scroll
+  const headerOpacity = scrollY.interpolate({
+    inputRange: [0, 100],
+    outputRange: [0, 1],
+    extrapolate: "clamp",
+  })
 
-    for (let i = 0; i < fullStars; i++) {
-      stars.push(<Ionicons key={`full-${i}`} name="star" size={14} color="#FF6B6B" style={styles.star} />)
-    }
-
-    if (hasHalfStar) {
-      stars.push(<Ionicons key="half" name="star-half" size={14} color="#FF6B6B" style={styles.star} />)
-    }
-
-    const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0)
-    for (let i = 0; i < emptyStars; i++) {
-      stars.push(<Ionicons key={`empty-${i}`} name="star-outline" size={14} color="#FFCACA" style={styles.star} />)
-    }
-
-    return stars
+  // Handle category selection
+  const handleCategoryPress = (categoryId) => {
+    setSelectedCategory(selectedCategory === categoryId ? null : categoryId)
   }
 
-  // Render category item
-  const renderCategoryItem = (icon, label, backgroundColor) => (
-    <TouchableOpacity style={styles.categoryItem}>
-      <View style={[styles.categoryIcon, { backgroundColor }]}>
-        <Image source={{ uri: icon }} style={styles.categoryIconImage} />
-      </View>
-      <Text style={styles.categoryText}>{label}</Text>
-    </TouchableOpacity>
+  // Render category item with animated appearance
+  const renderCategoryItem = (category, index) => (
+    <Animated.View
+      key={category.id}
+      style={{
+        opacity: categoryAnimations[index],
+        transform: [
+          {
+            translateY: categoryAnimations[index].interpolate({
+              inputRange: [0, 1],
+              outputRange: [50, 0],
+            }),
+          },
+        ],
+      }}
+    >
+      <TouchableOpacity
+        style={[styles.categoryItem, selectedCategory === category.id && styles.categoryItemSelected]}
+        onPress={() => handleCategoryPress(category.id)}
+      >
+        <LinearGradient
+          colors={category.gradient}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 1 }}
+          style={styles.categoryIcon}
+        >
+          <Ionicons name={category.icon} size={24} color="#FFFFFF" />
+        </LinearGradient>
+        <View style={styles.categoryTextContainer}>
+          <Text style={styles.categoryName}>{category.name}</Text>
+          <Text style={styles.categoryDescription}>{category.description}</Text>
+        </View>
+      </TouchableOpacity>
+    </Animated.View>
   )
 
   // Render featured cocktail
@@ -91,15 +219,40 @@ export default function HomeScreen({ navigation }) {
         style={styles.featuredContainer}
         onPress={() => navigation.navigate("CocktailDetail", { cocktail: featuredCocktail })}
       >
-        <TexturedBackground textureType="pinkLight" style={styles.featuredBackground}>
+        <LinearGradient
+          colors={["#FF9A9E", "#FECFEF"]}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 1 }}
+          style={styles.featuredBackground}
+        >
           <View style={styles.featuredContent}>
             <View style={styles.featuredTextContainer}>
+              <Text style={styles.featuredLabel}>Featured Cocktail</Text>
               <Text style={styles.featuredName}>{featuredCocktail.name}</Text>
-              <View style={styles.ratingContainer}>{renderStars(featuredCocktail.rating)}</View>
+              <View style={styles.ratingContainer}>
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <Ionicons
+                    key={`star-${star}`}
+                    name={
+                      star <= Math.floor(featuredCocktail.rating)
+                        ? "star"
+                        : star <= featuredCocktail.rating + 0.5
+                          ? "star-half"
+                          : "star-outline"
+                    }
+                    size={16}
+                    color="#FFFFFF"
+                    style={styles.star}
+                  />
+                ))}
+              </View>
+              <TouchableOpacity style={styles.featuredButton}>
+                <Text style={styles.featuredButtonText}>View Recipe</Text>
+              </TouchableOpacity>
             </View>
             <Image source={cocktailImage} style={styles.featuredImage} resizeMode="contain" />
           </View>
-        </TexturedBackground>
+        </LinearGradient>
       </TouchableOpacity>
     )
   }
@@ -126,6 +279,8 @@ export default function HomeScreen({ navigation }) {
       if (name === "Aperol Spritz") return "#FFF5E9"
       if (name === "Dry Martini") return "#E5F7F7"
       if (name === "Mojito") return "#E9F7EF"
+      if (name === "Caipirinha") return "#E9F7EF"
+
       return "#F9F9F9"
     }
 
@@ -141,14 +296,31 @@ export default function HomeScreen({ navigation }) {
       >
         <TexturedBackground
           textureType="subtle"
-          style={[styles.cocktailCardBg, { backgroundColor: getBgColor(cocktail.name) }]}
+          style={styles.cocktailCardBg}
         >
           <View style={styles.cocktailCardContent}>
             <View style={styles.cocktailCardInfo}>
               <Text style={styles.cocktailCardName}>{cocktail.name}</Text>
-              <View style={styles.ratingContainer}>{renderStars(cocktail.rating)}</View>
+              <Text style={styles.cocktailCardCategory}>{cocktail.category}</Text>
+
+              <View style={styles.ratingContainer}>
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <Ionicons
+                    key={`star-${star}`}
+                    name={
+                      star <= Math.floor(cocktail.rating)
+                        ? "star"
+                        : star <= cocktail.rating + 0.5
+                          ? "star-half"
+                          : "star-outline"
+                    }
+                    size={14}
+                    color="#FF6B6B"
+                    style={styles.star}
+                  />
+                ))}
+              </View>
             </View>
-            <Text style={styles.cocktailCardPrice}>${cocktail.price}</Text>
           </View>
           <Image source={cocktailImage} style={styles.cocktailCardImage} resizeMode="contain" />
         </TexturedBackground>
@@ -156,27 +328,43 @@ export default function HomeScreen({ navigation }) {
     )
   }
 
+
   return (
     <View style={[styles.container, { paddingTop: insets.top }]}>
-      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
+      {/* Animated header */}
+
+      <Animated.ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.scrollContent}
+        onScroll={Animated.event([{ nativeEvent: { contentOffset: { y: scrollY } } }], { useNativeDriver: false })}
+        scrollEventThrottle={16}
+        style={{ opacity: fadeAnim }}
+      >
         {/* Header */}
         <View style={styles.header}>
-          <Text style={styles.greeting}>Hello {userPreferences.name ? userPreferences.name : "Cocktail Lover"}!</Text>
-          <TouchableOpacity style={styles.profileButton}>
-            <Image source={{ uri: "https://randomuser.me/api/portraits/men/32.jpg" }} style={styles.profileImage} />
-          </TouchableOpacity>
+          <View>
+            <Text style={styles.greeting}>Hello,</Text>
+            <Text style={styles.userName}>{userPreferences.name ? userPreferences.name : "Cocktail Lover"}</Text>
+          </View>
+            <View style={styles.defaultProfileIcon}>
+              <Ionicons name="person-outline" size={25} color="gray" />
+            </View>
         </View>
 
         {/* Featured Cocktail */}
         {renderFeaturedCocktail()}
 
         {/* Categories */}
-        <View style={styles.categoryContainer}>
-          {renderCategoryItem("https://cdn-icons-png.flaticon.com/128/6866/6866599.png", "Citrus", "#FFEBE5")}
-          {renderCategoryItem("https://cdn-icons-png.flaticon.com/128/2738/2738730.png", "Beer", "#F5E6D8")}
-          {renderCategoryItem("https://cdn-icons-png.flaticon.com/128/2405/2405862.png", "Exotic", "#FFE8E8")}
-          {renderCategoryItem("https://cdn-icons-png.flaticon.com/128/2372/2372152.png", "Vegan", "#E5F7ED")}
+        <View style={styles.sectionHeader}>
+          <Text style={styles.sectionTitle}>Categories</Text>
+          <TouchableOpacity>
+            <Text style={styles.seeAllText}>See All</Text>
+          </TouchableOpacity>
         </View>
+
+        <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.categoryContainer}>
+          {categories.map((category, index) => renderCategoryItem(category, index))}
+        </ScrollView>
 
         {/* Tab Bar */}
         {renderTabBar()}
@@ -188,7 +376,7 @@ export default function HomeScreen({ navigation }) {
 
         {/* Extra padding at bottom for navigation */}
         <View style={styles.bottomPadding} />
-      </ScrollView>
+      </Animated.ScrollView>
     </View>
   )
 }
@@ -196,7 +384,26 @@ export default function HomeScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#FFF0F0", // Soft pink background as in the image
+    backgroundColor: "#FFF5F5", // Soft pink background
+  },
+  animatedHeader: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    height: 60,
+    backgroundColor: "rgba(255,255,255,0.95)",
+    zIndex: 100,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    borderBottomWidth: 1,
+    borderBottomColor: "#F0F0F0",
+  },
+  headerTitle: {
+    fontSize: 18,
+    fontWeight: "600",
+    color: "#4A3F41",
   },
   scrollContent: {
     paddingBottom: 80,
@@ -209,15 +416,20 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
   },
   greeting: {
-    fontSize: 20,
-    fontWeight: "600",
-    color: "#6B5E62", // Muted purple-gray color from the image
+    fontSize: 16,
+    color: "#6B5E62", // Muted purple-gray color
+    fontFamily: Platform.OS === "ios" ? "System" : "Roboto",
+  },
+  userName: {
+    fontSize: 22,
+    fontWeight: "700",
+    color: "#4A3F41", // Dark purple
     fontFamily: Platform.OS === "ios" ? "System" : "Roboto",
   },
   profileButton: {
-    width: 36,
-    height: 36,
-    borderRadius: 18,
+    width: 34,
+    height: 34,
+    borderRadius: 22,
     overflow: "hidden",
     borderWidth: 2,
     borderColor: "#FFF",
@@ -237,10 +449,10 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     overflow: "hidden",
     shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.15,
     shadowRadius: 8,
-    elevation: 4,
+    elevation: 6,
   },
   featuredBackground: {
     width: "100%",
@@ -256,12 +468,25 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
   },
+  featuredLabel: {
+    fontSize: 12,
+    fontWeight: "600",
+    color: "#FFFFFF",
+    opacity: 0.9,
+    marginBottom: 6,
+    fontFamily: Platform.OS === "ios" ? "System" : "Roboto",
+    textTransform: "uppercase",
+    letterSpacing: 1,
+  },
   featuredName: {
     fontSize: 24,
     fontWeight: "bold",
-    color: "#4A3F41", // Dark purple from the image
+    color: "#FFFFFF", // White text for contrast
     marginBottom: 8,
     fontFamily: Platform.OS === "ios" ? "System" : "Roboto",
+    textShadowColor: "rgba(0, 0, 0, 0.2)",
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 3,
   },
   featuredImage: {
     width: 150,
@@ -271,6 +496,21 @@ const styles = StyleSheet.create({
     bottom: -20,
     transform: [{ rotate: "15deg" }],
   },
+  featuredButton: {
+    backgroundColor: "rgba(255, 255, 255, 0.25)",
+    paddingHorizontal: 15,
+    paddingVertical: 8,
+    borderRadius: 20,
+    alignSelf: "flex-start",
+    marginTop: 10,
+    borderWidth: 1,
+    borderColor: "rgba(255, 255, 255, 0.5)",
+  },
+  featuredButtonText: {
+    color: "#FFFFFF",
+    fontWeight: "600",
+    fontSize: 12,
+  },
   ratingContainer: {
     flexDirection: "row",
     alignItems: "center",
@@ -278,42 +518,78 @@ const styles = StyleSheet.create({
   star: {
     marginRight: 2,
   },
-  categoryContainer: {
+  sectionHeader: {
     flexDirection: "row",
     justifyContent: "space-between",
+    alignItems: "center",
     paddingHorizontal: 20,
     marginTop: 25,
     marginBottom: 15,
   },
-  categoryItem: {
-    alignItems: "center",
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: "700",
+    color: "#4A3F41",
+    fontFamily: Platform.OS === "ios" ? "System" : "Roboto",
   },
-  categoryIcon: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    justifyContent: "center",
+  seeAllText: {
+    fontSize: 14,
+    color: "#FF6B6B",
+    fontWeight: "600",
+    fontFamily: Platform.OS === "ios" ? "System" : "Roboto",
+  },
+  categoryContainer: {
+    paddingHorizontal: 15,
+    paddingBottom: 5,
+  },
+  categoryItem: {
+    flexDirection: "row",
     alignItems: "center",
-    marginBottom: 8,
+    backgroundColor: "#FFFFFF",
+    marginHorizontal: 5,
+    marginBottom: 10,
+    paddingVertical: 12,
+    paddingHorizontal: 15,
+    borderRadius: 12,
+    width: 160,
     shadowColor: "#000",
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.05,
+    shadowRadius: 3,
     elevation: 2,
   },
-  categoryIconImage: {
-    width: 24,
-    height: 24,
+  categoryItemSelected: {
+    backgroundColor: "#FFF0F0",
+    borderWidth: 1,
+    borderColor: "#FF6B6B",
   },
-  categoryText: {
+  categoryIcon: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    justifyContent: "center",
+    alignItems: "center",
+    marginRight: 12,
+  },
+  categoryTextContainer: {
+    flex: 1,
+  },
+  categoryName: {
+    fontSize: 14,
+    fontWeight: "600",
+    color: "#4A3F41",
+    marginBottom: 2,
+    fontFamily: Platform.OS === "ios" ? "System" : "Roboto",
+  },
+  categoryDescription: {
     fontSize: 12,
-    color: "#6B5E62", // Muted purple-gray color from the image
+    color: "#6B5E62",
     fontFamily: Platform.OS === "ios" ? "System" : "Roboto",
   },
   tabBarContainer: {
     flexDirection: "row",
     paddingHorizontal: 20,
-    marginTop: 20,
+    marginTop: 25,
     marginBottom: 15,
     borderBottomWidth: 1,
     borderBottomColor: "#F0E0E0",
@@ -339,54 +615,62 @@ const styles = StyleSheet.create({
   cocktailsContainer: {
     paddingHorizontal: 20,
   },
-  cocktailCard: {
-    marginBottom: 15,
-    borderRadius: 15,
-    overflow: "hidden",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 2,
-  },
-  cocktailCardBg: {
-    width: "100%",
-    height: 80,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    paddingLeft: 15,
-    borderRadius: 15,
-  },
-  cocktailCardContent: {
-    flex: 1,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    paddingRight: 15,
-  },
-  cocktailCardInfo: {
-    flex: 1,
-  },
-  cocktailCardName: {
-    fontSize: 16,
-    fontWeight: "600",
-    color: "#4A3F41", // Dark purple from the image
-    marginBottom: 5,
-    fontFamily: Platform.OS === "ios" ? "System" : "Roboto",
-  },
-  cocktailCardPrice: {
-    fontSize: 16,
-    fontWeight: "600",
-    color: "#6B5E62", // Muted purple-gray color from the image
-    fontFamily: Platform.OS === "ios" ? "System" : "Roboto",
-  },
-  cocktailCardImage: {
-    width: 80,
-    height: 80,
-    marginRight: 5,
-  },
-  bottomPadding: {
-    height: 60,
-  },
+// Replace these style definitions in the styles object
+cocktailCard: {
+  marginBottom: 15,
+  borderRadius: 15,
+  overflow: "hidden",
+  shadowColor: "#000",
+  shadowOffset: { width: 0, height: 2 },
+  shadowOpacity: 0.1,
+  shadowRadius: 4,
+  elevation: 2,
+},
+cocktailCardBg: {
+  width: "100%",
+  height: 80,
+  flexDirection: "row",
+  alignItems: "center",
+  justifyContent: "space-between",
+  paddingLeft: 15,
+  borderRadius: 15,
+},
+cocktailCardContent: {
+  flex: 1,
+  flexDirection: "row",
+  justifyContent: "space-between",
+  alignItems: "center",
+  paddingRight: 15,
+},
+cocktailCardInfo: {
+  flex: 1,
+},
+cocktailCardName: {
+  fontSize: 16,
+  fontWeight: "600",
+  color: "#4A3F41", // Dark purple from the image
+  marginBottom: 5,
+  fontFamily: Platform.OS === "ios" ? "System" : "Roboto",
+},
+cocktailCardCategory: {
+  fontSize: 10,
+  fontWeight: "600",
+  textTransform: "uppercase",
+  marginBottom: 5,
+  color: "gray", // Muted purple-gray color from the image
+  fontFamily: Platform.OS === "ios" ? "System" : "Roboto",
+},
+cocktailCardImage: {
+  borderRadius: 50,
+  width: 80,
+  height: 80,
+  marginRight: 5,
+  boxShadow: '10 0px 80px rgba(242, 186, 48, 1)', // Sombras suaves
+  transition: 'box-shadow 0.3s ease-in-out', // Transición para el hover
+  backgroundColor: "rgba(242, 186, 48, 0.3)", // Soft pink background
+},
+
+bottomPadding: {
+  height: 80,
+},
 })
