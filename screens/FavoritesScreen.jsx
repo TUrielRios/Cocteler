@@ -21,35 +21,11 @@ import { getLocalImage } from "../utils/imageMapping"
 import BottomNavigation from "../components/BottomNavigation"
 import StarRating from "../components/StarRating"
 import FavoriteButton from "../components/FavoriteButton"
-import { useFavorites } from "../context/favoritesContext"
-import cocktailsData from "../data/api.json"
-import TexturedBackground from "../components/TexturedBackground"
+import { useFavorites } from "../context/FavoritesContext"
+import { useLanguage } from "../context/LanguageContext"
 
 const { width, height } = Dimensions.get("window")
 const cardWidth = (width - 50) / 2 // Two cards per row with margins
-
-const createSoftTint = (color, intensity = 0.5) => {
-  // If color is not in hex format or not provided, return white
-  if (!color || !color.startsWith("#")) {
-    return "#FFFFFF"
-  }
-
-  // Remove the # if it exists
-  color = color.replace("#", "")
-
-  // Parse the hex values
-  let r = Number.parseInt(color.substring(0, 2), 16)
-  let g = Number.parseInt(color.substring(2, 4), 16)
-  let b = Number.parseInt(color.substring(4, 6), 16)
-
-  // Create a very soft tint by mixing with white
-  r = Math.round(255 - (255 - r) * intensity)
-  g = Math.round(255 - (255 - g) * intensity)
-  b = Math.round(255 - (255 - b) * intensity)
-
-  // Convert back to hex
-  return `#${r.toString(16).padStart(2, "0")}${g.toString(16).padStart(2, "0")}${b.toString(16).padStart(2, "0")}`
-}
 
 export default function FavoritesScreen({ navigation }) {
   const insets = useSafeAreaInsets()
@@ -67,6 +43,7 @@ export default function FavoritesScreen({ navigation }) {
   const [editingCollection, setEditingCollection] = useState(null)
   const [selectedColor, setSelectedColor] = useState("#FF6B6B")
   const [selectedIcon, setSelectedIcon] = useState("wine")
+  const { t, cocktailsData } = useLanguage()
 
   // Animation values
   const fadeAnim = useRef(new Animated.Value(1)).current
@@ -82,7 +59,7 @@ export default function FavoritesScreen({ navigation }) {
   useEffect(() => {
     const cocktails = cocktailsData.filter((cocktail) => favorites.includes(cocktail.id))
     setFavoriteCocktails(cocktails)
-  }, [favorites])
+  }, [favorites, cocktailsData])
 
   // Handle tab change with animation
   const changeTab = (tab) => {
@@ -171,15 +148,10 @@ export default function FavoritesScreen({ navigation }) {
     const localImagePath = cocktail.imageLocal?.replace("require('", "").replace("')", "")
     const cocktailImage = getLocalImage(localImagePath)
 
-    // Get the background color from the cocktail data or use a default
-    const baseColor = cocktail.backgroundColor || "#F9F9F9"
-    // Create a very soft tint for the gradient
-    const softTint = createSoftTint(baseColor, 0.3)
-
     return (
       <View key={cocktail.id} style={styles.favoriteCard}>
         <LinearGradient
-          colors={["#FFFFFF", softTint]}
+          colors={["#FFFFFF", "#F9F9F9"]}
           start={{ x: 0, y: 0 }}
           end={{ x: 0, y: 1 }}
           style={styles.favoriteCardBg}
@@ -263,8 +235,8 @@ export default function FavoritesScreen({ navigation }) {
     return (
       <LinearGradient colors={["#FFF5F5", "#FFE6E6"]} style={styles.emptyStateContainer}>
         <Ionicons name="heart-outline" size={60} color="#FF6B6B" />
-        <Text style={styles.emptyStateTitle}>No favorites yet</Text>
-        <Text style={styles.emptyStateText}>Tap the heart icon on any cocktail to add it to your favorites</Text>
+        <Text style={styles.emptyStateTitle}>{t("noFavoritesYet")}</Text>
+        <Text style={styles.emptyStateText}>{t("tapHeart")}</Text>
         <TouchableOpacity style={styles.exploreButton} onPress={() => navigation.navigate("Home")}>
           <LinearGradient
             colors={["#FF6B6B", "#FF8E8E"]}
@@ -272,7 +244,7 @@ export default function FavoritesScreen({ navigation }) {
             end={{ x: 1, y: 0 }}
             style={styles.exploreButtonGradient}
           >
-            <Text style={styles.exploreButtonText}>Explore Cocktails</Text>
+            <Text style={styles.exploreButtonText}>{t("exploreCocktails")}</Text>
           </LinearGradient>
         </TouchableOpacity>
       </LinearGradient>
@@ -284,10 +256,8 @@ export default function FavoritesScreen({ navigation }) {
     return (
       <LinearGradient colors={["#F0F7FF", "#E6F0FF"]} style={styles.emptyStateContainer}>
         <Ionicons name="albums-outline" size={60} color="#60A5FA" />
-        <Text style={styles.emptyStateTitle}>No collections yet</Text>
-        <Text style={styles.emptyStateText}>
-          Create collections to organize your favorite cocktails by theme or occasion
-        </Text>
+        <Text style={styles.emptyStateTitle}>{t("noCollectionsYet")}</Text>
+        <Text style={styles.emptyStateText}>{t("createCollectionsDescription")}</Text>
         <TouchableOpacity style={styles.exploreButton} onPress={openCreateModal}>
           <LinearGradient
             colors={["#60A5FA", "#93C5FD"]}
@@ -295,7 +265,7 @@ export default function FavoritesScreen({ navigation }) {
             end={{ x: 1, y: 0 }}
             style={styles.exploreButtonGradient}
           >
-            <Text style={styles.exploreButtonText}>Create Collection</Text>
+            <Text style={styles.exploreButtonText}>{t("createCollection")}</Text>
           </LinearGradient>
         </TouchableOpacity>
       </LinearGradient>
@@ -322,13 +292,13 @@ export default function FavoritesScreen({ navigation }) {
       <View style={styles.modalOverlay}>
         <View style={styles.modalContainer}>
           <LinearGradient colors={["#FFFFFF", "#F9F9F9"]} style={styles.modalContent}>
-            <Text style={styles.modalTitle}>Create Collection</Text>
+            <Text style={styles.modalTitle}>{t("createCollection")}</Text>
 
             <View style={styles.inputContainer}>
-              <Text style={styles.inputLabel}>Name</Text>
+              <Text style={styles.inputLabel}>{t("name")}</Text>
               <TextInput
                 style={styles.textInput}
-                placeholder="Collection name"
+                placeholder={t("collectionNamePlaceholder")}
                 value={newCollection.name}
                 onChangeText={(text) => setNewCollection({ ...newCollection, name: text })}
                 autoFocus
@@ -336,10 +306,10 @@ export default function FavoritesScreen({ navigation }) {
             </View>
 
             <View style={styles.inputContainer}>
-              <Text style={styles.inputLabel}>Description (optional)</Text>
+              <Text style={styles.inputLabel}>{t("descriptionOptional")}</Text>
               <TextInput
                 style={[styles.textInput, styles.textAreaInput]}
-                placeholder="Describe your collection"
+                placeholder={t("describeCollectionPlaceholder")}
                 value={newCollection.description}
                 onChangeText={(text) => setNewCollection({ ...newCollection, description: text })}
                 multiline
@@ -348,7 +318,7 @@ export default function FavoritesScreen({ navigation }) {
             </View>
 
             <View style={styles.inputContainer}>
-              <Text style={styles.inputLabel}>Color</Text>
+              <Text style={styles.inputLabel}>{t("color")}</Text>
               <View style={styles.colorOptions}>
                 {collectionColors.map((color) => (
                   <TouchableOpacity
@@ -365,7 +335,7 @@ export default function FavoritesScreen({ navigation }) {
             </View>
 
             <View style={styles.inputContainer}>
-              <Text style={styles.inputLabel}>Icon</Text>
+              <Text style={styles.inputLabel}>{t("icon")}</Text>
               <View style={styles.iconOptions}>
                 {collectionIcons.map((icon) => (
                   <TouchableOpacity
@@ -381,7 +351,7 @@ export default function FavoritesScreen({ navigation }) {
 
             <View style={styles.modalButtons}>
               <TouchableOpacity style={styles.cancelButton} onPress={() => setIsCreateModalVisible(false)}>
-                <Text style={styles.cancelButtonText}>Cancel</Text>
+                <Text style={styles.cancelButtonText}>{t("cancel")}</Text>
               </TouchableOpacity>
 
               <TouchableOpacity
@@ -393,7 +363,7 @@ export default function FavoritesScreen({ navigation }) {
                 onPress={handleCreateCollection}
                 disabled={!newCollection.name.trim()}
               >
-                <Text style={styles.createButtonText}>Create</Text>
+                <Text style={styles.createButtonText}>{t("create")}</Text>
               </TouchableOpacity>
             </View>
           </LinearGradient>
@@ -413,13 +383,13 @@ export default function FavoritesScreen({ navigation }) {
       <View style={styles.modalOverlay}>
         <View style={styles.modalContainer}>
           <LinearGradient colors={["#FFFFFF", "#F9F9F9"]} style={styles.modalContent}>
-            <Text style={styles.modalTitle}>Edit Collection</Text>
+            <Text style={styles.modalTitle}>{t("editCollection")}</Text>
 
             <View style={styles.inputContainer}>
-              <Text style={styles.inputLabel}>Name</Text>
+              <Text style={styles.inputLabel}>{t("name")}</Text>
               <TextInput
                 style={styles.textInput}
-                placeholder="Collection name"
+                placeholder={t("collectionNamePlaceholder")}
                 value={editingCollection?.name || ""}
                 onChangeText={(text) => setEditingCollection({ ...editingCollection, name: text })}
                 autoFocus
@@ -427,10 +397,10 @@ export default function FavoritesScreen({ navigation }) {
             </View>
 
             <View style={styles.inputContainer}>
-              <Text style={styles.inputLabel}>Description (optional)</Text>
+              <Text style={styles.inputLabel}>{t("descriptionOptional")}</Text>
               <TextInput
                 style={[styles.textInput, styles.textAreaInput]}
-                placeholder="Describe your collection"
+                placeholder={t("describeCollectionPlaceholder")}
                 value={editingCollection?.description || ""}
                 onChangeText={(text) => setEditingCollection({ ...editingCollection, description: text })}
                 multiline
@@ -439,7 +409,7 @@ export default function FavoritesScreen({ navigation }) {
             </View>
 
             <View style={styles.inputContainer}>
-              <Text style={styles.inputLabel}>Color</Text>
+              <Text style={styles.inputLabel}>{t("color")}</Text>
               <View style={styles.colorOptions}>
                 {collectionColors.map((color) => (
                   <TouchableOpacity
@@ -456,7 +426,7 @@ export default function FavoritesScreen({ navigation }) {
             </View>
 
             <View style={styles.inputContainer}>
-              <Text style={styles.inputLabel}>Icon</Text>
+              <Text style={styles.inputLabel}>{t("icon")}</Text>
               <View style={styles.iconOptions}>
                 {collectionIcons.map((icon) => (
                   <TouchableOpacity
@@ -476,7 +446,7 @@ export default function FavoritesScreen({ navigation }) {
               </TouchableOpacity>
 
               <TouchableOpacity style={styles.cancelButton} onPress={() => setIsEditModalVisible(false)}>
-                <Text style={styles.cancelButtonText}>Cancel</Text>
+                <Text style={styles.cancelButtonText}>{t("cancel")}</Text>
               </TouchableOpacity>
 
               <TouchableOpacity
@@ -488,7 +458,7 @@ export default function FavoritesScreen({ navigation }) {
                 onPress={handleUpdateCollection}
                 disabled={!editingCollection?.name?.trim()}
               >
-                <Text style={styles.createButtonText}>Update</Text>
+                <Text style={styles.createButtonText}>{t("update")}</Text>
               </TouchableOpacity>
             </View>
           </LinearGradient>
@@ -500,16 +470,19 @@ export default function FavoritesScreen({ navigation }) {
   return (
     <View style={[styles.container, { paddingTop: insets.top }]}>
       {/* Header */}
-
+      <LinearGradient colors={["#FF9A9E", "#FECFEF"]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={styles.header}>
+        <Text style={styles.headerTitle}>{t("myCocktails")}</Text>
+        <Text style={styles.headerSubtitle}>{t("savedDrinks")}</Text>
+      </LinearGradient>
 
       {/* Tab Navigation */}
       <View style={styles.tabContainer}>
         <TouchableOpacity style={styles.tabButton} onPress={() => changeTab("favorites")} activeOpacity={0.7}>
-          <Text style={[styles.tabText, activeTab === "favorites" && styles.activeTabText]}>Favorites</Text>
+          <Text style={[styles.tabText, activeTab === "favorites" && styles.activeTabText]}>{t("favorites")}</Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.tabButton} onPress={() => changeTab("collections")} activeOpacity={0.7}>
-          <Text style={[styles.tabText, activeTab === "collections" && styles.activeTabText]}>Collections</Text>
+          <Text style={[styles.tabText, activeTab === "collections" && styles.activeTabText]}>{t("collections")}</Text>
         </TouchableOpacity>
 
         {/* Animated Tab Indicator */}
@@ -533,7 +506,10 @@ export default function FavoritesScreen({ navigation }) {
           favoriteCocktails.length > 0 ? (
             <ScrollView showsVerticalScrollIndicator={false}>
               <View style={styles.favoritesHeader}>
-                <Text style={styles.favoritesCount}>{favoriteCocktails.length} cocktails</Text>
+                <Text style={styles.favoritesTitle}>{t("yourFavorites")}</Text>
+                <Text style={styles.favoritesCount}>
+                  {favoriteCocktails.length} {t("cocktails")}
+                </Text>
               </View>
               <View style={styles.favoritesGrid}>{favoriteCocktails.map(renderFavoriteCard)}</View>
               <View style={styles.bottomPadding} />
@@ -545,7 +521,7 @@ export default function FavoritesScreen({ navigation }) {
           // Collections Tab
           <>
             <View style={styles.collectionsHeader}>
-              <Text style={styles.collectionsTitle}>Your Collections</Text>
+              <Text style={styles.collectionsTitle}>{t("yourCollections")}</Text>
               <TouchableOpacity style={styles.addCollectionButton} onPress={openCreateModal}>
                 <Ionicons name="add" size={24} color="#FF6B6B" />
               </TouchableOpacity>
@@ -588,7 +564,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#FFF5F5", // Soft pink background
-    margin:15
   },
   header: {
     paddingHorizontal: 20,
@@ -597,27 +572,24 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 30,
   },
   headerTitle: {
-    fontSize: 24,
+    fontSize: 32,
     fontWeight: "bold",
-    color: "#4A3F41",
+    color: "#FFFFFF",
     marginBottom: 8,
-    textTransform:"uppercase",
-    // In a real app, we would use a custom font
-    // fontFamily: "Playfair Display",
-    letterSpacing: 0.5,
+    textShadowColor: "rgba(0, 0, 0, 0.1)",
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 3,
   },
   headerSubtitle: {
     fontSize: 16,
-    color: "#6B5E62",
-    // In a real app, we would use a custom font
-    // fontFamily: "Poppins",
-    letterSpacing: 0.2,
+    color: "#FFFFFF",
+    opacity: 0.9,
   },
   tabContainer: {
     flexDirection: "row",
     position: "relative",
-    height: 70,
-    backgroundColor: "transparent",
+    height: 50,
+    backgroundColor: "#FFFFFF",
     elevation: 2,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
@@ -630,7 +602,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   tabText: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: "500",
     color: "#6B5E62",
   },
@@ -651,7 +623,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    paddingHorizontal: 0,
+    paddingHorizontal: 20,
     paddingTop: 20,
     marginBottom: 15,
   },
@@ -668,7 +640,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-between",
-    paddingHorizontal: 0,
+    paddingHorizontal: 20,
   },
   favoriteCard: {
     width: cardWidth,

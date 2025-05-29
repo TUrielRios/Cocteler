@@ -6,6 +6,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { Ionicons } from "@expo/vector-icons"
 import TexturedBackground from "../components/TexturedBackground"
 import { getLocalImage } from "../utils/imageMapping"
+import { useLanguage } from "../context/LanguageContext"
 
 const { width, height } = Dimensions.get("window")
 
@@ -14,6 +15,7 @@ export default function WelcomeScreen({ navigation }) {
   const fadeAnim = useRef(new Animated.Value(0)).current
   const slideAnim = useRef(new Animated.Value(50)).current
   const imageAnim = useRef(new Animated.Value(0)).current
+  const { t } = useLanguage()
 
   useEffect(() => {
     // Fade in animation
@@ -54,15 +56,6 @@ export default function WelcomeScreen({ navigation }) {
           },
         ]}
       >
-        <View style={styles.logoContainer}>
-        <Image 
-        source={require("../assets/images/logo/logo.png")} 
-        style={styles.logo} 
-        resizeMode="contain" 
-      />        
-      </View>
-        <Text style={styles.appName}>Cocteler</Text>
-        <Text style={styles.appTagline}>Your personal mixologist</Text>
       </Animated.View>
 
       {/* Cocktail image */}
@@ -76,7 +69,7 @@ export default function WelcomeScreen({ navigation }) {
         ]}
       >
         <Image
-          source={getLocalImage("../assets/images/cocktails/campariOrange.png")}
+          source={getLocalImage("../assets/images/cocktails/aperolSpritz.png")}
           style={styles.cocktailImage}
           resizeMode="contain"
         />
@@ -92,10 +85,8 @@ export default function WelcomeScreen({ navigation }) {
           },
         ]}
       >
-        <Text style={styles.welcomeTitle}>Welcome to Cocteler</Text>
-        <Text style={styles.welcomeText}>
-          Discover, create and enjoy the perfect cocktails tailored to your taste preferences.
-        </Text>
+        <Text style={styles.welcomeTitle}>{t("welcomeTitle")}</Text>
+        <Text style={styles.welcomeText}>{t("welcomeText")}</Text>
       </Animated.View>
 
       {/* Get started button */}
@@ -109,7 +100,7 @@ export default function WelcomeScreen({ navigation }) {
         ]}
       >
         <TouchableOpacity style={styles.getStartedButton} onPress={() => navigation.navigate("NameInput")}>
-          <Text style={styles.getStartedText}>Get Started</Text>
+          <Text style={styles.getStartedText}>{t("getStarted")}</Text>
           <Ionicons name="arrow-forward" size={20} color="#FFFFFF" style={styles.buttonIcon} />
         </TouchableOpacity>
       </Animated.View>
@@ -124,7 +115,7 @@ export default function WelcomeScreen({ navigation }) {
         ]}
       >
         <TouchableOpacity style={styles.skipButton} onPress={() => navigation.navigate("MainTabs")}>
-          <Text style={styles.skipText}>Skip for now</Text>
+          <Text style={styles.skipText}>{t("skipForNow")}</Text>
         </TouchableOpacity>
       </Animated.View>
     </TexturedBackground>
@@ -142,31 +133,29 @@ const styles = StyleSheet.create({
     marginBottom: 40,
   },
   logoContainer: {
-    width: 0,
-    height: 0,
+    width: 80,
+    height: 80,
     borderRadius: 40,
+    backgroundColor: "rgba(255, 255, 255, 0.9)",
     justifyContent: "center",
     alignItems: "center",
     marginBottom: 20,
-  },
-  logo: {
-    width: 80,
-    height: 80,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.1,
+    shadowRadius: 6,
+    elevation: 5,
   },
   appName: {
     fontSize: 36,
     fontWeight: "bold",
     color: "#4A3F41",
     marginBottom: 8,
-    // In a real app, we would use a custom font
-    // fontFamily: "Playfair Display",
     letterSpacing: 1,
   },
   appTagline: {
     fontSize: 16,
     color: "#6B5E62",
-    // In a real app, we would use a custom font
-    // fontFamily: "Poppins",
     letterSpacing: 0.5,
   },
   imageContainer: {
@@ -189,8 +178,6 @@ const styles = StyleSheet.create({
     color: "#4A3F41",
     marginBottom: 12,
     textAlign: "center",
-    // In a real app, we would use a custom font
-    // fontFamily: "Playfair Display",
     letterSpacing: 0.5,
   },
   welcomeText: {
@@ -198,8 +185,6 @@ const styles = StyleSheet.create({
     color: "#6B5E62",
     textAlign: "center",
     lineHeight: 24,
-    // In a real app, we would use a custom font
-    // fontFamily: "Poppins",
     letterSpacing: 0.2,
   },
   buttonContainer: {
@@ -223,8 +208,6 @@ const styles = StyleSheet.create({
     color: "#FFFFFF",
     fontSize: 18,
     fontWeight: "600",
-    // In a real app, we would use a custom font
-    // fontFamily: "Poppins",
     letterSpacing: 0.5,
   },
   buttonIcon: {
@@ -240,7 +223,5 @@ const styles = StyleSheet.create({
   skipText: {
     color: "#6B5E62",
     fontSize: 14,
-    // In a real app, we would use a custom font
-    // fontFamily: "Poppins",
   },
 })

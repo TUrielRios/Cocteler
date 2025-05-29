@@ -6,12 +6,14 @@ import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { Ionicons } from "@expo/vector-icons"
 import TexturedBackground from "../components/TexturedBackground"
 import { useOnboarding } from "../context/OnboardingContext"
+import { useLanguage } from "../context/LanguageContext"
 
 const { width } = Dimensions.get("window")
 
 export default function NameInputScreen({ navigation }) {
   const insets = useSafeAreaInsets()
   const { updatePreferences } = useOnboarding()
+  const { t } = useLanguage()
   const [name, setName] = useState("")
 
   // Animation values
@@ -44,8 +46,8 @@ export default function NameInputScreen({ navigation }) {
   return (
     <View style={[styles.container, { paddingTop: insets.top }]}>
       <TexturedBackground textureType="pinkLight" style={styles.header}>
-        <Text style={styles.headerTitle}>About You</Text>
-        <Text style={styles.headerSubtitle}>Let's personalize your experience</Text>
+        <Text style={styles.headerTitle}>{t("aboutYou")}</Text>
+        <Text style={styles.headerSubtitle}>{t("personalizeExperience")}</Text>
       </TexturedBackground>
 
       <Animated.View
@@ -57,13 +59,15 @@ export default function NameInputScreen({ navigation }) {
           },
         ]}
       >
-
+        <View style={styles.instructionContainer}>
+          <Text style={styles.instructionText}>{t("nameInstruction")}</Text>
+        </View>
 
         <View style={styles.inputContainer}>
-          <Text style={styles.inputLabel}>Your Name</Text>
+          <Text style={styles.inputLabel}>{t("yourName")}</Text>
           <TextInput
             style={styles.nameInput}
-            placeholder="Enter your name"
+            placeholder={t("enterYourName")}
             placeholderTextColor="#AAAAAA"
             value={name}
             onChangeText={setName}
@@ -79,13 +83,13 @@ export default function NameInputScreen({ navigation }) {
             onPress={handleContinue}
             disabled={!name.trim()}
           >
-            <Text style={styles.continueButtonText}>Continue</Text>
+            <Text style={styles.continueButtonText}>{t("continue")}</Text>
             <Ionicons name="arrow-forward" size={20} color="#FFFFFF" style={styles.buttonIcon} />
           </TouchableOpacity>
         </View>
 
         <TouchableOpacity style={styles.skipButton} onPress={() => navigation.navigate("TastePreferences")}>
-          <Text style={styles.skipButtonText}>Skip this step</Text>
+          <Text style={styles.skipButtonText}>{t("skipThisStep")}</Text>
         </TouchableOpacity>
       </Animated.View>
 
@@ -116,15 +120,11 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#4A3F41",
     marginBottom: 8,
-    // In a real app, we would use a custom font
-    // fontFamily: "Playfair Display",
     letterSpacing: 0.5,
   },
   headerSubtitle: {
     fontSize: 16,
     color: "#6B5E62",
-    // In a real app, we would use a custom font
-    // fontFamily: "Poppins",
     letterSpacing: 0.2,
   },
   content: {
@@ -147,8 +147,6 @@ const styles = StyleSheet.create({
     color: "#4A3F41",
     lineHeight: 24,
     textAlign: "center",
-    // In a real app, we would use a custom font
-    // fontFamily: "Poppins",
   },
   inputContainer: {
     marginBottom: 30,
@@ -158,8 +156,6 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     color: "#4A3F41",
     marginBottom: 15,
-    // In a real app, we would use a custom font
-    // fontFamily: "Playfair Display",
   },
   nameInput: {
     backgroundColor: "rgba(255, 255, 255, 0.9)",
@@ -168,8 +164,6 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     fontSize: 18,
     color: "#4A3F41",
-    // In a real app, we would use a custom font
-    // fontFamily: "Poppins",
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
@@ -200,8 +194,6 @@ const styles = StyleSheet.create({
     color: "#FFFFFF",
     fontSize: 18,
     fontWeight: "600",
-    // In a real app, we would use a custom font
-    // fontFamily: "Poppins",
     letterSpacing: 0.5,
   },
   buttonIcon: {
@@ -214,8 +206,6 @@ const styles = StyleSheet.create({
   skipButtonText: {
     color: "#6B5E62",
     fontSize: 16,
-    // In a real app, we would use a custom font
-    // fontFamily: "Poppins",
   },
   progressContainer: {
     flexDirection: "row",

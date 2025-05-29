@@ -18,9 +18,12 @@ import { Ionicons } from "@expo/vector-icons"
 import { LinearGradient } from "expo-linear-gradient"
 import { getLocalImage } from "../utils/imageMapping"
 import BottomNavigation from "../components/BottomNavigation"
-import cocktailsData from "../data/api.json"
+// Cambiar la importación directa de cocktailsData
+// import cocktailsData from "../api.json"
 import StarRating from "../components/StarRating"
 import FavoriteButton from "../components/FavoriteButton"
+// Por la importación desde el contexto de idioma
+import { useLanguage } from "../context/LanguageContext"
 
 const { width } = Dimensions.get("window")
 const cardWidth = (width - 60) / 2 // Two cards per row with margins
@@ -65,6 +68,9 @@ export default function IngredientFilterScreen({ navigation }) {
   const [isSearchFocused, setIsSearchFocused] = useState(false)
   const [isAccordionExpanded, setIsAccordionExpanded] = useState(false)
   const accordionHeight = useRef(new Animated.Value(0)).current
+  // Y luego en el componente, cambiar:
+  // const { t } = useLanguage()
+  const { t, cocktailsData } = useLanguage()
 
   // Animation values
   const fadeAnim = useRef(new Animated.Value(0)).current
@@ -88,23 +94,23 @@ export default function IngredientFilterScreen({ navigation }) {
       })
     })
 
-    // Set some popular ingredients
+    // Set popular ingredients with translations
     setPopularIngredients([
-      "Gin",
-      "Vodka",
-      "Rum",
-      "Tequila",
-      "Whiskey",
-      "Lime",
-      "Lemon",
-      "Orange",
-      "Mint",
-      "Soda",
-      "Vermouth",
-      "Grenadine",
-      "Sugar",
-      "Aperol",
-      "Prosecco",
+      t("gin"),
+      t("vodka"),
+      t("rum"),
+      t("tequila"),
+      t("whiskey"),
+      t("lime"),
+      t("lemon"),
+      t("orange"),
+      t("mint"),
+      t("soda"),
+      t("vermouth"),
+      t("grenadine"),
+      t("sugar"),
+      t("aperol"),
+      t("prosecco"),
     ])
 
     // Entrance animation
@@ -120,7 +126,7 @@ export default function IngredientFilterScreen({ navigation }) {
         useNativeDriver: true,
       }),
     ]).start()
-  }, [])
+  }, [cocktailsData, t])
 
   // Filter cocktails based on selected ingredients
   useEffect(() => {
@@ -138,7 +144,7 @@ export default function IngredientFilterScreen({ navigation }) {
     })
 
     setMatchingCocktails(filtered)
-  }, [selectedIngredients])
+  }, [selectedIngredients, cocktailsData])
 
   // Add an ingredient to the selected list
   const addIngredient = (ingredient) => {
@@ -299,7 +305,9 @@ export default function IngredientFilterScreen({ navigation }) {
             <Text style={styles.cocktailCardCategory}>{item.category}</Text>
             <StarRating rating={item.rating} size={14} />
             <View style={styles.matchBadge}>
-              <Text style={styles.matchBadgeText}>{percentComplete}% match</Text>
+              <Text style={styles.matchBadgeText}>
+                {percentComplete}% {t("match")}
+              </Text>
             </View>
           </View>
         </LinearGradient>
@@ -319,7 +327,7 @@ export default function IngredientFilterScreen({ navigation }) {
           },
         ]}
       >
-        <Text style={styles.headerTitle}>Mix Your Cocktail</Text>
+        <Text style={styles.headerTitle}>{t("mixYourCocktail")}</Text>
       </Animated.View>
 
       <Animated.ScrollView
@@ -331,18 +339,18 @@ export default function IngredientFilterScreen({ navigation }) {
       >
         {/* Header with gradient background */}
         <LinearGradient
-          colors={["white", "lightblue"]}
-          start={{ x: 1, y: 1 }}
-          end={{ x: 0, y: 0 }}
+          colors={["#FF9A9E", "#FECFEF"]}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 1 }}
           style={styles.header}
         >
           <View style={styles.headerContent}>
-            <Text style={styles.headerTitle}>Mix Your Cocktail</Text>
-            <Text style={styles.headerSubtitle}>Find recipes with your ingredients</Text>
+            <Text style={styles.headerTitle}>{t("mixYourCocktail")}</Text>
+            <Text style={styles.headerSubtitle}>{t("findRecipes")}</Text>
           </View>
           <View style={styles.headerImageContainer}>
             <Image
-              source={getLocalImage("../assets/images/cocktails/DryMartini.png")}
+              source={getLocalImage("../assets/images/cocktails/aperolSpritz.png")}
               style={styles.headerImage}
               resizeMode="contain"
             />
@@ -369,7 +377,7 @@ export default function IngredientFilterScreen({ navigation }) {
             <Ionicons name="search" size={20} color={isSearchFocused ? "#FF6B6B" : "#AAAAAA"} />
             <TextInput
               style={styles.searchInput}
-              placeholder="Search ingredients..."
+              placeholder={t("searchIngredients")}
               value={searchText}
               onChangeText={setSearchText}
               onSubmitEditing={() => searchText.trim() && addIngredient(searchText)}
@@ -419,7 +427,7 @@ export default function IngredientFilterScreen({ navigation }) {
             >
               <Ionicons name="checkmark-circle" size={20} color="#FFFFFF" />
             </LinearGradient>
-            <Text style={styles.sectionTitle}>Your ingredients</Text>
+            <Text style={styles.sectionTitle}>{t("yourIngredients")}</Text>
             {selectedIngredients.length > 0 && (
               <View style={styles.countBadge}>
                 <Text style={styles.countBadgeText}>{selectedIngredients.length}</Text>
@@ -439,13 +447,41 @@ export default function IngredientFilterScreen({ navigation }) {
             ) : (
               <View style={styles.emptyStateContainer}>
                 <Ionicons name="basket-outline" size={40} color="#FFCACA" />
-                <Text style={styles.emptyStateText}>Add ingredients to see what cocktails you can make</Text>
+                <Text style={styles.emptyStateText}>{t("addIngredients")}</Text>
               </View>
             )}
           </LinearGradient>
         </View>
-              {/* Matching cocktails */}
-              {selectedIngredients.length > 0 && (
+
+        {/* Popular ingredients */}
+        <View style={styles.popularIngredientsContainer}>
+          <View style={styles.sectionTitleContainer}>
+            <LinearGradient
+              colors={["#F59E0B", "#FBBF24"]}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 0 }}
+              style={styles.sectionIconContainer}
+            >
+              <Ionicons name="star" size={20} color="#FFFFFF" />
+            </LinearGradient>
+            <Text style={styles.sectionTitle}>{t("popularIngredients")}</Text>
+          </View>
+          <LinearGradient
+            colors={["#FFFFFF", "#F9F9F9"]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 0, y: 1 }}
+            style={styles.popularIngredientsCard}
+          >
+            <View style={styles.ingredientChipsContainer}>
+              {popularIngredients
+                .slice(0, 10)
+                .map((ingredient) => !selectedIngredients.includes(ingredient) && renderIngredientChip(ingredient))}
+            </View>
+          </LinearGradient>
+        </View>
+
+        {/* Matching cocktails */}
+        {selectedIngredients.length > 0 && (
           <View style={styles.matchingCocktailsContainer}>
             <TouchableOpacity style={styles.accordionHeader} onPress={toggleAccordion}>
               <View style={styles.sectionTitleContainer}>
@@ -459,8 +495,8 @@ export default function IngredientFilterScreen({ navigation }) {
                 </LinearGradient>
                 <Text style={styles.sectionTitle}>
                   {matchingCocktails.length > 0
-                    ? `Cocktails you can make (${matchingCocktails.length})`
-                    : "No matching cocktails found"}
+                    ? `${t("cocktailsYouCanMake")} (${matchingCocktails.length})`
+                    : t("noMatchingCocktailsFound")}
                 </Text>
               </View>
               <Animated.View
@@ -507,43 +543,14 @@ export default function IngredientFilterScreen({ navigation }) {
                     style={styles.noMatchBg}
                   >
                     <Ionicons name="wine-outline" size={50} color="#FF6B6B" />
-                    <Text style={styles.noMatchTitle}>No matches found</Text>
-                    <Text style={styles.noMatchText}>Try adding more ingredients to find matching cocktails</Text>
+                    <Text style={styles.noMatchTitle}>{t("noMatchesFound")}</Text>
+                    <Text style={styles.noMatchText}>{t("tryAddingMore")}</Text>
                   </LinearGradient>
                 </View>
               )}
             </Animated.View>
           </View>
         )}
-
-        {/* Popular ingredients */}
-        <View style={styles.popularIngredientsContainer}>
-          <View style={styles.sectionTitleContainer}>
-            <LinearGradient
-              colors={["#F59E0B", "#FBBF24"]}
-              start={{ x: 0, y: 0 }}
-              end={{ x: 1, y: 0 }}
-              style={styles.sectionIconContainer}
-            >
-              <Ionicons name="star" size={20} color="#FFFFFF" />
-            </LinearGradient>
-            <Text style={styles.sectionTitle}>Popular ingredients</Text>
-          </View>
-          <LinearGradient
-            colors={["#FFFFFF", "#F9F9F9"]}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 0, y: 1 }}
-            style={styles.popularIngredientsCard}
-          >
-            <View style={styles.ingredientChipsContainer}>
-              {popularIngredients
-                .slice(0, 10)
-                .map((ingredient) => !selectedIngredients.includes(ingredient) && renderIngredientChip(ingredient))}
-            </View>
-          </LinearGradient>
-        </View>
-
-  
 
         {/* Extra padding at bottom for navigation */}
         <View style={styles.bottomPadding} />
@@ -558,7 +565,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#FFF5F5", // Soft pink background
-    margin: 15
   },
   animatedHeader: {
     position: "absolute",
@@ -607,9 +613,8 @@ const styles = StyleSheet.create({
   },
   headerSubtitle: {
     fontSize: 16,
-    width:150,
     color: "#FFFFFF",
-    fontWeight: "700",
+    opacity: 0.9,
     fontFamily: Platform.OS === "ios" ? "System" : "Roboto",
   },
   headerImageContainer: {
@@ -619,13 +624,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   headerImage: {
-    width: 230,
-    height: 230,
+    width: 120,
+    height: 120,
     transform: [{ rotate: "15deg" }],
   },
   searchContainer: {
     paddingHorizontal: 20,
-    marginTop: 25,
+    marginTop: -25,
     zIndex: 10,
   },
   searchBar: {

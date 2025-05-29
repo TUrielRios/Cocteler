@@ -8,6 +8,7 @@ import HomeScreen from "../screens/HomeScreen"
 import SearchScreen from "../screens/SearchScreen"
 import IngredientFilterScreen from "../screens/ingredientFilterScreen"
 import FavoritesScreen from "../screens/FavoritesScreen"
+import CommunityScreen from "../screens/CommunityScreen"
 import SettingsScreen from "../screens/SettingsScreen"
 
 const Tab = createBottomTabNavigator()
@@ -73,6 +74,15 @@ export default function TabNavigator() {
           ),
         }}
       />
+      {/*<Tab.Screen
+        name="CommunityTab"
+        component={CommunityScreen}
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <Ionicons name="people-outline" size={24} color={focused ? "#FF6B6B" : "#CCCCCC"} />
+          ),
+        }}
+      />*/}
       <Tab.Screen
         name="SettingsTab"
         component={SettingsScreen}
@@ -91,7 +101,7 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
     borderRadius: 30,
-    backgroundColor: "#FF6B6B", // main color matching the focus button
+    backgroundColor: "#26C6B9", // Teal color matching the order button
     justifyContent: "center",
     alignItems: "center",
     shadowColor: "#000",

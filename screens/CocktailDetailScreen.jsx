@@ -15,7 +15,7 @@ import {
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { Ionicons } from "@expo/vector-icons"
 import { getLocalImage } from "../utils/imageMapping"
-import { useFavorites } from "../context/favoritesContext"
+import { useFavorites } from "../context/FavoritesContext"
 
 // Get screen dimensions
 const { width, height } = Dimensions.get("window")

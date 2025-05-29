@@ -12,14 +12,14 @@ import {
   Platform,
   Animated,
 } from "react-native"
-import TexturedBackground from "../components/TexturedBackground"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { Ionicons } from "@expo/vector-icons"
 import { LinearGradient } from "expo-linear-gradient"
 import { getLocalImage } from "../utils/imageMapping"
 import { useOnboarding } from "../context/OnboardingContext"
-import { useFavorites } from "../context/favoritesContext"
-import cocktailsData from "../data/api.json"
+import { useFavorites } from "../context/FavoritesContext"
+import { useLanguage } from "../context/LanguageContext"
+import TexturedBackground from "../components/TexturedBackground"
 
 // Get screen dimensions
 const { width } = Dimensions.get("window")
@@ -65,6 +65,7 @@ export default function HomeScreen({ navigation }) {
   const insets = useSafeAreaInsets()
   const { userPreferences } = useOnboarding()
   const { favorites } = useFavorites()
+  const { cocktailsData, t } = useLanguage()
 
   // Animation values
   const scrollY = useRef(new Animated.Value(0)).current
@@ -102,7 +103,7 @@ export default function HomeScreen({ navigation }) {
         }),
       ),
     ).start()
-  }, [])
+  }, [cocktailsData])
 
   // Filter cocktails based on active tab and limit to 5
   const getFilteredCocktails = () => {
@@ -111,9 +112,9 @@ export default function HomeScreen({ navigation }) {
     // Apply category filter if selected
     if (selectedCategory) {
       filtered = filtered.filter((cocktail) => {
-        if (selectedCategory === "citrus") return cocktail.category === "Citrus"
+        if (selectedCategory === "citrus") return cocktail.category === "Citrus" || cocktail.category === "Cítrico"
         if (selectedCategory === "beer") return cocktail.name.toLowerCase().includes("beer")
-        if (selectedCategory === "exotic") return cocktail.category === "Exotic"
+        if (selectedCategory === "exotic") return cocktail.category === "Exotic" || cocktail.category === "Exótico"
         if (selectedCategory === "vegan") return !cocktail.ingredients.some((i) => i.name.includes("Cream"))
         return true
       })
@@ -227,7 +228,7 @@ export default function HomeScreen({ navigation }) {
         >
           <View style={styles.featuredContent}>
             <View style={styles.featuredTextContainer}>
-              <Text style={styles.featuredLabel}>Featured Cocktail</Text>
+              <Text style={styles.featuredLabel}>{t("featuredCocktail")}</Text>
               <Text style={styles.featuredName}>{featuredCocktail.name}</Text>
               <View style={styles.ratingContainer}>
                 {[1, 2, 3, 4, 5].map((star) => (
@@ -247,7 +248,7 @@ export default function HomeScreen({ navigation }) {
                 ))}
               </View>
               <TouchableOpacity style={styles.featuredButton}>
-                <Text style={styles.featuredButtonText}>View Recipe</Text>
+                <Text style={styles.featuredButtonText}>{t("viewRecipe")}</Text>
               </TouchableOpacity>
             </View>
             <Image source={cocktailImage} style={styles.featuredImage} resizeMode="contain" />
@@ -266,21 +267,19 @@ export default function HomeScreen({ navigation }) {
           style={[styles.tabItem, activeTab === tab && styles.activeTabItem]}
           onPress={() => setActiveTab(tab)}
         >
-          <Text style={[styles.tabText, activeTab === tab && styles.activeTabText]}>{tab}</Text>
+          <Text style={[styles.tabText, activeTab === tab && styles.activeTabText]}>{t(tab.toLowerCase())}</Text>
         </TouchableOpacity>
       ))}
     </View>
   )
 
-  // Render cocktail card
+  // Replace the renderCocktailCard function with this version that uses the original design
   const renderCocktailCard = (cocktail) => {
     // Define background colors based on cocktail type
     const getBgColor = (name) => {
       if (name === "Aperol Spritz") return "#FFF5E9"
       if (name === "Dry Martini") return "#E5F7F7"
       if (name === "Mojito") return "#E9F7EF"
-      if (name === "Caipirinha") return "#E9F7EF"
-
       return "#F9F9F9"
     }
 
@@ -296,13 +295,11 @@ export default function HomeScreen({ navigation }) {
       >
         <TexturedBackground
           textureType="subtle"
-          style={styles.cocktailCardBg}
+          style={[styles.cocktailCardBg, { backgroundColor: getBgColor(cocktail.name) }]}
         >
           <View style={styles.cocktailCardContent}>
             <View style={styles.cocktailCardInfo}>
               <Text style={styles.cocktailCardName}>{cocktail.name}</Text>
-              <Text style={styles.cocktailCardCategory}>{cocktail.category}</Text>
-
               <View style={styles.ratingContainer}>
                 {[1, 2, 3, 4, 5].map((star) => (
                   <Ionicons
@@ -321,6 +318,7 @@ export default function HomeScreen({ navigation }) {
                 ))}
               </View>
             </View>
+            <Text style={styles.cocktailCardPrice}>${cocktail.price}</Text>
           </View>
           <Image source={cocktailImage} style={styles.cocktailCardImage} resizeMode="contain" />
         </TexturedBackground>
@@ -328,10 +326,20 @@ export default function HomeScreen({ navigation }) {
     )
   }
 
-
   return (
     <View style={[styles.container, { paddingTop: insets.top }]}>
       {/* Animated header */}
+      <Animated.View
+        style={[
+          styles.animatedHeader,
+          {
+            opacity: headerOpacity,
+            paddingTop: insets.top,
+          },
+        ]}
+      >
+        <Text style={styles.headerTitle}>Cocktails</Text>
+      </Animated.View>
 
       <Animated.ScrollView
         showsVerticalScrollIndicator={false}
@@ -343,12 +351,14 @@ export default function HomeScreen({ navigation }) {
         {/* Header */}
         <View style={styles.header}>
           <View>
-            <Text style={styles.greeting}>Hello,</Text>
+            <Text style={styles.greeting}>{t("hello")}</Text>
             <Text style={styles.userName}>{userPreferences.name ? userPreferences.name : "Cocktail Lover"}</Text>
           </View>
+          <TouchableOpacity style={styles.profileButton}>
             <View style={styles.defaultProfileIcon}>
-              <Ionicons name="person-outline" size={25} color="gray" />
+              <Ionicons name="person-outline" size={24} color="#A78BFA" />
             </View>
+          </TouchableOpacity>
         </View>
 
         {/* Featured Cocktail */}
@@ -356,9 +366,9 @@ export default function HomeScreen({ navigation }) {
 
         {/* Categories */}
         <View style={styles.sectionHeader}>
-          <Text style={styles.sectionTitle}>Categories</Text>
+          <Text style={styles.sectionTitle}>{t("categories")}</Text>
           <TouchableOpacity>
-            <Text style={styles.seeAllText}>See All</Text>
+            <Text style={styles.seeAllText}>{t("seeAll")}</Text>
           </TouchableOpacity>
         </View>
 
@@ -427,8 +437,8 @@ const styles = StyleSheet.create({
     fontFamily: Platform.OS === "ios" ? "System" : "Roboto",
   },
   profileButton: {
-    width: 34,
-    height: 34,
+    width: 44,
+    height: 44,
     borderRadius: 22,
     overflow: "hidden",
     borderWidth: 2,
@@ -439,9 +449,12 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 2,
   },
-  profileImage: {
+  defaultProfileIcon: {
     width: "100%",
     height: "100%",
+    backgroundColor: "#F0EAFF",
+    justifyContent: "center",
+    alignItems: "center",
   },
   featuredContainer: {
     marginHorizontal: 20,
@@ -615,62 +628,56 @@ const styles = StyleSheet.create({
   cocktailsContainer: {
     paddingHorizontal: 20,
   },
-// Replace these style definitions in the styles object
-cocktailCard: {
-  marginBottom: 15,
-  borderRadius: 15,
-  overflow: "hidden",
-  shadowColor: "#000",
-  shadowOffset: { width: 0, height: 2 },
-  shadowOpacity: 0.1,
-  shadowRadius: 4,
-  elevation: 2,
-},
-cocktailCardBg: {
-  width: "100%",
-  height: 80,
-  flexDirection: "row",
-  alignItems: "center",
-  justifyContent: "space-between",
-  paddingLeft: 15,
-  borderRadius: 15,
-},
-cocktailCardContent: {
-  flex: 1,
-  flexDirection: "row",
-  justifyContent: "space-between",
-  alignItems: "center",
-  paddingRight: 15,
-},
-cocktailCardInfo: {
-  flex: 1,
-},
-cocktailCardName: {
-  fontSize: 16,
-  fontWeight: "600",
-  color: "#4A3F41", // Dark purple from the image
-  marginBottom: 5,
-  fontFamily: Platform.OS === "ios" ? "System" : "Roboto",
-},
-cocktailCardCategory: {
-  fontSize: 10,
-  fontWeight: "600",
-  textTransform: "uppercase",
-  marginBottom: 5,
-  color: "gray", // Muted purple-gray color from the image
-  fontFamily: Platform.OS === "ios" ? "System" : "Roboto",
-},
-cocktailCardImage: {
-  borderRadius: 50,
-  width: 80,
-  height: 80,
-  marginRight: 5,
-  boxShadow: '10 0px 80px rgba(242, 186, 48, 1)', // Sombras suaves
-  transition: 'box-shadow 0.3s ease-in-out', // Transición para el hover
-  backgroundColor: "rgba(242, 186, 48, 0.3)", // Soft pink background
-},
-
-bottomPadding: {
-  height: 80,
-},
+  // Update the cocktail card styles to match the original design
+  // Replace these style definitions in the styles object
+  cocktailCard: {
+    marginBottom: 15,
+    borderRadius: 15,
+    overflow: "hidden",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 2,
+  },
+  cocktailCardBg: {
+    width: "100%",
+    height: 80,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingLeft: 15,
+    borderRadius: 15,
+  },
+  cocktailCardContent: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingRight: 15,
+  },
+  cocktailCardInfo: {
+    flex: 1,
+  },
+  cocktailCardName: {
+    fontSize: 16,
+    fontWeight: "600",
+    color: "#4A3F41", // Dark purple from the image
+    marginBottom: 5,
+    fontFamily: Platform.OS === "ios" ? "System" : "Roboto",
+  },
+  cocktailCardPrice: {
+    fontSize: 16,
+    fontWeight: "600",
+    color: "#6B5E62", // Muted purple-gray color from the image
+    fontFamily: Platform.OS === "ios" ? "System" : "Roboto",
+  },
+  cocktailCardImage: {
+    width: 80,
+    height: 80,
+    marginRight: 5,
+  },
+  bottomPadding: {
+    height: 80,
+  },
 })

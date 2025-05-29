@@ -19,14 +19,17 @@ import { getLocalImage } from "../utils/imageMapping"
 import BottomNavigation from "../components/BottomNavigation"
 import StarRating from "../components/StarRating"
 import FavoriteButton from "../components/FavoriteButton"
-import cocktailsData from "../data/api.json"
+// Cambiar la importación directa de cocktailsData
+// import cocktailsData from "../api.json"
 import { LinearGradient } from "expo-linear-gradient"
+// Por la importación desde el contexto de idioma
+import { useLanguage } from "../context/LanguageContext"
 
 const { width } = Dimensions.get("window")
 const cardWidth = width * 0.7 // Card width for horizontal scroll
 
 // Replace the lightenColor function with this new function that creates a very soft tint
-const createSoftTint = (color, intensity = 0.5) => {
+const createSoftTint = (color, intensity = 0.15) => {
   // If color is not in hex format or not provided, return white
   if (!color || !color.startsWith("#")) {
     return "#FFFFFF"
@@ -54,14 +57,17 @@ export default function SearchScreen({ navigation }) {
   const [searchText, setSearchText] = useState("")
   const [searchResults, setSearchResults] = useState([])
   const [categories, setCategories] = useState([])
+  // Y luego en el componente, cambiar:
+  // const { t } = useLanguage()
+  const { t, cocktailsData } = useLanguage()
 
   useEffect(() => {
     // Create category data
     const categoryData = [
       {
         id: "party",
-        title: "Let's party with these cocktails",
-        description: "Perfect for evening gatherings and celebrations",
+        title: t("partyCategory"),
+        description: t("partyDescription"),
         icon: "wine",
         filter: (cocktail) =>
           cocktail.occasion &&
@@ -69,60 +75,60 @@ export default function SearchScreen({ navigation }) {
       },
       {
         id: "brunch",
-        title: "Perfect for Brunch",
-        description: "Start your day with these delightful mixes",
+        title: t("brunchCategory"),
+        description: t("brunchDescription"),
         icon: "sunny",
         filter: (cocktail) =>
           cocktail.occasion && cocktail.occasion.some((occ) => ["brunch", "afternoon"].includes(occ.toLowerCase())),
       },
       {
         id: "summer",
-        title: "Summer Refreshments",
-        description: "Cool down with these refreshing cocktails",
+        title: t("summerCategory"),
+        description: t("summerDescription"),
         icon: "ice-cream",
         filter: (cocktail) =>
           cocktail.occasion && cocktail.occasion.some((occ) => ["summer", "beach"].includes(occ.toLowerCase())),
       },
       {
         id: "easy",
-        title: "Quick & Easy Mixes",
-        description: "Simple cocktails ready in minutes",
+        title: t("easyCategory"),
+        description: t("easyDescription"),
         icon: "timer",
         filter: (cocktail) =>
           cocktail.difficulty === "Easy" || (cocktail.preparationTime && cocktail.preparationTime.includes("3")),
       },
       {
         id: "citrus",
-        title: "Citrus Delights",
-        description: "Zesty and refreshing citrus flavors",
+        title: t("citrusCategory"),
+        description: t("citrusDescription"),
         icon: "nutrition",
         filter: (cocktail) => cocktail.category === "Citrus",
       },
       {
         id: "classic",
-        title: "Classic Cocktails",
-        description: "Timeless recipes everyone should know",
+        title: t("classicCategory"),
+        description: t("classicDescription"),
         icon: "book",
         filter: (cocktail) => cocktail.category === "Classic",
       },
       {
         id: "exotic",
-        title: "Exotic Adventures",
-        description: "Unique flavors from around the world",
+        title: t("exoticCategory"),
+        description: t("exoticDescription"),
         icon: "globe",
         filter: (cocktail) => cocktail.category === "Exotic",
       },
       {
         id: "sweet",
-        title: "Sweet Sensations",
-        description: "For those with a sweet tooth",
+        title: t("sweetCategory"),
+        description: t("sweetDescription"),
         icon: "cafe",
         filter: (cocktail) => cocktail.taste && cocktail.taste.sweet >= 3,
       },
       {
         id: "sophisticated",
-        title: "For the Sophisticated",
-        description: "Strong and elegant cocktails",
+        title: t("sophisticatedCategory"),
+        description: t("sophisticatedDescription"),
         icon: "diamond",
         filter: (cocktail) => {
           const alcoholContent = Number.parseInt(cocktail.alcoholContent)
@@ -131,8 +137,8 @@ export default function SearchScreen({ navigation }) {
       },
       {
         id: "lowcal",
-        title: "Low-Calorie Options",
-        description: "Lighter cocktails under 180 calories",
+        title: t("lowcalCategory"),
+        description: t("lowcalDescription"),
         icon: "leaf",
         filter: (cocktail) => cocktail.calories < 180,
       },
@@ -149,7 +155,7 @@ export default function SearchScreen({ navigation }) {
 
     // Only keep categories that have cocktails
     setCategories(processedCategories.filter((cat) => cat.cocktails.length > 0))
-  }, [])
+  }, [cocktailsData, t])
 
   // Handle search
   useEffect(() => {
@@ -167,7 +173,7 @@ export default function SearchScreen({ navigation }) {
     )
 
     setSearchResults(results)
-  }, [searchText])
+  }, [searchText, cocktailsData])
 
   // Update the renderCocktailCard function to use white to soft tint gradient
   const renderCocktailCard = ({ item }) => {
@@ -249,7 +255,7 @@ export default function SearchScreen({ navigation }) {
               // Get the background color from the cocktail data or use a default
               const baseColor = cocktail.backgroundColor || "#F9F9F9"
               // Create a very soft tint for the gradient
-              const softTint = createSoftTint(baseColor, 0.9)
+              const softTint = createSoftTint(baseColor, 0.3)
 
               return (
                 <TouchableOpacity
@@ -279,8 +285,10 @@ export default function SearchScreen({ navigation }) {
         ) : (
           <TexturedBackground textureType="pinkLight" style={styles.noResultsContainer}>
             <Ionicons name="search-outline" size={50} color="#FF6B6B" />
-            <Text style={styles.noResultsText}>No cocktails found matching "{searchText}"</Text>
-            <Text style={styles.noResultsSubtext}>Try a different search term</Text>
+            <Text style={styles.noResultsText}>
+              {t("noResults")} "{searchText}"
+            </Text>
+            <Text style={styles.noResultsSubtext}>{t("tryDifferent")}</Text>
           </TexturedBackground>
         )}
       </View>
@@ -292,7 +300,8 @@ export default function SearchScreen({ navigation }) {
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
         {/* Header */}
         <TexturedBackground textureType="pinkLight" style={styles.header}>
-          
+          <Text style={styles.headerTitle}>{t("discover")}</Text>
+          <Text style={styles.headerSubtitle}>{t("findPerfectCocktail")}</Text>
         </TexturedBackground>
 
         {/* Search bar */}
@@ -301,7 +310,7 @@ export default function SearchScreen({ navigation }) {
             <Ionicons name="search" size={20} color="#AAAAAA" />
             <TextInput
               style={styles.searchInput}
-              placeholder="Search cocktails, ingredients..."
+              placeholder={t("searchPlaceholder")}
               value={searchText}
               onChangeText={setSearchText}
               returnKeyType="search"
@@ -433,7 +442,7 @@ const styles = StyleSheet.create({
     paddingRight: 10,
   },
   cocktailCard: {
-    width: 155,
+    width: 170,
     marginRight: 15,
     borderRadius: 15,
     overflow: "hidden",

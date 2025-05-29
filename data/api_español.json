@@ -1,0 +1,441 @@
+[
+    {
+      "id": "1",
+      "name": "Union Square",
+      "category": "Exótico",
+      "rating": 5,
+      "price": 22,
+      "image": "https://www.thecocktaildb.com/images/media/drink/qvvxwy1472406424.jpg",
+      "imageLocal": "require('../assets/images/cocktails/UnionSquare.png')",
+      "backgroundColor": "#f23149",
+      "description": "Union Square es un cóctel vibrante y sofisticado que equilibra notas dulces y ácidas con un toque de especias exóticas. Nombrado en honor al famoso lugar de Nueva York, este trago encarna la energía y diversidad de la ciudad.",
+      "story": "Creado por un reconocido mixólogo en el corazón de Manhattan, Union Square se inspiró en los colores y sabores del famoso mercado verde de Union Square. Rápidamente ganó popularidad entre locales y turistas por su perfil de sabores único y presentación impresionante.",
+      "ingredients": [
+        {
+          "name": "Ginebra",
+          "amount": "2 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/920/920582.png"
+        },
+        {
+          "name": "Vermut",
+          "amount": "1 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/2738/2738639.png"
+        },
+        {
+          "name": "Granadina",
+          "amount": "0.5 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/3076/3076028.png"
+        },
+        {
+          "name": "Lima",
+          "amount": "0.5 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/6866/6866522.png"
+        }
+      ],
+      "preparation": "Agitar todos los ingredientes con hielo y colar en una copa de cóctel enfriada. Decorar con una rodaja de lima y una cereza.",
+      "glassType": "Copa de cóctel",
+      "garnish": "Rodaja de lima y cereza",
+      "alcoholContent": "18%",
+      "taste": {
+        "sweet": 3,
+        "sour": 4,
+        "bitter": 2,
+        "spicy": 1
+      },
+      "difficulty": "Intermedio",
+      "preparationTime": "5 minutos",
+      "popularity": "Alta",
+      "occasion": ["Noche", "Celebración", "Reunión social"],
+      "allergens": ["Ninguno"],
+      "calories": 220,
+      "tips": "Para un extra de sabor, agregar un toque de bitters de chili. Combina bien con entradas de mariscos."
+    },
+    {
+      "id": "2",
+      "name": "Aperol Spritz",
+      "category": "Cítrico",
+      "rating": 4.5,
+      "price": 19,
+      "image": "https://www.thecocktaildb.com/images/media/drink/itwkbs1622738662.jpg",
+      "imageLocal": "require('../assets/images/cocktails/aperolSpritz.png')",
+      "backgroundColor": "#FF8C42",
+      "description": "El Aperol Spritz es un refrescante aperitivo italiano con un equilibrio perfecto entre amargor y dulzura. Su vibrante color naranja y naturaleza efervescente lo hacen ideal para reuniones de verano.",
+      "story": "Originario de Venecia en los años 50, el Aperol Spritz ganó popularidad como bebida pre-cena para estimular el apetito. Su receta simple y sabor refrescante lo convirtieron en favorito mundial, especialmente en meses cálidos.",
+      "ingredients": [
+        {
+          "name": "Aperol",
+          "amount": "3 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/2674/2674883.png"
+        },
+        {
+          "name": "Prosecco",
+          "amount": "2 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/1682/1682987.png"
+        },
+        {
+          "name": "Soda",
+          "amount": "1 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/2722/2722527.png"
+        },
+        {
+          "name": "Naranja",
+          "amount": "1 rodaja",
+          "icon": "https://cdn-icons-png.flaticon.com/128/415/415682.png"
+        }
+      ],
+      "preparation": "Llenar una copa de vino con hielo. Verter el Aperol, luego el Prosecco y un chorrito de soda. Revolver suavemente y decorar con una rodaja de naranja.",
+      "glassType": "Copa de vino",
+      "garnish": "Rodaja de naranja",
+      "alcoholContent": "11%",
+      "taste": {
+        "sweet": 3,
+        "sour": 2,
+        "bitter": 4,
+        "spicy": 0
+      },
+      "difficulty": "Fácil",
+      "preparationTime": "3 minutos",
+      "popularity": "Muy alta",
+      "occasion": ["Brunch", "Tarde", "Verano"],
+      "allergens": ["Sulfitos"],
+      "calories": 170,
+      "tips": "Usar ingredientes fríos para mejor sabor. La proporción puede ajustarse, pero tradicionalmente es 3-2-1 (Aperol-Prosecco-Soda)."
+    },
+    {
+      "id": "3",
+      "name": "Dry Martini",
+      "category": "Clásico",
+      "rating": 4,
+      "price": 11,
+      "image": "https://www.thecocktaildb.com/images/media/drink/6ck9yi1589574317.jpg",
+      "imageLocal": "require('../assets/images/cocktails/DryMartini.png')",
+      "backgroundColor": "#E5F7F7",
+      "description": "El dry martini tiene un agradable sabor salado que contrasta con la ginebra y el vermut. 'Dirty' se refiere a la adición de jugo de oliva o salmuera. Es un cóctel clásico muy fácil de preparar.",
+      "story": "El Martini tiene un origen disputado, con múltiples versiones que datan del siglo XIX. La variación 'dirty' se popularizó a mediados del siglo XX cuando Franklin D. Roosevelt disfrutaba esta versión con olivas del clásico cóctel.",
+      "ingredients": [
+        {
+          "name": "Ginebra",
+          "amount": "2.5 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/920/920582.png"
+        },
+        {
+          "name": "Vermut",
+          "amount": "0.5 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/2738/2738639.png"
+        },
+        {
+          "name": "Aceitunas",
+          "amount": "3",
+          "icon": "https://cdn-icons-png.flaticon.com/128/2909/2909808.png"
+        }
+      ],
+      "preparation": "Mezclar ginebra y vermut con hielo en un vaso mezclador hasta que esté bien frío. Colar en una copa martini enfriada. Añadir jugo de oliva al gusto. Decorar con aceitunas.",
+      "glassType": "Copa martini",
+      "garnish": "Aceitunas verdes",
+      "alcoholContent": "32%",
+      "taste": {
+        "sweet": 1,
+        "sour": 0,
+        "bitter": 3,
+        "spicy": 0
+      },
+      "difficulty": "Fácil",
+      "preparationTime": "4 minutos",
+      "popularity": "Alta",
+      "occasion": ["Noche", "Formal", "Negocios"],
+      "allergens": ["Ninguno"],
+      "calories": 210,
+      "tips": "Algunos bartenders sugieren usar unas gotas de aceite de oliva en lugar de salmuera."
+    },
+    {
+      "id": "4",
+      "name": "Mojito",
+      "category": "Cítrico",
+      "rating": 4.5,
+      "price": 18,
+      "image": "https://www.thecocktaildb.com/images/media/drink/metwgh1606770327.jpg",
+      "imageLocal": "require('../assets/images/cocktails/Mojito.png')",
+      "backgroundColor": "#C7F9CC",
+      "description": "El Mojito es un clásico cubano que combina la frescura de la menta con la acidez de la lima y la dulzura del azúcar. Es un cóctel refrescante perfecto para días calurosos.",
+      "story": "El Mojito se originó en Cuba y es uno de los cócteles más antiguos del país. Era el favorito del escritor Ernest Hemingway y sus raíces se remontan al siglo XVI cuando la tripulación de Sir Francis Drake usaba una versión primitiva para combatir el escorbuto.",
+      "ingredients": [
+        {
+          "name": "Ron Blanco",
+          "amount": "2 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/2738/2738638.png"
+        },
+        {
+          "name": "Lima",
+          "amount": "1",
+          "icon": "https://cdn-icons-png.flaticon.com/128/6866/6866522.png"
+        },
+        {
+          "name": "Menta",
+          "amount": "8 hojas",
+          "icon": "https://cdn-icons-png.flaticon.com/128/6866/6866562.png"
+        },
+        {
+          "name": "Azúcar",
+          "amount": "2 cucharaditas",
+          "icon": "https://cdn-icons-png.flaticon.com/128/2455/2455576.png"
+        },
+        {
+          "name": "Soda",
+          "amount": "Completar",
+          "icon": "https://cdn-icons-png.flaticon.com/128/2722/2722527.png"
+        }
+      ],
+      "preparation": "Majar hojas de menta con azúcar y jugo de lima. Añadir un chorro de soda y llenar el vaso con hielo picado. Verter el ron y completar con soda. Decorar con menta y una rodaja de lima.",
+      "glassType": "Vaso alto",
+      "garnish": "Rama de menta y rodaja de lima",
+      "alcoholContent": "13%",
+      "taste": {
+        "sweet": 3,
+        "sour": 4,
+        "bitter": 0,
+        "spicy": 0
+      },
+      "difficulty": "Intermedio",
+      "preparationTime": "7 minutos",
+      "popularity": "Muy alta",
+      "occasion": ["Verano", "Playa", "Casual"],
+      "allergens": ["Ninguno"],
+      "calories": 160,
+      "tips": "Majar suavemente la menta para liberar los aceites sin romper las hojas, lo que puede crear un sabor amargo."
+    },
+    {
+      "id": "5",
+      "name": "Campari & Naranja",
+      "category": "Cítrico",
+      "rating": 4,
+      "price": 16,
+      "image": "https://www.thecocktaildb.com/images/media/drink/x8lhp41513703167.jpg",
+      "imageLocal": "require('../assets/images/cocktails/campariOrange.png')",
+      "backgroundColor": "#FF3D00",
+      "description": "Un simple pero sofisticado aperitivo italiano que combina el amargor complejo del Campari con la dulce frescura del jugo de naranja. Perfecto para brunch o como bebida pre-cena.",
+      "story": "Esta combinación clásica data de principios del siglo XX cuando el Campari se popularizó en Italia. La adición de jugo de naranja ayudó a balancear su amargor, haciéndolo más accesible manteniendo su carácter distintivo.",
+      "ingredients": [
+        {
+          "name": "Campari",
+          "amount": "1.5 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/2674/2674883.png"
+        },
+        {
+          "name": "Jugo de Naranja",
+          "amount": "4.5 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/415/415682.png"
+        },
+        {
+          "name": "Naranja",
+          "amount": "1 rodaja",
+          "icon": "https://cdn-icons-png.flaticon.com/128/415/415682.png"
+        }
+      ],
+      "preparation": "Llenar un vaso alto con hielo. Verter primero el Campari, luego completar con jugo de naranja fresco. Revolver suavemente y decorar con una rodaja de naranja.",
+      "glassType": "Vaso alto",
+      "garnish": "Rodaja de naranja",
+      "alcoholContent": "8%",
+      "taste": {
+        "sweet": 3,
+        "sour": 2,
+        "bitter": 4,
+        "spicy": 0
+      },
+      "difficulty": "Fácil",
+      "preparationTime": "2 minutos",
+      "popularity": "Media",
+      "occasion": ["Brunch", "Tarde", "Aperitivo"],
+      "allergens": ["Ninguno"],
+      "calories": 150,
+      "tips": "Usar jugo de naranja recién exprimido para mejor sabor. La proporción puede ajustarse al gusto (típicamente 1:3 Campari a jugo)."
+    },
+    {
+      "id": "6",
+      "name": "Gin & Tonic",
+      "category": "Clásico",
+      "rating": 4.5,
+      "price": 14,
+      "image": "https://www.thecocktaildb.com/images/media/drink/z0myp71504351051.jpg",
+      "imageLocal": "require('../assets/images/cocktails/GinTonic.png')",
+      "backgroundColor": "#E5F7F7",
+      "description": "El clásico británico que muestra los botánicos de la ginebra con el amargor fresco del agua tónica. Simple pero infinitamente personalizable con diferentes decoraciones.",
+      "story": "Originalmente desarrollado para hacer más palatable la quinina (un medicamento antimalárico) para soldados británicos en la India colonial, el Gin & Tonic se convirtió en un clásico global. Su popularidad creció en el siglo XIX y sigue siendo un básico mundial.",
+      "ingredients": [
+        {
+          "name": "Ginebra",
+          "amount": "2 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/920/920582.png"
+        },
+        {
+          "name": "Agua Tónica",
+          "amount": "5 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/2722/2722527.png"
+        },
+        {
+          "name": "Lima",
+          "amount": "1 gajo",
+          "icon": "https://cdn-icons-png.flaticon.com/128/6866/6866522.png"
+        }
+      ],
+      "preparation": "Llenar un vaso alto con hielo. Añadir ginebra, luego completar con agua tónica. Exprimir un gajo de lima y agregarlo. Revolver suavemente.",
+      "glassType": "Vaso alto",
+      "garnish": "Gajo de lima",
+      "alcoholContent": "12%",
+      "taste": {
+        "sweet": 1,
+        "sour": 2,
+        "bitter": 3,
+        "spicy": 0
+      },
+      "difficulty": "Fácil",
+      "preparationTime": "3 minutos",
+      "popularity": "Muy alta",
+      "occasion": ["Cualquier momento", "Casual", "Verano"],
+      "allergens": ["Quinina"],
+      "calories": 180,
+      "tips": "Usar agua tónica premium y ginebra de calidad. Experimentar con diferentes decoraciones como pepino, pomelo o hierbas para complementar los botánicos de tu ginebra."
+    },
+    {
+      "id": "7",
+      "name": "Fernandito",
+      "category": "Exótico",
+      "rating": 3.5,
+      "price": 15,
+      "image": "https://www.thecocktaildb.com/images/media/drink/2n6bvk1504379973.jpg",
+      "imageLocal": "require('../assets/images/cocktails/fernandito.png')",
+      "backgroundColor": "#F5E6CA",
+      "description": "Un refrescante cóctel argentino que combina Fernet, un licor amargo de hierbas, con cola para una bebida sorprendentemente balanceada y energizante. Popular entre jóvenes argentinos como bebida social.",
+      "story": "Originado en Argentina en el siglo XX, el Fernandito (o 'Fernet con Coca') se convirtió en la bebida nacional no oficial. Su popularidad se extendió por Sudamérica como digestivo y bebida de fiesta, consumida en grandes cantidades durante celebraciones.",
+      "ingredients": [
+        {
+          "name": "Fernet Branca",
+          "amount": "1.5 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/2674/2674883.png"
+        },
+        {
+          "name": "Cola",
+          "amount": "4.5 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/2909/2909761.png"
+        },
+        {
+          "name": "Hielo",
+          "amount": "Completar",
+          "icon": "https://cdn-icons-png.flaticon.com/128/2965/2965879.png"
+        }
+      ],
+      "preparation": "Llenar un vaso alto con hielo. Verter primero el Fernet, luego completar con cola. Revolver suavemente y servir.",
+      "glassType": "Vaso alto",
+      "garnish": "Ninguno",
+      "alcoholContent": "10%",
+      "taste": {
+        "sweet": 2,
+        "sour": 1,
+        "bitter": 5,
+        "spicy": 2
+      },
+      "difficulty": "Fácil",
+      "preparationTime": "2 minutos",
+      "popularity": "Alta (en Sudamérica)",
+      "occasion": ["Salida nocturna", "Después de cenar", "Reunión social"],
+      "allergens": ["Cafeína"],
+      "calories": 190,
+      "tips": "La proporción tradicional es 1:3 Fernet a cola, pero ajustar al gusto. Algunos prefieren más Fernet para un sabor herbal más fuerte."
+    },
+    {
+      "id": "8",
+      "name": "Cuba Libre",
+      "category": "Clásico",
+      "rating": 4,
+      "price": 13,
+      "image": "https://www.thecocktaildb.com/images/media/drink/wmkbfj1606853905.jpg",
+      "imageLocal": "require('../assets/images/cocktails/CubaLibre.png')",
+      "backgroundColor": "#ed830a",
+      "description": "El Cuba Libre es un simple pero satisfactorio cóctel que combina ron, cola y lima en un refrescante trago alto. Su nombre significa 'Cuba Libre', reflejando sus orígenes durante la Guerra de Independencia cubana.",
+      "story": "Creado alrededor de 1900 cuando Cuba luchaba por su independencia de España, la bebida se popularizó entre soldados americanos. La adición de Coca-Cola (un producto nuevo en ese momento) al tradicional ron con lima creó un clásico instantáneo que se extendió mundialmente.",
+      "ingredients": [
+        {
+          "name": "Ron Blanco",
+          "amount": "2 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/2738/2738638.png"
+        },
+        {
+          "name": "Cola",
+          "amount": "4 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/2909/2909761.png"
+        },
+        {
+          "name": "Lima",
+          "amount": "0.5 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/6866/6866522.png"
+        }
+      ],
+      "preparation": "Exprimir jugo de lima en un vaso alto con hielo. Añadir ron, luego completar con cola. Revolver suavemente y decorar con un gajo de lima.",
+      "glassType": "Vaso alto",
+      "garnish": "Gajo de lima",
+      "alcoholContent": "12%",
+      "taste": {
+        "sweet": 4,
+        "sour": 2,
+        "bitter": 1,
+        "spicy": 0
+      },
+      "difficulty": "Fácil",
+      "preparationTime": "3 minutos",
+      "popularity": "Alta",
+      "occasion": ["Casual", "Verano", "Playa"],
+      "allergens": ["Cafeína"],
+      "calories": 185,
+      "tips": "Usar ron estilo cubano si está disponible. Para una versión más auténtica, usar Coca-Cola mexicana hecha con azúcar de caña."
+    },
+    {
+      "id": "9",
+      "name": "Cosmopolitan",
+      "category": "Exótico",
+      "rating": 4.5,
+      "price": 20,
+      "image": "https://www.thecocktaildb.com/images/media/drink/kpsajh1504368362.jpg",
+      "imageLocal": "require('../assets/images/cocktails/Cosmopolitan.png')",
+      "backgroundColor": "#fd5f8a",
+      "description": "Un elegante cóctel rosado que balancea el sabor limpio del vodka con lo ácido del arándano y la acidez de la lima, terminado con un toque de sofisticación del licor de naranja.",
+      "story": "Popularizado en los 90 por Madonna y la serie 'Sex and the City', el Cosmopolitan en realidad se originó en Miami en los 70 antes de ser perfeccionado en Nueva York. Se convirtió en la bebida definitoria de una generación buscando cócteles glamorosos pero accesibles.",
+      "ingredients": [
+        {
+          "name": "Vodka Cítrico",
+          "amount": "1.5 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/3132/3132735.png"
+        },
+        {
+          "name": "Triple Sec",
+          "amount": "0.5 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/2738/2738639.png"
+        },
+        {
+          "name": "Jugo de Arándano",
+          "amount": "1 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/2909/2909763.png"
+        },
+        {
+          "name": "Lima",
+          "amount": "0.5 oz",
+          "icon": "https://cdn-icons-png.flaticon.com/128/6866/6866522.png"
+        }
+      ],
+      "preparation": "Agitar todos los ingredientes con hielo y colar en una copa martini enfriada. Decorar con un twist de naranja o rodaja de lima.",
+      "glassType": "Copa martini",
+      "garnish": "Twist de naranja",
+      "alcoholContent": "20%",
+      "taste": {
+        "sweet": 3,
+        "sour": 4,
+        "bitter": 1,
+        "spicy": 0
+      },
+      "difficulty": "Intermedio",
+      "preparationTime": "5 minutos",
+      "popularity": "Alta",
+      "occasion": ["Salida nocturna", "Celebración", "Noche de chicas"],
+      "allergens": ["Ninguno"],
+      "calories": 200,
+      "tips": "Usar jugo de arándano de alta calidad (no cóctel) para la acidez correcta. El Cosmo perfecto debe ser rosa translúcido, no rojo opaco."
+    }
+]

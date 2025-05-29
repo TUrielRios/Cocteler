@@ -4,11 +4,14 @@ import { StatusBar } from "expo-status-bar"
 import { SafeAreaProvider } from "react-native-safe-area-context"
 import { View, ActivityIndicator } from "react-native"
 
-import { FavoritesProvider } from "./context/favoritesContext"
+import { FavoritesProvider } from "./context/FavoritesContext"
 import { OnboardingProvider, useOnboarding } from "./context/OnboardingContext"
+import { LanguageProvider } from "./context/LanguageContext"
 import TabNavigator from "./navigation/TabNavigator"
 import CocktailDetailScreen from "./screens/CocktailDetailScreen"
 import CollectionDetailScreen from "./screens/CollectionDetailScreen"
+import CommunityDetailScreen from "./screens/CommunityDetailScreen"
+import LanguageSelectionScreen from "./screens/LanguageSelectionScreen"
 import WelcomeScreen from "./screens/WelcomeScreen"
 import NameInputScreen from "./screens/NameInputScreen"
 import TastePreferencesScreen from "./screens/TastePreferenceScreen"
@@ -32,16 +35,22 @@ function AppNavigator() {
   return (
     <Stack.Navigator
       screenOptions={{ headerShown: false }}
-      initialRouteName={onboardingCompleted ? "MainTabs" : "Welcome"}
+      initialRouteName={onboardingCompleted ? "MainTabs" : "LanguageSelection"}
     >
-      {/* Always include onboarding screens, but they'll only be the initial route when onboardingCompleted is false */}
+      {/* Language selection screen - first screen */}
+      <Stack.Screen name="LanguageSelection" component={LanguageSelectionScreen} />
+
+      {/* Onboarding screens */}
       <Stack.Screen name="Welcome" component={WelcomeScreen} />
       <Stack.Screen name="NameInput" component={NameInputScreen} />
+      <Stack.Screen name="TastePreferences" component={TastePreferencesScreen} />
       <Stack.Screen name="FavoriteBase" component={FavoriteBaseScreen} />
       <Stack.Screen name="OccasionPreferences" component={OccasionPreferencesScreen} />
 
+      {/* Main app */}
       <Stack.Screen name="MainTabs" component={TabNavigator} />
-      <Stack.Screen name="TastePreferences" component={TastePreferencesScreen} />
+
+      {/* Modal screens */}
       <Stack.Screen
         name="CocktailDetail"
         component={CocktailDetailScreen}
@@ -58,6 +67,14 @@ function AppNavigator() {
           presentation: "modal",
         }}
       />
+      <Stack.Screen
+        name="CommunityDetail"
+        component={CommunityDetailScreen}
+        options={{
+          cardStyle: { backgroundColor: "transparent" },
+          presentation: "modal",
+        }}
+      />
     </Stack.Navigator>
   )
 }
@@ -65,14 +82,16 @@ function AppNavigator() {
 export default function App() {
   return (
     <SafeAreaProvider>
-      <FavoritesProvider>
-        <OnboardingProvider>
-          <NavigationContainer>
-            <StatusBar style="auto" />
-            <AppNavigator />
-          </NavigationContainer>
-        </OnboardingProvider>
-      </FavoritesProvider>
+      <LanguageProvider>
+        <FavoritesProvider>
+          <OnboardingProvider>
+            <NavigationContainer>
+              <StatusBar style="auto" />
+              <AppNavigator />
+            </NavigationContainer>
+          </OnboardingProvider>
+        </FavoritesProvider>
+      </LanguageProvider>
     </SafeAreaProvider>
   )
 }

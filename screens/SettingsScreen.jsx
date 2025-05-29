@@ -6,12 +6,14 @@ import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { Ionicons } from "@expo/vector-icons"
 import { LinearGradient } from "expo-linear-gradient"
 import { useOnboarding } from "../context/OnboardingContext"
+import { useLanguage } from "../context/LanguageContext"
 
 const { width } = Dimensions.get("window")
 
 export default function SettingsScreen({ navigation }) {
   const insets = useSafeAreaInsets()
   const { userPreferences, resetOnboarding } = useOnboarding()
+  const { language, changeLanguage, t } = useLanguage()
 
   // State for settings
   const [notificationsEnabled, setNotificationsEnabled] = useState(true)
@@ -110,6 +112,33 @@ export default function SettingsScreen({ navigation }) {
     </TouchableOpacity>
   )
 
+  // Render language selector
+  const renderLanguageSelector = () => (
+    <View style={styles.settingItem}>
+      <View style={[styles.settingIconContainer, { backgroundColor: "#4ECDC4" }]}>
+        <Ionicons name="language" size={22} color="#FFFFFF" />
+      </View>
+      <View style={styles.settingContent}>
+        <Text style={styles.settingTitle}>{t("language")}</Text>
+        <Text style={styles.settingDescription}>{t("selectLanguage")}</Text>
+      </View>
+      <View style={styles.languageSelector}>
+        <TouchableOpacity
+          style={[styles.languageOption, language === "en" && styles.languageOptionSelected]}
+          onPress={() => changeLanguage("en")}
+        >
+          <Text style={[styles.languageText, language === "en" && styles.languageTextSelected]}>{t("english")}</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.languageOption, language === "es" && styles.languageOptionSelected]}
+          onPress={() => changeLanguage("es")}
+        >
+          <Text style={[styles.languageText, language === "es" && styles.languageTextSelected]}>{t("spanish")}</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  )
+
   return (
     <View style={[styles.container, { paddingTop: insets.top }]}>
       {/* Animated header */}
@@ -122,7 +151,7 @@ export default function SettingsScreen({ navigation }) {
           },
         ]}
       >
-        <Text style={styles.headerTitle}>Settings</Text>
+        <Text style={styles.headerTitle}>{t("settings")}</Text>
       </Animated.View>
 
       <Animated.ScrollView
@@ -139,8 +168,8 @@ export default function SettingsScreen({ navigation }) {
           end={{ x: 1, y: 1 }}
           style={styles.header}
         >
-          <Text style={styles.headerTitle}>Settings</Text>
-          <Text style={styles.headerSubtitle}>Customize your experience</Text>
+          <Text style={styles.headerTitle}>{t("settings")}</Text>
+          <Text style={styles.headerSubtitle}>{t("customizeExperience")}</Text>
           <Image
             source={{ uri: "https://cdn-icons-png.flaticon.com/128/2099/2099058.png" }}
             style={styles.headerIcon}
@@ -159,87 +188,89 @@ export default function SettingsScreen({ navigation }) {
           </View>
           <View style={styles.profileInfo}>
             <Text style={styles.profileName}>{userPreferences.name || "Cocktail Lover"}</Text>
-            <Text style={styles.profileEmail}>user@example.com</Text>
+            {/* <Text style={styles.profileEmail}>user@example.com</Text>
             <TouchableOpacity style={styles.editProfileTextButton}>
-              <Text style={styles.editProfileText}>Edit Profile</Text>
-            </TouchableOpacity>
+              <Text style={styles.editProfileText}>{t("editProfile")}</Text>
+            </TouchableOpacity> */}
           </View>
         </View>
 
         {/* Settings Sections */}
         <View style={styles.settingsSection}>
-          <Text style={styles.sectionTitle}>Preferences</Text>
+          <Text style={styles.sectionTitle}>{t("preferences")}</Text>
 
           {renderSwitchSetting({
             icon: "notifications-outline",
-            title: "Notifications",
-            description: "Receive updates about new cocktails and features",
+            title: t("notifications"),
+            description: t("receiveUpdates"),
             value: notificationsEnabled,
             onValueChange: setNotificationsEnabled,
           })}
 
-          {renderSwitchSetting({
+          {/* {renderSwitchSetting({
             icon: "moon-outline",
-            title: "Dark Mode",
-            description: "Switch to dark theme",
+            title: t("darkMode"),
+            description: t("switchTheme"),
             value: darkModeEnabled,
             onValueChange: setDarkModeEnabled,
             color: "#6366F1",
-          })}
+          })} */}
 
           {renderSwitchSetting({
             icon: "save-outline",
-            title: "Save Ingredients",
-            description: "Remember ingredients you have at home",
+            title: t("saveIngredients"),
+            description: t("rememberIngredients"),
             value: saveIngredientsEnabled,
             onValueChange: setSaveIngredientsEnabled,
             color: "#34D399",
           })}
+
+          {renderLanguageSelector()}
         </View>
 
         <View style={styles.settingsSection}>
-          <Text style={styles.sectionTitle}>Account</Text>
+          <Text style={styles.sectionTitle}>{t("account")}</Text>
 
-          {renderNavigationSetting({
+          {/* {renderNavigationSetting({
             icon: "person-outline",
-            title: "Personal Information",
-            description: "Update your profile details",
+            title: t("personalInfo"),
+            description: t("updateProfile"),
             onPress: () => {},
             color: "#60A5FA",
-          })}
+          })} */}
 
           {renderNavigationSetting({
             icon: "wine-outline",
-            title: "Taste Preferences",
-            description: "Update your flavor preferences",
+            title: t("tastePreferences"),
+            description: t("updateFlavor"),
             onPress: () => navigation.navigate("TastePreferences", { fromSettings: true }),
             color: "#FF6B6B",
           })}
 
-          {renderNavigationSetting({
+          {/* {renderNavigationSetting({
             icon: "lock-closed-outline",
-            title: "Privacy Settings",
-            description: "Manage your data and privacy",
+            title: t("privacySettings"),
+            description: t("manageData"),
             onPress: () => {},
             color: "#8B5CF6",
-          })}
+          })} */}
         </View>
 
         <View style={styles.settingsSection}>
-          <Text style={styles.sectionTitle}>About</Text>
+          <Text style={styles.sectionTitle}>{t("about")}</Text>
 
           {renderNavigationSetting({
             icon: "information-circle-outline",
-            title: "App Information",
-            description: "Version 1.0.0",
+            title: t("appInfo"),
+            description: t("version"),
             onPress: () => {},
             color: "#F59E0B",
           })}
 
           {renderNavigationSetting({
             icon: "help-circle-outline",
-            title: "Help & Support",
-            description: "FAQs and contact information",
+            title: t("helpSupport"),
+            description: t("faqContact"),
             onPress: () => {},
             color: "#10B981",
             badge: "New",
@@ -247,28 +278,28 @@ export default function SettingsScreen({ navigation }) {
 
           {renderNavigationSetting({
             icon: "star-outline",
-            title: "Rate the App",
-            description: "Tell us what you think",
+            title: t("rateApp"),
+            description: t("tellUs"),
             onPress: () => {},
             color: "#F97316",
           })}
         </View>
 
         <View style={styles.settingsSection}>
-          <Text style={styles.sectionTitle}>Advanced</Text>
+          <Text style={styles.sectionTitle}>{t("advanced")}</Text>
 
           {renderNavigationSetting({
             icon: "refresh-outline",
-            title: "Reset Preferences",
-            description: "Reset all app preferences to default",
+            title: t("resetPreferences"),
+            description: t("resetToDefault"),
             onPress: () => {},
             color: "#6B7280",
           })}
 
           {renderDangerSetting({
             icon: "refresh-circle-outline",
-            title: "Reset Onboarding",
-            description: "Go through the welcome screens again",
+            title: t("resetOnboarding"),
+            description: t("welcomeScreens"),
             onPress: handleResetOnboarding,
           })}
         </View>
@@ -281,13 +312,13 @@ export default function SettingsScreen({ navigation }) {
             style={styles.logoutGradient}
           >
             <Ionicons name="log-out-outline" size={20} color="#FFFFFF" style={styles.logoutIcon} />
-            <Text style={styles.logoutText}>Log Out</Text>
+            <Text style={styles.logoutText}>{t("logOut")}</Text>
           </LinearGradient>
         </TouchableOpacity>
 
         <View style={styles.versionContainer}>
           <Text style={styles.versionText}>Cocktail App v1.0.0</Text>
-          <Text style={styles.copyrightText}>© 2025 Cocktail App. All rights reserved.</Text>
+          <Text style={styles.copyrightText}>{t("copyright")}</Text>
         </View>
 
         {/* Extra padding at bottom for navigation */}
@@ -331,8 +362,6 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 30,
     position: "relative",
     overflow: "hidden",
-    margin:15,
-    marginBottom: 30
   },
   headerTitle: {
     fontSize: 32,
@@ -374,13 +403,6 @@ const styles = StyleSheet.create({
     position: "relative",
     marginRight: 20,
   },
-  // profileImage: {
-  //   width: 70,
-  //   height: 70,
-  //   borderRadius: 35,
-  //   borderWidth: 3,
-  //   borderColor: "#FFFFFF",
-  // },
   defaultProfileIcon: {
     width: 70,
     height: 70,
@@ -488,6 +510,27 @@ const styles = StyleSheet.create({
     color: "#FFFFFF",
     fontSize: 10,
     fontWeight: "bold",
+  },
+  languageSelector: {
+    flexDirection: "row",
+  },
+  languageOption: {
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 15,
+    backgroundColor: "#F0F0F0",
+    marginLeft: 8,
+  },
+  languageOptionSelected: {
+    backgroundColor: "#4ECDC4",
+  },
+  languageText: {
+    fontSize: 12,
+    color: "#6B5E62",
+  },
+  languageTextSelected: {
+    color: "#FFFFFF",
+    fontWeight: "600",
   },
   logoutButton: {
     marginHorizontal: 20,

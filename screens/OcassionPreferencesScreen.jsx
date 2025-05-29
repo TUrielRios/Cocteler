@@ -5,62 +5,64 @@ import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Dimensions, Anima
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { Ionicons } from "@expo/vector-icons"
 import { useOnboarding } from "../context/OnboardingContext"
+import { useLanguage } from "../context/LanguageContext"
 import { LinearGradient } from "expo-linear-gradient"
 
 const { width } = Dimensions.get("window")
 
-// Occasion options
-const occasionOptions = [
-  {
-    id: "evening",
-    name: "Evening",
-    icon: "moon-outline",
-  },
-  {
-    id: "celebration",
-    name: "Celebration",
-    icon: "gift-outline",
-  },
-  {
-    id: "brunch",
-    name: "Brunch",
-    icon: "sunny-outline",
-  },
-  {
-    id: "dinner",
-    name: "Dinner",
-    icon: "restaurant-outline",
-  },
-  {
-    id: "party",
-    name: "Party",
-    icon: "people-outline",
-  },
-  {
-    id: "date",
-    name: "Date Night",
-    icon: "heart-outline",
-  },
-  {
-    id: "casual",
-    name: "Casual",
-    icon: "home-outline",
-  },
-  {
-    id: "summer",
-    name: "Summer",
-    icon: "umbrella-outline",
-  },
-]
-
 export default function OccasionPreferencesScreen({ navigation }) {
   const insets = useSafeAreaInsets()
   const { completeOnboarding } = useOnboarding()
+  const { t } = useLanguage()
   const [selectedOccasions, setSelectedOccasions] = useState([])
 
   // Animation values
   const fadeAnim = useRef(new Animated.Value(0)).current
   const slideAnim = useRef(new Animated.Value(30)).current
+
+  // Occasion options
+  const occasionOptions = [
+    {
+      id: "evening",
+      name: t("evening"),
+      icon: "moon-outline",
+    },
+    {
+      id: "celebration",
+      name: t("celebration"),
+      icon: "gift-outline",
+    },
+    {
+      id: "brunch",
+      name: t("brunch"),
+      icon: "sunny-outline",
+    },
+    {
+      id: "dinner",
+      name: t("dinner"),
+      icon: "restaurant-outline",
+    },
+    {
+      id: "party",
+      name: t("party"),
+      icon: "people-outline",
+    },
+    {
+      id: "date",
+      name: t("dateNight"),
+      icon: "heart-outline",
+    },
+    {
+      id: "casual",
+      name: t("casual"),
+      icon: "home-outline",
+    },
+    {
+      id: "summer",
+      name: t("summer"),
+      icon: "umbrella-outline",
+    },
+  ]
 
   useEffect(() => {
     // Fade in animation
@@ -118,8 +120,8 @@ export default function OccasionPreferencesScreen({ navigation }) {
   return (
     <View style={[styles.container, { paddingTop: insets.top }]}>
       <LinearGradient colors={["#FF9A9E", "#FF6B6B"]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={styles.header}>
-        <Text style={styles.headerTitle}>Occasions</Text>
-        <Text style={styles.headerSubtitle}>When do you enjoy cocktails?</Text>
+        <Text style={styles.headerTitle}>{t("occasions")}</Text>
+        <Text style={styles.headerSubtitle}>{t("whenEnjoyCocktails")}</Text>
         <Image source={{ uri: "https://cdn-icons-png.flaticon.com/128/2674/2674883.png" }} style={styles.headerIcon} />
       </LinearGradient>
 
@@ -132,10 +134,7 @@ export default function OccasionPreferencesScreen({ navigation }) {
         >
           <View style={styles.instructionContainer}>
             <Ionicons name="information-circle" size={24} color="#FF6B6B" style={styles.instructionIcon} />
-            <Text style={styles.instructionText}>
-              Select the occasions when you typically enjoy cocktails. This helps us recommend the perfect drinks for
-              your lifestyle.
-            </Text>
+            <Text style={styles.instructionText}>{t("selectOccasions")}</Text>
           </View>
 
           <View style={styles.occasionsContainer}>{occasionOptions.map(renderOccasionOption)}</View>
@@ -148,14 +147,14 @@ export default function OccasionPreferencesScreen({ navigation }) {
                 end={{ x: 1, y: 0 }}
                 style={styles.buttonGradient}
               >
-                <Text style={styles.finishButtonText}>Finish</Text>
+                <Text style={styles.finishButtonText}>{t("finish")}</Text>
                 <Ionicons name="checkmark-circle" size={20} color="#FFFFFF" style={styles.buttonIcon} />
               </LinearGradient>
             </TouchableOpacity>
           </View>
 
           <TouchableOpacity style={styles.skipButton} onPress={() => navigation.navigate("MainTabs")}>
-            <Text style={styles.skipButtonText}>Skip this step</Text>
+            <Text style={styles.skipButtonText}>{t("skipThisStep")}</Text>
           </TouchableOpacity>
         </Animated.View>
       </ScrollView>
@@ -189,8 +188,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#FFFFFF",
     marginBottom: 8,
-    // In a real app, we would use a custom font
-    // fontFamily: "Playfair Display",
     letterSpacing: 0.5,
     textShadowColor: "rgba(0, 0, 0, 0.1)",
     textShadowOffset: { width: 1, height: 1 },
@@ -199,8 +196,6 @@ const styles = StyleSheet.create({
   headerSubtitle: {
     fontSize: 16,
     color: "#FFFFFF",
-    // In a real app, we would use a custom font
-    // fontFamily: "Poppins",
     letterSpacing: 0.2,
     opacity: 0.9,
   },
@@ -237,8 +232,6 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: "#4A3F41",
     lineHeight: 22,
-    // In a real app, we would use a custom font
-    // fontFamily: "Poppins",
     textAlign: "center",
   },
   occasionsContainer: {
@@ -270,8 +263,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "#4A3F41",
     flex: 1,
-    // In a real app, we would use a custom font
-    // fontFamily: "Poppins",
   },
   occasionNameSelected: {
     color: "#FFFFFF",
@@ -303,8 +294,6 @@ const styles = StyleSheet.create({
     color: "#FFFFFF",
     fontSize: 18,
     fontWeight: "600",
-    // In a real app, we would use a custom font
-    // fontFamily: "Poppins",
     letterSpacing: 0.5,
   },
   buttonIcon: {
@@ -318,8 +307,6 @@ const styles = StyleSheet.create({
   skipButtonText: {
     color: "#6B5E62",
     fontSize: 16,
-    // In a real app, we would use a custom font
-    // fontFamily: "Poppins",
   },
   progressContainer: {
     flexDirection: "row",

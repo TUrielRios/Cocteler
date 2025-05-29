@@ -6,6 +6,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { Ionicons } from "@expo/vector-icons"
 import { useOnboarding } from "../context/OnboardingContext"
 import { LinearGradient } from "expo-linear-gradient"
+import { useLanguage } from "../context/LanguageContext"
 
 const { width } = Dimensions.get("window")
 const SLIDER_WIDTH = width - 100
@@ -17,6 +18,7 @@ export default function TastePreferencesScreen({ navigation, route }) {
   const { updatePreferences, userPreferences } = useOnboarding()
   const fadeAnim = useRef(new Animated.Value(0)).current
   const fromSettings = route.params?.fromSettings
+  const { t } = useLanguage()
 
   // Taste preferences state
   const [tastePreferences, setTastePreferences] = useState({
@@ -50,31 +52,31 @@ export default function TastePreferencesScreen({ navigation, route }) {
     }
   }, [fromSettings, userPreferences])
 
-  // Taste icons and colors
+  // Taste icons and colors - Updated to use translations
   const tasteConfig = {
     sweet: {
       icon: "ice-cream-outline",
       emoji: "🍯",
       gradient: ["#FF9A9E", "#FECFEF"],
-      description: "From barely sweet to dessert-like",
+      description: t("sweetDescription"), // Using translation
     },
     sour: {
       icon: "nutrition-outline",
       emoji: "🍋",
       gradient: ["#96DEDA", "#50C9C3"],
-      description: "From subtle tang to mouth-puckering",
+      description: t("sourDescription"), // Using translation
     },
     bitter: {
       icon: "leaf-outline",
       emoji: "🌿",
       gradient: ["#A8CABA", "#5D8466"],
-      description: "From smooth to intensely bitter",
+      description: t("bitterDescription"), // Using translation
     },
     spicy: {
       icon: "flame-outline",
       emoji: "🌶️",
       gradient: ["#FF9A9E", "#FF5757"],
-      description: "From mild warmth to fiery heat",
+      description: t("spicyDescription"), // Using translation
     },
   }
 
@@ -134,7 +136,7 @@ export default function TastePreferencesScreen({ navigation, route }) {
           <View style={styles.sliderTitleContainer}>
             <Text style={styles.sliderEmoji}>{config.emoji}</Text>
             <View>
-              <Text style={styles.sliderTitle}>{type.charAt(0).toUpperCase() + type.slice(1)}</Text>
+              <Text style={styles.sliderTitle}>{t(type)}</Text>
               <Text style={styles.sliderDescription}>{config.description}</Text>
             </View>
           </View>
@@ -179,8 +181,8 @@ export default function TastePreferencesScreen({ navigation, route }) {
           </View>
 
           <View style={styles.sliderLabelsContainer}>
-            <Text style={styles.sliderMinLabel}>Less</Text>
-            <Text style={styles.sliderMaxLabel}>More</Text>
+            <Text style={styles.sliderMinLabel}>{t("less")}</Text>
+            <Text style={styles.sliderMaxLabel}>{t("more")}</Text>
           </View>
         </View>
       </View>
@@ -198,18 +200,15 @@ export default function TastePreferencesScreen({ navigation, route }) {
       )}
 
       <LinearGradient colors={["#FF9A9E", "#FECFEF"]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={styles.header}>
-        <Text style={styles.headerTitle}>Taste Preferences</Text>
-        <Text style={styles.headerSubtitle}>Tell us what you like</Text>
-        <Image source={{ uri: "https://cdn-icons-png.flaticon.com/128/2674/2674883.png" }} style={styles.headerIcon} />
+        <Text style={styles.headerTitle}>{t("tastePreferences")}</Text>
+        <Text style={styles.headerSubtitle}>{t("tellUsWhatYouLike")}</Text>
       </LinearGradient>
 
       <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
         <Animated.View style={{ opacity: fadeAnim }}>
           <View style={styles.instructionContainer}>
             <Ionicons name="information-circle" size={24} color="#FF6B6B" style={styles.instructionIcon} />
-            <Text style={styles.instructionText}>
-              Adjust the sliders to tell us your taste preferences. This will help us recommend cocktails you'll love.
-            </Text>
+            <Text style={styles.instructionText}>{t("adjustSliders")}</Text>
           </View>
 
           {renderTasteSlider("sweet")}
@@ -225,7 +224,7 @@ export default function TastePreferencesScreen({ navigation, route }) {
                 end={{ x: 1, y: 0 }}
                 style={styles.buttonGradient}
               >
-                <Text style={styles.continueButtonText}>{fromSettings ? "Save Changes" : "Continue"}</Text>
+                <Text style={styles.continueButtonText}>{fromSettings ? t("saveChanges") : t("continue")}</Text>
                 <Ionicons
                   name={fromSettings ? "checkmark" : "arrow-forward"}
                   size={20}

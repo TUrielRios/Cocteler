@@ -5,59 +5,55 @@ import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Image, Dimensions
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { Ionicons } from "@expo/vector-icons"
 import { useOnboarding } from "../context/OnboardingContext"
+import { useLanguage } from "../context/LanguageContext"
 import { LinearGradient } from "expo-linear-gradient"
 
 const { width } = Dimensions.get("window")
 const cardWidth = (width - 60) / 2 // Two cards per row with margins
 
-// Base spirit options
-const baseOptions = [
-  {
-    id: "gin",
-    name: "Gin",
-    icon: "https://cdn-icons-png.flaticon.com/128/920/920582.png",
-    description: "Botanical and aromatic",
-  },
-  {
-    id: "vodka",
-    name: "Vodka",
-    icon: "https://cdn-icons-png.flaticon.com/128/2738/2738638.png",
-    description: "Clean and versatile",
-  },
-  {
-    id: "rum",
-    name: "Rum",
-    icon: "https://cdn-icons-png.flaticon.com/128/2738/2738638.png",
-    description: "Sweet and tropical",
-  },
-  {
-    id: "tequila",
-    name: "Tequila",
-    icon: "https://cdn-icons-png.flaticon.com/128/2738/2738639.png",
-    description: "Bold and earthy",
-  },
-  {
-    id: "whiskey",
-    name: "Whiskey",
-    icon: "https://cdn-icons-png.flaticon.com/128/2738/2738639.png",
-    description: "Rich and complex",
-  },
-  {
-    id: "any",
-    name: "Any",
-    icon: "https://cdn-icons-png.flaticon.com/128/1682/1682987.png",
-    description: "I'm open to anything",
-  },
-]
-
 export default function FavoriteBaseScreen({ navigation }) {
   const insets = useSafeAreaInsets()
   const { updatePreferences } = useOnboarding()
+  const { t } = useLanguage()
   const [selectedBase, setSelectedBase] = useState(null)
 
   // Animation values
   const fadeAnim = useRef(new Animated.Value(0)).current
   const slideAnim = useRef(new Animated.Value(30)).current
+
+  // Base spirit options
+  const baseOptions = [
+    {
+      id: "gin",
+      name: t("gin"),
+      description: t("ginDescription"),
+    },
+    {
+      id: "vodka",
+      name: t("vodka"),
+      description: t("vodkaDescription"),
+    },
+    {
+      id: "rum",
+      name: t("rum"),
+      description: t("rumDescription"),
+    },
+    {
+      id: "tequila",
+      name: t("tequila"),
+      description: t("tequilaDescription"),
+    },
+    {
+      id: "whiskey",
+      name: t("whiskey"),
+      description: t("whiskeyDescription"),
+    },
+    {
+      id: "any",
+      name: t("any"),
+      description: t("anyDescription"),
+    },
+  ]
 
   useEffect(() => {
     // Fade in animation
@@ -110,8 +106,8 @@ export default function FavoriteBaseScreen({ navigation }) {
   return (
     <View style={[styles.container, { paddingTop: insets.top }]}>
       <LinearGradient colors={["#A8CABA", "#5D8466"]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={styles.header}>
-        <Text style={styles.headerTitle}>Favorite Base</Text>
-        <Text style={styles.headerSubtitle}>What's your preferred spirit?</Text>
+        <Text style={styles.headerTitle}>{t("favoriteBase")}</Text>
+        <Text style={styles.headerSubtitle}>{t("preferredSpirit")}</Text>
         <Image source={{ uri: "https://cdn-icons-png.flaticon.com/128/2738/2738639.png" }} style={styles.headerIcon} />
       </LinearGradient>
 
@@ -124,9 +120,7 @@ export default function FavoriteBaseScreen({ navigation }) {
         >
           <View style={styles.instructionContainer}>
             <Ionicons name="information-circle" size={24} color="#5D8466" style={styles.instructionIcon} />
-            <Text style={styles.instructionText}>
-              Select your favorite base spirit. We'll use this to recommend cocktails you'll enjoy.
-            </Text>
+            <Text style={styles.instructionText}>{t("selectFavoriteBase")}</Text>
           </View>
 
           <View style={styles.baseGrid}>{baseOptions.map(renderBaseCard)}</View>
@@ -143,7 +137,7 @@ export default function FavoriteBaseScreen({ navigation }) {
                 end={{ x: 1, y: 0 }}
                 style={styles.buttonGradient}
               >
-                <Text style={styles.continueButtonText}>Continue</Text>
+                <Text style={styles.continueButtonText}>{t("continue")}</Text>
                 <Ionicons name="arrow-forward" size={20} color="#FFFFFF" style={styles.buttonIcon} />
               </LinearGradient>
             </TouchableOpacity>
@@ -180,8 +174,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#FFFFFF",
     marginBottom: 8,
-    // In a real app, we would use a custom font
-    // fontFamily: "Playfair Display",
     letterSpacing: 0.5,
     textShadowColor: "rgba(0, 0, 0, 0.1)",
     textShadowOffset: { width: 1, height: 1 },
@@ -190,8 +182,6 @@ const styles = StyleSheet.create({
   headerSubtitle: {
     fontSize: 16,
     color: "#FFFFFF",
-    // In a real app, we would use a custom font
-    // fontFamily: "Poppins",
     letterSpacing: 0.2,
     opacity: 0.9,
   },
@@ -228,8 +218,6 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: "#4A3F41",
     lineHeight: 22,
-    // In a real app, we would use a custom font
-    // fontFamily: "Poppins",
   },
   baseGrid: {
     flexDirection: "row",
@@ -282,8 +270,6 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     color: "#4A3F41",
     marginBottom: 5,
-    // In a real app, we would use a custom font
-    // fontFamily: "Playfair Display",
   },
   baseNameSelected: {
     color: "#FFFFFF",
@@ -292,8 +278,6 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: "#6B5E62",
     textAlign: "center",
-    // In a real app, we would use a custom font
-    // fontFamily: "Poppins",
   },
   baseDescriptionSelected: {
     color: "rgba(255, 255, 255, 0.9)",
@@ -329,8 +313,6 @@ const styles = StyleSheet.create({
     color: "#FFFFFF",
     fontSize: 18,
     fontWeight: "600",
-    // In a real app, we would use a custom font
-    // fontFamily: "Poppins",
     letterSpacing: 0.5,
   },
   buttonIcon: {

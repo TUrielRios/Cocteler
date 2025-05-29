@@ -7,8 +7,8 @@ import { Ionicons } from "@expo/vector-icons"
 import { LinearGradient } from "expo-linear-gradient"
 import { getLocalImage } from "../utils/imageMapping"
 import StarRating from "../components/StarRating"
-import { useFavorites } from "../context/favoritesContext"
-import cocktailsData from "../data/api.json"
+import { useFavorites } from "../context/FavoritesContext"
+import { useLanguage } from "../context/LanguageContext"
 
 const { width, height } = Dimensions.get("window")
 const cardWidth = (width - 50) / 2 // Two cards per row with margins
@@ -17,6 +17,7 @@ export default function CollectionDetailScreen({ route, navigation }) {
   const { collection } = route.params
   const insets = useSafeAreaInsets()
   const { addToCollection, removeFromCollection, isInCollection } = useFavorites()
+  const { cocktailsData, t } = useLanguage()
   const [collectionCocktails, setCollectionCocktails] = useState([])
   const [isAddModalVisible, setIsAddModalVisible] = useState(false)
   const [availableCocktails, setAvailableCocktails] = useState([])
@@ -41,7 +42,7 @@ export default function CollectionDetailScreen({ route, navigation }) {
       duration: 500,
       useNativeDriver: true,
     }).start()
-  }, [collection])
+  }, [collection, cocktailsData])
 
   // Header animation based on scroll
   const headerOpacity = scrollY.interpolate({
@@ -136,13 +137,13 @@ export default function CollectionDetailScreen({ route, navigation }) {
     return (
       <View style={styles.emptyStateContainer}>
         <Ionicons name="wine-outline" size={60} color={collection.color} />
-        <Text style={styles.emptyStateTitle}>No cocktails yet</Text>
-        <Text style={styles.emptyStateText}>Add cocktails to your collection</Text>
+        <Text style={styles.emptyStateTitle}>{t("noCocktailsYet")}</Text>
+        <Text style={styles.emptyStateText}>{t("addCocktailsToCollection")}</Text>
         <TouchableOpacity
           style={[styles.addButton, { backgroundColor: collection.color }]}
           onPress={() => setIsAddModalVisible(true)}
         >
-          <Text style={styles.addButtonText}>Add Cocktails</Text>
+          <Text style={styles.addButtonText}>{t("addCocktails")}</Text>
         </TouchableOpacity>
       </View>
     )
@@ -160,7 +161,7 @@ export default function CollectionDetailScreen({ route, navigation }) {
         <View style={styles.modalContainer}>
           <LinearGradient colors={["#FFFFFF", "#F9F9F9"]} style={styles.modalContent}>
             <View style={styles.modalHeader}>
-              <Text style={styles.modalTitle}>Add to Collection</Text>
+              <Text style={styles.modalTitle}>{t("addToCollection")}</Text>
               <TouchableOpacity onPress={() => setIsAddModalVisible(false)}>
                 <Ionicons name="close" size={24} color="#6B5E62" />
               </TouchableOpacity>
@@ -176,7 +177,7 @@ export default function CollectionDetailScreen({ route, navigation }) {
               />
             ) : (
               <View style={styles.noMoreCocktails}>
-                <Text style={styles.noMoreCocktailsText}>You've added all available cocktails to this collection</Text>
+                <Text style={styles.noMoreCocktailsText}>{t("allCocktailsAdded")}</Text>
               </View>
             )}
           </LinearGradient>
@@ -228,9 +229,9 @@ export default function CollectionDetailScreen({ route, navigation }) {
               <Ionicons name={collection.icon} size={32} color="#FFFFFF" />
             </View>
             <Text style={styles.collectionName}>{collection.name}</Text>
-            <Text style={styles.collectionDescription}>{collection.description || `A collection of cocktails`}</Text>
+            <Text style={styles.collectionDescription}>{collection.description || t("collectionDescription")}</Text>
             <Text style={styles.collectionCount}>
-              {collectionCocktails.length} {collectionCocktails.length === 1 ? "cocktail" : "cocktails"}
+              {collectionCocktails.length} {collectionCocktails.length === 1 ? t("cocktail") : t("cocktails")}
             </Text>
           </LinearGradient>
         </Animated.View>
@@ -244,7 +245,7 @@ export default function CollectionDetailScreen({ route, navigation }) {
               onPress={() => setIsAddModalVisible(true)}
             >
               <Ionicons name="add" size={20} color="#FFFFFF" />
-              <Text style={styles.actionButtonText}>Add Cocktails</Text>
+              <Text style={styles.actionButtonText}>{t("addCocktails")}</Text>
             </TouchableOpacity>
           </View>
 

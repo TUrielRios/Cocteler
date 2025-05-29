@@ -2,7 +2,7 @@
 
 import { TouchableOpacity, StyleSheet } from "react-native"
 import { Ionicons } from "@expo/vector-icons"
-import { useFavorites } from "../context/favoritesContext"
+import { useFavorites } from "../context/FavoritesContext"
 
 export default function FavoriteButton({ cocktailId, size = 22, style = {} }) {
   const { isFavorite, toggleFavorite } = useFavorites()
